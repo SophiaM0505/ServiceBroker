@@ -1,0 +1,40 @@
+<xs:schema xmlns:tns="http://Rest.API.AHECore.ccs.chem.ucl.ac.uk/" xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://Rest.API.AHECore.ccs.chem.ucl.ac.uk/">
+  <xs:element name="createServer" type="tns:createServer"/>
+  <xs:element name="createServerResponse" type="tns:createServerResponse"/>
+  <xs:element name="createServer_HTTPS" type="tns:createServer_HTTPS"/>
+  <xs:element name="createServer_HTTPSResponse" type="tns:createServer_HTTPSResponse"/>
+  <xs:element name="stopServer" type="tns:stopServer"/>
+  <xs:element name="stopServerResponse" type="tns:stopServerResponse"/>
+  <xs:complexType name="stopServer">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:complexType name="stopServerResponse">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:complexType name="createServer">
+    <xs:sequence>
+      <xs:element name="arg0" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="createServerResponse">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:complexType name="createServer_HTTPS">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg2" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg3" type="xs:string"/>
+      <xs:element name="arg4" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="createServer_HTTPSResponse">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:element name="Exception" type="tns:Exception"/>
+  <xs:complexType name="Exception">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="message" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

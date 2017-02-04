@@ -1,0 +1,15 @@
+<xsd:schema xmlns:ns0="http://Rest.API.AHECore.ccs.chem.ucl.ac.uk/" xmlns:tns="http://localhost/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://localhost/">
+  <xsd:import namespace="http://Rest.API.AHECore.ccs.chem.ucl.ac.uk/" schemaLocation="restapi_schema1.xsd"/>
+  <xsd:element name="createServer_HTTPS" nillable="true" type="ns0:createServer_HTTPS"/>
+  <xsd:element name="createServer_HTTPSResponse" nillable="true" type="ns0:createServer_HTTPSResponse"/>
+  <xsd:element name="Exception" type="tns:Exception"/>
+  <xsd:complexType name="Exception">
+    <xsd:sequence>
+      <xsd:element minOccurs="0" name="message" type="xsd:string"/>
+    </xsd:sequence>
+  </xsd:complexType>
+  <xsd:element name="stopServer" nillable="true" type="ns0:stopServer"/>
+  <xsd:element name="stopServerResponse" nillable="true" type="ns0:stopServerResponse"/>
+  <xsd:element name="createServer" nillable="true" type="ns0:createServer"/>
+  <xsd:element name="createServerResponse" nillable="true" type="ns0:createServerResponse"/>
+</xsd:schema>

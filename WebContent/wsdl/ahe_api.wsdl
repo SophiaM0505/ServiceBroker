@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="AHE_APIService" targetNamespace="http://API.AHECore.ccs.chem.ucl.ac.uk/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://API.AHECore.ccs.chem.ucl.ac.uk/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:portType name="AHE_API">
+  </wsdl:portType>
+  <wsdl:binding name="AHE_APIServiceSoapBinding" type="tns:AHE_API">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+  </wsdl:binding>
+  <wsdl:service name="AHE_APIService">
+    <wsdl:port name="AHE_APIPort" binding="tns:AHE_APIServiceSoapBinding">
+      <soap:address location="http://localhost:8080/AHE3/services/AHE_APIPort"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

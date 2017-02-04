@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="RestAPIService" targetNamespace="http://Rest.API.AHECore.ccs.chem.ucl.ac.uk/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://Rest.API.AHECore.ccs.chem.ucl.ac.uk/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:types>
+    <schema xmlns="http://www.w3.org/2001/XMLSchema">
+  <import namespace="http://Rest.API.AHECore.ccs.chem.ucl.ac.uk/" schemaLocation="restapi_schema1.xsd"/>
+</schema>
+  </wsdl:types>
+  <wsdl:message name="stopServerResponse">
+    <wsdl:part name="parameters" element="tns:stopServerResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createServer_HTTPSResponse">
+    <wsdl:part name="parameters" element="tns:createServer_HTTPSResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createServer">
+    <wsdl:part name="parameters" element="tns:createServer">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createServer_HTTPS">
+    <wsdl:part name="parameters" element="tns:createServer_HTTPS">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="stopServer">
+    <wsdl:part name="parameters" element="tns:stopServer">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="createServerResponse">
+    <wsdl:part name="parameters" element="tns:createServerResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="Exception">
+    <wsdl:part name="Exception" element="tns:Exception">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="RestAPI">
+    <wsdl:operation name="stopServer">
+      <wsdl:input name="stopServer" message="tns:stopServer">
+    </wsdl:input>
+      <wsdl:output name="stopServerResponse" message="tns:stopServerResponse">
+    </wsdl:output>
+      <wsdl:fault name="Exception" message="tns:Exception">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="createServer">
+      <wsdl:input name="createServer" message="tns:createServer">
+    </wsdl:input>
+      <wsdl:output name="createServerResponse" message="tns:createServerResponse">
+    </wsdl:output>
+      <wsdl:fault name="Exception" message="tns:Exception">
+    </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="createServer_HTTPS">
+      <wsdl:input name="createServer_HTTPS" message="tns:createServer_HTTPS">
+    </wsdl:input>
+      <wsdl:output name="createServer_HTTPSResponse" message="tns:createServer_HTTPSResponse">
+    </wsdl:output>
+      <wsdl:fault name="Exception" message="tns:Exception">
+    </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="RestAPIServiceSoapBinding" type="tns:RestAPI">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="stopServer">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="stopServer">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="stopServerResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="createServer">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="createServer">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createServerResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="createServer_HTTPS">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="createServer_HTTPS">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createServer_HTTPSResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="Exception">
+        <soap:fault name="Exception" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="RestAPIService">
+    <wsdl:port name="RestAPIPort" binding="tns:RestAPIServiceSoapBinding">
+      <soap:address location="http://localhost:8080/AHE3/services/RestAPIPort"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

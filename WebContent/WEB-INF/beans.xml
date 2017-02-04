@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:jaxws="http://cxf.apache.org/jaxws"
+    xmlns="http://www.springframework.org/schema/beans"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd" >
+
+    <import resource="classpath:META-INF/cxf/cxf.xml" />
+
+    <import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
+
+    <import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
+
+    <jaxws:endpoint
+        xmlns:tns="http://API.AHECore.ccs.chem.ucl.ac.uk/"
+        id="ahe_api"
+        address="/AHE_APIPort"
+        endpointName="tns:AHE_APIPort"
+        implementor="uk.ac.ucl.chem.ccs.AHECore.API.AHE_API"
+        serviceName="tns:AHE_APIService"
+        wsdlLocation="wsdl/ahe_api.wsdl" >
+
+        <jaxws:features>
+
+            <bean class="org.apache.cxf.feature.LoggingFeature" />
+        </jaxws:features>
+    </jaxws:endpoint>
+
+    <jaxws:endpoint
+        xmlns:tns="http://Rest.API.AHECore.ccs.chem.ucl.ac.uk/"
+        id="restapi"
+        address="/RestAPIPort"
+        endpointName="tns:RestAPIPort"
+        implementor="uk.ac.ucl.chem.ccs.AHECore.API.Rest.RestAPI"
+        serviceName="tns:RestAPIService"
+        wsdlLocation="wsdl/restapi.wsdl" >
+
+        <jaxws:features>
+
+            <bean class="org.apache.cxf.feature.LoggingFeature" />
+        </jaxws:features>
+    </jaxws:endpoint>
+
+</beans>

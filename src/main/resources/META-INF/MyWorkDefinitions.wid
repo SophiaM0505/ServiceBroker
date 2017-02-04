@@ -1,0 +1,280 @@
+import org.drools.process.core.datatype.impl.type.IntegerDataType;
+import org.drools.process.core.datatype.impl.type.StringDataType;
+import org.drools.process.core.datatype.impl.type.ObjectDataType;
+
+[
+  
+  [
+    "name" : "Prepare",
+    "parameters" : [
+      "app_inst_id" : new ObjectDataType(),
+    ],
+    "displayName" : "Prepare",
+    "icon" : "icons/notification.gif"
+  ],
+  
+  [
+    "name" : "Staging",
+    "parameters" : [
+      "app_inst_id" : new ObjectDataType(),
+    ],
+    "displayName" : "Staging",
+    "icon" : "icons/notification.gif"
+  ],
+  
+   [
+    "name" : "InitWorkflow",
+    "parameters" : [
+      "app_inst_id" : new ObjectDataType(),
+    ],
+    "displayName" : "Init",
+    "icon" : "icons/notification.gif"
+  ],
+  
+  [
+    "name" : "Submit",
+    "parameters" : [
+      "app_inst_id" : new ObjectDataType(),
+    ],
+    "displayName" : "Submit",
+    "icon" : "icons/notification.gif"
+  ],
+  
+  [
+    "name" : "SubmitAwsError",
+    "parameters" : [
+      "app_inst_id_comp" : new ObjectDataType(),
+    ],
+    "displayName" : "SubmitAwsError",
+    "icon" : "icons/notification.gif"
+  ],
+  
+  [
+    "name" : "SubmitCompleted",
+    "parameters" : [
+      "app_inst_id_comp" : new ObjectDataType(),
+    ],
+    "displayName" : "SubmitCompleted",
+    "icon" : "icons/notification.gif"
+  ],
+  
+  
+  [
+    "name" : "Polling",
+    "parameters" : [
+      "app_inst_id" : new ObjectDataType(),
+    ],
+    "displayName" : "Polling",
+    "icon" : "icons/notification.gif"
+  ],
+  
+  [
+    "name" : "SchedulerWait",
+    "parameters" : [
+      "app_inst_id" : new ObjectDataType(),
+    ],
+    "displayName" : "SchedulerWait",
+    "icon" : "icons/notification.gif"
+  ],
+  
+  [
+    "name" : "Fetch",
+    "parameters" : [
+      "app_inst_id" : new ObjectDataType(),
+    ],
+    "displayName" : "Fetch",
+    "icon" : "icons/notification.gif"
+  ],
+  
+    [
+    "name" : "Notification",
+    "parameters" : [
+      "app_inst_id" : new ObjectDataType(),
+    ],
+    "displayName" : "Notification",
+    "icon" : "icons/notification.gif"
+  ],
+  
+      [
+    "name" : "JobCompleted",
+    "parameters" : [
+      "app_inst_id" : new ObjectDataType(),
+    ],
+    "displayName" : "Job Completed",
+    "icon" : "icons/notification.gif"
+  ],
+  
+    [
+    "name" : "Finish",
+    "parameters" : [
+      "app_inst_id" : new ObjectDataType(),
+    ],
+    "displayName" : "Finish",
+    "icon" : "icons/notification.gif"
+  ],
+  
+      [
+    "name" : "StageInPoll",
+    "parameters" : [
+      "app_inst_id" : new ObjectDataType(),
+    ],
+    "displayName" : "Stage In Poll",
+    "icon" : "icons/notification.gif"
+  ],
+  
+      [
+    "name" : "StageInScheduleWait",
+    "parameters" : [
+      "app_inst_id" : new ObjectDataType(),
+    ],
+    "displayName" : "Stage In Wait",
+    "icon" : "icons/notification.gif"
+  ],
+  
+        [
+    "name" : "StageOutPoll",
+    "parameters" : [
+      "app_inst_id" : new ObjectDataType(),
+    ],
+    "displayName" : "Stage Out Poll",
+    "icon" : "icons/notification.gif"
+  ],
+  
+      [
+    "name" : "StageOutScheduleWait",
+    "parameters" : [
+      "app_inst_id" : new ObjectDataType(),
+    ],
+    "displayName" : "Stage Out Wait",
+    "icon" : "icons/notification.gif"
+  ],
+  
+    [
+    "name" : "Error",
+    "parameters" : [
+      "app_inst_id" : new ObjectDataType(),
+    ],
+    "displayName" : "Error",
+    "icon" : "icons/notification.gif"
+  ]
+  
+  ,
+  
+    [
+    "name" : "StagingErrorHandler",
+    "parameters" : [
+      "app_inst_id" : new ObjectDataType(),
+    ],
+    "displayName" : "StagingErrorHandler",
+    "icon" : "icons/notification.gif"
+  ]
+  
+  ,
+  
+    [
+    "name" : "SubmissionErrorHandler",
+    "parameters" : [
+      "app_inst_id" : new ObjectDataType(),
+    ],
+    "displayName" : "SubmissionErrorHandler",
+    "icon" : "icons/notification.gif"
+  ]
+  
+  ,
+  
+    [
+    "name" : "ResultStagingErrorHandler",
+    "parameters" : [
+      "app_inst_id" : new ObjectDataType(),
+    ],
+    "displayName" : "ResultStagingErrorHandler",
+    "icon" : "icons/notification.gif"
+  ]
+  
+  ,
+  
+    [
+    "name" : "PollingErrorHandler",
+    "parameters" : [
+      "app_inst_id" : new ObjectDataType(),
+    ],
+    "displayName" : "PollingErrorHandler",
+    "icon" : "icons/notification.gif"
+  ]
+  
+    ,
+  
+    [
+    "name" : "SecuritySetup",
+    "parameters" : [
+      "app_inst_id" : new ObjectDataType(),
+    ],
+    "displayName" : "Security Setup",
+    "icon" : "icons/notification.gif"
+  ]
+  
+      ,
+  
+    [
+    "name" : "SecurityDispose",
+    "parameters" : [
+      "app_inst_id" : new ObjectDataType(),
+    ],
+    "displayName" : "Security Dispose",
+    "icon" : "icons/notification.gif"
+  ] ,
+  
+      [
+    "name" : "PreProcessing",
+    "parameters" : [
+      "app_inst_id" : new ObjectDataType(),
+    ],
+    "displayName" : "Pre-Processing",
+    "icon" : "icons/notification.gif"
+  ]
+  
+      ,
+      
+          [
+    "name" : "PostProcessing",
+    "parameters" : [
+      "app_inst_id" : new ObjectDataType(),
+    ],
+    "displayName" : "Post-Processing",
+    "icon" : "icons/notification.gif"
+  ]
+  
+            ,
+      
+  [
+    "name" : "StartVirtualApp",
+    "parameters" : [
+      "app_inst_id" : new ObjectDataType(),
+    ],
+    "displayName" : "StartVirtualApp",
+    "icon" : "icons/notification.gif"
+  ],
+  
+  [
+    "name" : "First",
+    "parameters" : [
+      "parameter1" : new StringDataType(),
+    ],
+    
+    "icon" : "icons/world.png",
+    "displayName" : "First"
+  ],
+  
+  // the Second work item
+  [
+    "name" : "Second",
+    "parameters" : [
+      "parameter2" : new StringDataType(),
+    ],
+    
+    "icon" : "icons/world.png",
+    "displayName" : "Second"
+  ]
+  
+
+]

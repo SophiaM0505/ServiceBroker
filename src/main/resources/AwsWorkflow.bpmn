@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:tns="http://www.jboss.org/drools" xmlns="http://www.jboss.org/drools" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd" id="Definition" expressionLanguage="http://www.mvel.org/2.0" targetNamespace="http://www.jboss.org/drools" typeLanguage="http://www.java.com/javaTypes">
+  <bpmn2:itemDefinition id="_app_inst_idItem" isCollection="false" structureRef="LongDataType"/>
+  <bpmn2:itemDefinition id="_submit_statusItem" isCollection="false" structureRef="Integer"/>
+  <bpmn2:itemDefinition id="_submit_idItem" isCollection="false" structureRef="String"/>
+  <bpmn2:escalation id="error" escalationCode="null"/>
+  <bpmn2:process id="AwsWorkflow" tns:version="1" tns:packageName="defaultPackage" tns:adHoc="false" name="AwsWorkflow" isExecutable="true" processType="Private">
+    <bpmn2:property id="app_inst_id" itemSubjectRef="_app_inst_idItem"/>
+    <bpmn2:property id="app_inst_id_comp" itemSubjectRef="_app_inst_idItem"/>
+    <bpmn2:property id="submit_id" itemSubjectRef="_submit_idItem"/>
+    <bpmn2:property id="submit_status" itemSubjectRef="_submit_statusItem"/>
+    <bpmn2:endEvent id="_3" name="End">
+      <bpmn2:incoming>SequenceFlow_3</bpmn2:incoming>
+      <bpmn2:terminateEventDefinition id="TerminateEventDefinition_1"/>
+    </bpmn2:endEvent>
+    <bpmn2:startEvent id="_1" name="Start">
+      <bpmn2:outgoing>SequenceFlow_2</bpmn2:outgoing>
+    </bpmn2:startEvent>
+    <bpmn2:sequenceFlow id="SequenceFlow_2" tns:priority="1" name="" sourceRef="_1" targetRef="Task_3"/>
+    <bpmn2:task id="Task_1" tns:taskName="SubmitCompleted" tns:displayName="SubmitCompleted" tns:icon="icons/world.png" name="Submit Completed">
+      <bpmn2:incoming>SequenceFlow_4</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_3</bpmn2:outgoing>
+      <bpmn2:ioSpecification id="InputOutputSpecification_1">
+        <bpmn2:dataInput id="DataInput_1" itemSubjectRef="_app_inst_idItem" name="app_inst_id_comp"/>
+        <bpmn2:inputSet id="InputSet_1" name="Input Set 1">
+          <bpmn2:dataInputRefs>DataInput_1</bpmn2:dataInputRefs>
+        </bpmn2:inputSet>
+        <bpmn2:outputSet id="OutputSet_1" name="Output Set 4"/>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataInputAssociation id="DataInputAssociation_1">
+        <bpmn2:targetRef>DataInput_1</bpmn2:targetRef>
+        <bpmn2:assignment id="Assignment_1">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="FormalExpression_1">#{app_inst_id}</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="FormalExpression_2">app_inst_id_comp</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+    </bpmn2:task>
+    <bpmn2:sequenceFlow id="SequenceFlow_3" tns:priority="1" name="" sourceRef="Task_1" targetRef="_3"/>
+    <bpmn2:task id="Task_3" tns:taskName="Submit" tns:displayName="Submit" tns:icon="icons/world.png" name="Submit">
+      <bpmn2:incoming>SequenceFlow_2</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_1</bpmn2:outgoing>
+      <bpmn2:ioSpecification id="_InputOutputSpecification_10">
+        <bpmn2:dataInput id="_DataInput_10" itemSubjectRef="_app_inst_idItem" name="app_inst_id"/>
+        <bpmn2:dataOutput id="_DataOutput_10" itemSubjectRef="_submit_idItem" name="submit_id"/>
+        <bpmn2:dataOutput id="_DataOutput_11" itemSubjectRef="_submit_statusItem" name="submit_status"/>
+        <bpmn2:inputSet id="_InputSet_10" name="Input Set 10">
+          <bpmn2:dataInputRefs>_DataInput_10</bpmn2:dataInputRefs>
+        </bpmn2:inputSet>
+        <bpmn2:outputSet id="OutputSet_3">
+          <bpmn2:dataOutputRefs>_DataOutput_10</bpmn2:dataOutputRefs>
+          <bpmn2:dataOutputRefs>_DataOutput_11</bpmn2:dataOutputRefs>
+        </bpmn2:outputSet>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataInputAssociation id="_DataInputAssociation_10">
+        <bpmn2:targetRef>_DataInput_10</bpmn2:targetRef>
+        <bpmn2:assignment id="Assignment_4">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="FormalExpression_9">#{app_inst_id}</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="FormalExpression_7">_DataInput_10</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:dataOutputAssociation id="_DataOutputAssociation_10">
+        <bpmn2:sourceRef>_DataInput_10</bpmn2:sourceRef>
+        <bpmn2:targetRef>app_inst_id_comp</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:dataOutputAssociation id="DataOutputAssociation_1">
+        <bpmn2:sourceRef>_DataOutput_10</bpmn2:sourceRef>
+        <bpmn2:targetRef>submit_id</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+      <bpmn2:dataOutputAssociation id="DataOutputAssociation_2">
+        <bpmn2:sourceRef>_DataOutput_11</bpmn2:sourceRef>
+        <bpmn2:targetRef>submit_status</bpmn2:targetRef>
+      </bpmn2:dataOutputAssociation>
+    </bpmn2:task>
+    <bpmn2:sequenceFlow id="SequenceFlow_1" tns:priority="1" name="" sourceRef="Task_3" targetRef="ExclusiveGateway_1"/>
+    <bpmn2:exclusiveGateway id="ExclusiveGateway_1" name="SubmitGateway" gatewayDirection="Diverging">
+      <bpmn2:incoming>SequenceFlow_1</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_4</bpmn2:outgoing>
+      <bpmn2:outgoing>SequenceFlow_8</bpmn2:outgoing>
+    </bpmn2:exclusiveGateway>
+    <bpmn2:sequenceFlow id="SequenceFlow_4" tns:priority="1" name="SubmitSucceed" sourceRef="ExclusiveGateway_1" targetRef="Task_1">
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="FormalExpression_5" language="http://www.java.com/java">return submit_status == 1;</bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
+    <bpmn2:sequenceFlow id="SequenceFlow_8" tns:priority="1" name="SubmitError" sourceRef="ExclusiveGateway_1" targetRef="Task_2">
+      <bpmn2:conditionExpression xsi:type="bpmn2:tFormalExpression" id="FormalExpression_4" language="http://www.java.com/java">return submit_status == -1;</bpmn2:conditionExpression>
+    </bpmn2:sequenceFlow>
+    <bpmn2:endEvent id="EndEvent_1" name="Error">
+      <bpmn2:incoming>SequenceFlow_5</bpmn2:incoming>
+      <bpmn2:dataInput id="DataInput_8" itemSubjectRef="_submit_idItem" name="Escalation_1_Input"/>
+      <bpmn2:dataInputAssociation id="DataInputAssociation_8">
+        <bpmn2:sourceRef>submit_id</bpmn2:sourceRef>
+        <bpmn2:targetRef>DataInput_8</bpmn2:targetRef>
+      </bpmn2:dataInputAssociation>
+      <bpmn2:inputSet id="InputSet_8" name="Input Set 8">
+        <bpmn2:dataInputRefs>DataInput_8</bpmn2:dataInputRefs>
+      </bpmn2:inputSet>
+      <bpmn2:escalationEventDefinition id="EscalationEventDefinition_1" escalationRef="error"/>
+    </bpmn2:endEvent>
+    <bpmn2:task id="Task_2" tns:taskName="SubmitAwsError" tns:displayName="SubmitAwsError" tns:icon="icons/world.png" name="Submit Aws Error">
+      <bpmn2:incoming>SequenceFlow_8</bpmn2:incoming>
+      <bpmn2:outgoing>SequenceFlow_5</bpmn2:outgoing>
+      <bpmn2:ioSpecification id="InputOutputSpecification_2">
+        <bpmn2:dataInput id="DataInput_2" itemSubjectRef="_app_inst_idItem" name="app_inst_id_comp"/>
+        <bpmn2:inputSet id="InputSet_2" name="Input Set 1">
+          <bpmn2:dataInputRefs>DataInput_2</bpmn2:dataInputRefs>
+        </bpmn2:inputSet>
+        <bpmn2:outputSet id="OutputSet_2" name="Output Set 4"/>
+      </bpmn2:ioSpecification>
+      <bpmn2:dataInputAssociation id="DataInputAssociation_2">
+        <bpmn2:targetRef>DataInput_2</bpmn2:targetRef>
+        <bpmn2:assignment id="Assignment_2">
+          <bpmn2:from xsi:type="bpmn2:tFormalExpression" id="FormalExpression_3">#{app_inst_id}</bpmn2:from>
+          <bpmn2:to xsi:type="bpmn2:tFormalExpression" id="FormalExpression_6">app_inst_id_comp</bpmn2:to>
+        </bpmn2:assignment>
+      </bpmn2:dataInputAssociation>
+    </bpmn2:task>
+    <bpmn2:sequenceFlow id="SequenceFlow_5" tns:priority="1" name="" sourceRef="Task_2" targetRef="EndEvent_1"/>
+  </bpmn2:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_Process_1" bpmnElement="AwsWorkflow">
+      <bpmndi:BPMNShape id="BPMNShape_StartEvent_1" bpmnElement="_1">
+        <dc:Bounds height="36.0" width="36.0" x="50.0" y="160.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_EndEvent_1" bpmnElement="_3">
+        <dc:Bounds height="36.0" width="36.0" x="520.0" y="157.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_Task_1" bpmnElement="Task_1">
+        <dc:Bounds height="41.0" width="71.0" x="370.0" y="157.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_ExclusiveGateway_1" bpmnElement="ExclusiveGateway_1" isMarkerVisible="true">
+        <dc:Bounds height="50.0" width="50.0" x="272.0" y="152.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_Task_3" bpmnElement="Task_3">
+        <dc:Bounds height="41.0" width="71.0" x="160.0" y="157.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_EndEvent_2" bpmnElement="EndEvent_1">
+        <dc:Bounds height="36.0" width="36.0" x="514.0" y="81.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="BPMNShape_Task_2" bpmnElement="Task_2">
+        <dc:Bounds height="41.0" width="71.0" x="370.0" y="78.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_4" bpmnElement="SequenceFlow_2" sourceElement="BPMNShape_StartEvent_1" targetElement="BPMNShape_Task_3">
+        <di:waypoint xsi:type="dc:Point" x="86.0" y="178.0"/>
+        <di:waypoint xsi:type="dc:Point" x="119.0" y="178.0"/>
+        <di:waypoint xsi:type="dc:Point" x="119.0" y="177.0"/>
+        <di:waypoint xsi:type="dc:Point" x="160.0" y="177.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_1" bpmnElement="SequenceFlow_1" sourceElement="BPMNShape_Task_3" targetElement="BPMNShape_ExclusiveGateway_1">
+        <di:waypoint xsi:type="dc:Point" x="231.0" y="177.0"/>
+        <di:waypoint xsi:type="dc:Point" x="272.0" y="177.0"/>
+        <di:waypoint xsi:type="dc:Point" x="272.0" y="177.0"/>
+        <di:waypoint xsi:type="dc:Point" x="272.0" y="177.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_2" bpmnElement="SequenceFlow_3" sourceElement="BPMNShape_Task_1" targetElement="BPMNShape_EndEvent_1">
+        <di:waypoint xsi:type="dc:Point" x="441.0" y="177.0"/>
+        <di:waypoint xsi:type="dc:Point" x="500.0" y="177.0"/>
+        <di:waypoint xsi:type="dc:Point" x="500.0" y="175.0"/>
+        <di:waypoint xsi:type="dc:Point" x="520.0" y="175.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_3" bpmnElement="SequenceFlow_4" sourceElement="BPMNShape_ExclusiveGateway_1" targetElement="BPMNShape_Task_1">
+        <di:waypoint xsi:type="dc:Point" x="323.0" y="177.0"/>
+        <di:waypoint xsi:type="dc:Point" x="350.0" y="177.0"/>
+        <di:waypoint xsi:type="dc:Point" x="350.0" y="177.0"/>
+        <di:waypoint xsi:type="dc:Point" x="370.0" y="177.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_8" bpmnElement="SequenceFlow_8" sourceElement="BPMNShape_ExclusiveGateway_1" targetElement="BPMNShape_Task_2">
+        <di:waypoint xsi:type="dc:Point" x="297.0" y="152.0"/>
+        <di:waypoint xsi:type="dc:Point" x="297.0" y="98.0"/>
+        <di:waypoint xsi:type="dc:Point" x="370.0" y="98.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="BPMNEdge_SequenceFlow_5" bpmnElement="SequenceFlow_5" sourceElement="BPMNShape_Task_2" targetElement="BPMNShape_EndEvent_2">
+        <di:waypoint xsi:type="dc:Point" x="441.0" y="98.0"/>
+        <di:waypoint xsi:type="dc:Point" x="473.0" y="98.0"/>
+        <di:waypoint xsi:type="dc:Point" x="473.0" y="99.0"/>
+        <di:waypoint xsi:type="dc:Point" x="514.0" y="99.0"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn2:definitions>
