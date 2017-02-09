@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+<class name="negotiation.HibernateImp.Contract" table="CONTRACT">
+<id column="ID" name="id" type="long" />
+<property column="jobId" name="jobId" type="long" />
+<property column="username" name="username" type="string" />
+<property column="groupname" name="groupname" type="string" />
+<property column="level" name="level" type="int" />
+<property column="numjobs" name="numjobs" type="int" />
+<property column="nefold" name="nefold" type="int" />
+<property column="deadline" name="deadline" type="string" />
+<property column="overPrivilege" name="overPrivilege" type="int" />
+<property column="sub" name="sub" type="string" />
+<property column="owner" name="owner" type="string" />
+<property column="appname" name="appname" type="string" />
+<property column="worker" name="worker" type="string" />
+<property column="share" name="share" type="string" />
+<property column="startTime" name="startTime" type="string" />
+<property column="contractDate" name="contractDate" type="string" />
+<property column="endTime" name="endTime" type="string" />
+<property column="maxDuration" name="maxDuration" type="long" />
+<property column="maxTotalCpuT" name="maxTotalCpuT" type="long" />
+<property column="maxCost" name="maxCost" type="double" />
+<property column="minCpuTime" name="minCpuTime" type="long" />
+<property column="userBalance" name="userBalance" type="double" />
+<property column="requiredCpuNo" name="requiredCpuNo" type="int" />
+<property column="requiredCpuT" name="requiredCpuT" type="long" />
+<property column="endpoint" name="endpoint" type="string" />
+<component name="Service" class="negotiation.HibernateImp.Service">
+    <property name="charge" />
+    <property name="cost" />
+    <property name="cpuNo" />
+    <property name="instance" />
+    <property name="memory" />
+    <property name="provider" />
+    <property name="measurement" />
+</component>
+<property column="status" name="status" type="string" />
+</class>
+</hibernate-mapping>

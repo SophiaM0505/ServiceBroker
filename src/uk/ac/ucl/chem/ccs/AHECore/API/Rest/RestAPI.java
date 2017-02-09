@@ -10,8 +10,12 @@ import java.io.InputStreamReader;
 import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.jws.WebService;
+
+import negotiation.Steerer.AccountingTimer;
 
 import org.restlet.Application;
 import org.restlet.Component;
@@ -130,6 +134,25 @@ public class RestAPI {
 			//set up for RedQueen
 			
 			rest.createServer(8080);
+			
+			/*TimerTask accounting_timer = new AccountingTimer();
+			Timer timer = new Timer();
+			timer.scheduleAtFixedRate(accounting_timer, 0, 1200*1000);
+			//timer.scheduleAtFixedRate(accounting_timer, 120*1000, 1200*1000);
+			
+			try {
+	            Thread.sleep(2400*1000);
+	        } catch (InterruptedException e) {
+	            e.printStackTrace();
+	        }
+	        timer.cancel();
+	        timer.purge();
+	        System.out.println("******* accounting timer cancelled");
+	        try {
+	            Thread.sleep(30000);
+	        } catch (InterruptedException e) {
+	            e.printStackTrace();
+	        }*/
 		
 			//final String command = "/opt/test/job_submit_broker_expect.sh" ;
 			/*System.out.println("%%%%%%%%%%% submitted command: " + command);

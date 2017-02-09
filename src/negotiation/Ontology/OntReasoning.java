@@ -2438,7 +2438,7 @@ public class OntReasoning {
 
 		    	   Random rand = new Random();
 		   	       long offer_no = rand.nextInt(10000 + 1);
-		   	    /*Service service = new Service();
+		   	       Service service = new Service();
 		    	   service.setProvider("UoM_cluster");
 		    	   //service.setService_name(workerN);
 		    	   service.setCpuNo(aCpuNo);
@@ -2476,7 +2476,7 @@ public class OntReasoning {
 					offer.setNumjobs(numjobs);
 					offer.setDeadline(deadline);
 					
-					NegHibConnect.hibOffer(offer);*/
+					NegHibConnect.hibOffer(offer);
 					String offer_contents = "=" + endpoint + ";";
 				/*String offer_contents = "- Provider: "+ provider + ", worker: " +
 		        		workerN + ", CPU Number: " +

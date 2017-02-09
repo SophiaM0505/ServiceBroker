@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<definitions id="Definition"
+             targetNamespace="http://www.jboss.org/drools"
+             typeLanguage="http://www.java.com/javaTypes"
+             expressionLanguage="http://www.mvel.org/2.0"
+             xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL"
+             xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
+             xs:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd"
+             xmlns:g="http://www.jboss.org/drools/flow/gpd"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI"
+             xmlns:dc="http://www.omg.org/spec/DD/20100524/DC"
+             xmlns:di="http://www.omg.org/spec/DD/20100524/DI"
+             xmlns:tns="http://www.jboss.org/drools">
+
+  <itemDefinition id="_testCountItem" structureRef="Integer" />
+  <itemDefinition id="_TimerDelayItem" structureRef="String" />
+  <itemDefinition id="_app_inst_idItem" structureRef="Long" />
+  <itemDefinition id="_polling_statusItem" structureRef="Integer" />
+  <itemDefinition id="_submit_idItem" structureRef="String" />
+
+  <escalation id="PollingError" escalationCode="PollingError" />
+  <process processType="Private" isExecutable="true" id="BasicAHEWorkflow" name="BasicAHEWorkflow.b" >
+
+    <!-- process variables -->
+    <property id="testCount" itemSubjectRef="_testCountItem"/>
+    <property id="TimerDelay" itemSubjectRef="_TimerDelayItem"/>
+    <property id="app_inst_id" itemSubjectRef="_app_inst_idItem"/>
+    <property id="polling_status" itemSubjectRef="_polling_statusItem"/>
+    <property id="submit_id" itemSubjectRef="_submit_idItem"/>
+
+    <!-- nodes -->
+    <startEvent id="_1" name="Start" />
+    <task id="_3" name="Staging" tns:taskName="Staging" >
+      <ioSpecification>
+        <dataInput id="_3_testInput" name="test" />
+        <dataInput id="_3_app_inst_idInput" name="app_inst_id" />
+        <inputSet>
+          <dataInputRefs>_3_testInput</dataInputRefs>
+          <dataInputRefs>_3_app_inst_idInput</dataInputRefs>
+        </inputSet>
+        <outputSet>
+        </outputSet>
+      </ioSpecification>
+      <dataInputAssociation>
+        <sourceRef>testCount</sourceRef>
+        <targetRef>_3_testInput</targetRef>
+      </dataInputAssociation>
+      <dataInputAssociation>
+        <targetRef>_3_app_inst_idInput</targetRef>
+        <assignment>
+          <from xs:type="tFormalExpression">#{app_inst_id}</from>
+          <to xs:type="tFormalExpression">_3_app_inst_idInput</to>
+        </assignment>
+      </dataInputAssociation>
+    </task>
+    <task id="_4" name="Submit" tns:taskName="Submit" >
+      <ioSpecification>
+        <dataInput id="_4_app_inst_idInput" name="app_inst_id" />
+        <dataOutput id="_4_submit_idOutput" name="submit_id" />
+        <inputSet>
+          <dataInputRefs>_4_app_inst_idInput</dataInputRefs>
+        </inputSet>
+        <outputSet>
+          <dataOutputRefs>_4_submit_idOutput</dataOutputRefs>
+        </outputSet>
+      </ioSpecification>
+      <dataInputAssociation>
+        <targetRef>_4_app_inst_idInput</targetRef>
+        <assignment>
+          <from xs:type="tFormalExpression">#{app_inst_id}</from>
+          <to xs:type="tFormalExpression">_4_app_inst_idInput</to>
+        </assignment>
+      </dataInputAssociation>
+      <dataOutputAssociation>
+        <sourceRef>_4_submit_idOutput</sourceRef>
+        <targetRef>submit_id</targetRef>
+      </dataOutputAssociation>
+    </task>
+    <task id="_6" name="SchedulerWait" tns:taskName="SchedulerWait" >
+      <ioSpecification>
+        <dataInput id="_6_countInput" name="count" />
+        <dataInput id="_6_polling_statusInput" name="polling_status" />
+        <dataInput id="_6_app_inst_idInput" name="app_inst_id" />
+        <dataOutput id="_6_countOutput" name="count" />
+        <inputSet>
+          <dataInputRefs>_6_countInput</dataInputRefs>
+          <dataInputRefs>_6_polling_statusInput</dataInputRefs>
+          <dataInputRefs>_6_app_inst_idInput</dataInputRefs>
+        </inputSet>
+        <outputSet>
+          <dataOutputRefs>_6_countOutput</dataOutputRefs>
+        </outputSet>
+      </ioSpecification>
+      <dataInputAssociation>
+        <sourceRef>testCount</sourceRef>
+        <targetRef>_6_countInput</targetRef>
+      </dataInputAssociation>
+      <dataInputAssociation>
+        <sourceRef>polling_status</sourceRef>
+        <targetRef>_6_polling_statusInput</targetRef>
+      </dataInputAssociation>
+      <dataInputAssociation>
+        <targetRef>_6_app_inst_idInput</targetRef>
+        <assignment>
+          <from xs:type="tFormalExpression">#{app_inst_id}</from>
+          <to xs:type="tFormalExpression">_6_app_inst_idInput</to>
+        </assignment>
+      </dataInputAssociation>
+      <dataOutputAssociation>
+        <sourceRef>_6_countOutput</sourceRef>
+        <targetRef>testCount</targetRef>
+      </dataOutputAssociation>
+    </task>
+    <task id="_7" name="Fetch" tns:taskName="Fetch" >
+      <ioSpecification>
+        <dataInput id="_7_app_inst_idInput" name="app_inst_id" />
+        <inputSet>
+          <dataInputRefs>_7_app_inst_idInput</dataInputRefs>
+        </inputSet>
+        <outputSet>
+        </outputSet>
+      </ioSpecification>
+      <dataInputAssociation>
+        <targetRef>_7_app_inst_idInput</targetRef>
+        <assignment>
+          <from xs:type="tFormalExpression">#{app_inst_id}</from>
+          <to xs:type="tFormalExpression">_7_app_inst_idInput</to>
+        </assignment>
+      </dataInputAssociation>
+    </task>
+    <endEvent id="_8" name="End" >
+        <terminateEventDefinition/>
+    </endEvent>
+    <parallelGateway id="_9" name="StagingWait" gatewayDirection="Converging" />
+    <parallelGateway id="_10" name="SubmitWait" gatewayDirection="Converging" />
+    <intermediateCatchEvent id="_11" name="Signal" >
+      <signalEventDefinition signalRef="StagingCompleteSignal"/>
+    </intermediateCatchEvent>
+    <intermediateCatchEvent id="_12" name="Signal" >
+      <signalEventDefinition signalRef="SubmitSignal"/>
+    </intermediateCatchEvent>
+    <exclusiveGateway id="_13" name="Gateway" gatewayDirection="Converging" />
+    <exclusiveGateway id="_14" name="SchedulerGateway" gatewayDirection="Diverging" />
+    <endEvent id="_15" name="Error" >
+      <escalationEventDefinition escalationRef="PollingError" />
+    </endEvent>
+    <intermediateCatchEvent id="_17" name="Timer" >
+      <timerEventDefinition>
+        <timeCycle>#{TimerDelay}</timeCycle>
+      </timerEventDefinition>
+    </intermediateCatchEvent>
+    <task id="_16" name="Init" tns:taskName="InitWorkflow" >
+      <ioSpecification>
+        <dataInput id="_16_app_inst_idInput" name="app_inst_id" />
+        <inputSet>
+          <dataInputRefs>_16_app_inst_idInput</dataInputRefs>
+        </inputSet>
+        <outputSet>
+        </outputSet>
+      </ioSpecification>
+      <dataInputAssociation>
+        <targetRef>_16_app_inst_idInput</targetRef>
+        <assignment>
+          <from xs:type="tFormalExpression">#{app_inst_id}</from>
+          <to xs:type="tFormalExpression">_16_app_inst_idInput</to>
+        </assignment>
+      </dataInputAssociation>
+    </task>
+    <task id="_19" name="Polling" tns:taskName="Polling" >
+      <ioSpecification>
+        <dataInput id="_19_countInput" name="count" />
+        <dataInput id="_19_submit_idInput" name="submit_id" />
+        <dataInput id="_19_app_inst_idInput" name="app_inst_id" />
+        <dataOutput id="_19_polling_statusOutput" name="polling_status" />
+        <inputSet>
+          <dataInputRefs>_19_countInput</dataInputRefs>
+          <dataInputRefs>_19_submit_idInput</dataInputRefs>
+          <dataInputRefs>_19_app_inst_idInput</dataInputRefs>
+        </inputSet>
+        <outputSet>
+          <dataOutputRefs>_19_polling_statusOutput</dataOutputRefs>
+        </outputSet>
+      </ioSpecification>
+      <dataInputAssociation>
+        <sourceRef>testCount</sourceRef>
+        <targetRef>_19_countInput</targetRef>
+      </dataInputAssociation>
+      <dataInputAssociation>
+        <sourceRef>submit_id</sourceRef>
+        <targetRef>_19_submit_idInput</targetRef>
+      </dataInputAssociation>
+      <dataInputAssociation>
+        <targetRef>_19_app_inst_idInput</targetRef>
+        <assignment>
+          <from xs:type="tFormalExpression">#{app_inst_id}</from>
+          <to xs:type="tFormalExpression">_19_app_inst_idInput</to>
+        </assignment>
+      </dataInputAssociation>
+      <dataOutputAssociation>
+        <sourceRef>_19_polling_statusOutput</sourceRef>
+        <targetRef>polling_status</targetRef>
+      </dataOutputAssociation>
+    </task>
+    <task id="_18" name="Job Completed" tns:taskName="JobCompleted" >
+      <ioSpecification>
+        <dataInput id="_18_app_inst_idInput" name="app_inst_id" />
+        <inputSet>
+          <dataInputRefs>_18_app_inst_idInput</dataInputRefs>
+        </inputSet>
+        <outputSet>
+        </outputSet>
+      </ioSpecification>
+      <dataInputAssociation>
+        <targetRef>_18_app_inst_idInput</targetRef>
+        <assignment>
+          <from xs:type="tFormalExpression">#{app_inst_id}</from>
+          <to xs:type="tFormalExpression">_18_app_inst_idInput</to>
+        </assignment>
+      </dataInputAssociation>
+    </task>
+
+    <!-- connections -->
+    <sequenceFlow id="_9-_3" sourceRef="_9" targetRef="_3" />
+    <sequenceFlow id="_10-_4" sourceRef="_10" targetRef="_4" />
+    <sequenceFlow id="_14-_6" sourceRef="_14" targetRef="_6" name="Wait" >
+      <conditionExpression xs:type="tFormalExpression" >return polling_status == 0;</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="_14-_7" sourceRef="_14" targetRef="_7" name="Completed" >
+      <conditionExpression xs:type="tFormalExpression" >return polling_status == 1;</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="_18-_8" sourceRef="_18" targetRef="_8" />
+    <sequenceFlow id="_11-_9" sourceRef="_11" targetRef="_9" />
+    <sequenceFlow id="_16-_9" sourceRef="_16" targetRef="_9" />
+    <sequenceFlow id="_3-_10" sourceRef="_3" targetRef="_10" />
+    <sequenceFlow id="_12-_10" sourceRef="_12" targetRef="_10" />
+    <sequenceFlow id="_4-_13" sourceRef="_4" targetRef="_13" />
+    <sequenceFlow id="_17-_13" sourceRef="_17" targetRef="_13" />
+    <sequenceFlow id="_19-_14" sourceRef="_19" targetRef="_14" />
+    <sequenceFlow id="_14-_15" sourceRef="_14" targetRef="_15" name="Error" >
+      <conditionExpression xs:type="tFormalExpression" >return polling_status == -1;</conditionExpression>
+    </sequenceFlow>
+    <sequenceFlow id="_6-_17" sourceRef="_6" targetRef="_17" />
+    <sequenceFlow id="_1-_16" sourceRef="_1" targetRef="_16" />
+    <sequenceFlow id="_13-_19" sourceRef="_13" targetRef="_19" />
+    <sequenceFlow id="_7-_18" sourceRef="_7" targetRef="_18" />
+
+  </process>
+
+  <bpmndi:BPMNDiagram>
+    <bpmndi:BPMNPlane bpmnElement="BasicAHEWorkflow" >
+      <bpmndi:BPMNShape bpmnElement="_1" >
+        <dc:Bounds x="108" y="16" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_3" >
+        <dc:Bounds x="85" y="230" width="100" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_4" >
+        <dc:Bounds x="81" y="376" width="100" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_6" >
+        <dc:Bounds x="258" y="514" width="100" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_7" >
+        <dc:Bounds x="82" y="664" width="100" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_8" >
+        <dc:Bounds x="112" y="826" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_9" >
+        <dc:Bounds x="110" y="168" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_10" >
+        <dc:Bounds x="106" y="303" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_11" >
+        <dc:Bounds x="250" y="124" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_12" >
+        <dc:Bounds x="28" y="253" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_13" >
+        <dc:Bounds x="106" y="452" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_14" >
+        <dc:Bounds x="110" y="598" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_15" >
+        <dc:Bounds x="7" y="596" width="48" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_17" >
+        <dc:Bounds x="259" y="435" width="100" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_16" >
+        <dc:Bounds x="82" y="96" width="100" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_19" >
+        <dc:Bounds x="88" y="513" width="100" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_18" >
+        <dc:Bounds x="79" y="741" width="100" height="48" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="_9-_3" >
+        <di:waypoint x="134" y="192" />
+        <di:waypoint x="135" y="254" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_10-_4" >
+        <di:waypoint x="130" y="327" />
+        <di:waypoint x="131" y="400" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_14-_6" >
+        <di:waypoint x="134" y="622" />
+        <di:waypoint x="308" y="538" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_14-_7" >
+        <di:waypoint x="134" y="622" />
+        <di:waypoint x="132" y="688" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_18-_8" >
+        <di:waypoint x="129" y="765" />
+        <di:waypoint x="136" y="850" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_11-_9" >
+        <di:waypoint x="274" y="148" />
+        <di:waypoint x="134" y="192" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_16-_9" >
+        <di:waypoint x="132" y="120" />
+        <di:waypoint x="134" y="192" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_3-_10" >
+        <di:waypoint x="135" y="254" />
+        <di:waypoint x="130" y="327" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_12-_10" >
+        <di:waypoint x="52" y="277" />
+        <di:waypoint x="130" y="327" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_4-_13" >
+        <di:waypoint x="131" y="400" />
+        <di:waypoint x="130" y="476" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_17-_13" >
+        <di:waypoint x="309" y="459" />
+        <di:waypoint x="130" y="476" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_19-_14" >
+        <di:waypoint x="138" y="537" />
+        <di:waypoint x="134" y="622" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_14-_15" >
+        <di:waypoint x="134" y="622" />
+        <di:waypoint x="31" y="620" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_6-_17" >
+        <di:waypoint x="308" y="538" />
+        <di:waypoint x="309" y="459" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_1-_16" >
+        <di:waypoint x="132" y="40" />
+        <di:waypoint x="132" y="120" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_13-_19" >
+        <di:waypoint x="130" y="476" />
+        <di:waypoint x="138" y="537" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="_7-_18" >
+        <di:waypoint x="132" y="688" />
+        <di:waypoint x="129" y="765" />
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+
+</definitions>

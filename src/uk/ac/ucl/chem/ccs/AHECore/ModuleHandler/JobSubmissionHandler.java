@@ -376,8 +376,8 @@ public class JobSubmissionHandler {
 			
 			//to get numjobs and nefold from database
 			int service_level;
-			String numjobs = "1";
-			String nefold = "1";
+			String numjobs = "5";
+			String nefold = "12";
 			
 			//to submit job to redqueen via scripts, it also copies job_unread.txt to broker instance
 			/*final String command = "/opt/test/job_submit_broker_expect.sh " + numjobs + " " + nefold + " " + job_id + " " + "1" ;
@@ -385,7 +385,7 @@ public class JobSubmissionHandler {
 			Runtime rt = Runtime.getRuntime();
 			rt.exec(command);*/
 			timer_job_id = job_id;
-			
+			//this timer is for waiting for fetching redqueen_job_id
 			TimerTask timerTask = new RedQueenTimer();
 			cluster_timer.purge();
 			cluster_timer.cancel();
@@ -396,7 +396,7 @@ public class JobSubmissionHandler {
 			this_timer.schedule(timerTask, 0);
 			
 			try {
-                Thread.sleep(30000);
+                Thread.sleep(2000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -405,7 +405,7 @@ public class JobSubmissionHandler {
 			
 			
 			System.out.println("@@@@@@@@@@@@@ " + job_service.toString());
-			
+			//this timer is for deadline timer where deadline is specified by a user
 			TimerTask deadline_timerTask = new SteererTimer();
             //running timer task as daemon thread
     
@@ -422,7 +422,7 @@ public class JobSubmissionHandler {
             System.out.println("TimerTask started***");
             
             try {
-                Thread.sleep(30000);
+                Thread.sleep(2000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }

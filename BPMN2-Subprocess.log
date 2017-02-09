@@ -1,0 +1,368 @@
+<object-stream>
+<org.drools.audit.event.RuleFlowLogEvent>
+  <type>8</type>
+  <processId>SubProcess</processId>
+  <processName>Minimal SubProcess</processName>
+  <processInstanceId>1</processInstanceId>
+</org.drools.audit.event.RuleFlowLogEvent>
+<org.drools.audit.event.RuleFlowNodeLogEvent>
+  <type>24</type>
+  <processId>SubProcess</processId>
+  <processName>Minimal SubProcess</processName>
+  <processInstanceId>1</processInstanceId>
+  <nodeId>1</nodeId>
+  <nodeName>StartProcess</nodeName>
+  <nodeInstanceId>0</nodeInstanceId>
+</org.drools.audit.event.RuleFlowNodeLogEvent>
+<org.drools.audit.event.RuleFlowNodeLogEvent>
+  <type>26</type>
+  <processId>SubProcess</processId>
+  <processName>Minimal SubProcess</processName>
+  <processInstanceId>1</processInstanceId>
+  <nodeId>1</nodeId>
+  <nodeName>StartProcess</nodeName>
+  <nodeInstanceId>0</nodeInstanceId>
+</org.drools.audit.event.RuleFlowNodeLogEvent>
+<org.drools.audit.event.RuleFlowNodeLogEvent>
+  <type>24</type>
+  <processId>SubProcess</processId>
+  <processName>Minimal SubProcess</processName>
+  <processInstanceId>1</processInstanceId>
+  <nodeId>2</nodeId>
+  <nodeName>Hello</nodeName>
+  <nodeInstanceId>1</nodeInstanceId>
+</org.drools.audit.event.RuleFlowNodeLogEvent>
+<org.drools.audit.event.RuleFlowNodeLogEvent>
+  <type>24</type>
+  <processId>SubProcess</processId>
+  <processName>Minimal SubProcess</processName>
+  <processInstanceId>1</processInstanceId>
+  <nodeId>2:1</nodeId>
+  <nodeName>StartSubProcess</nodeName>
+  <nodeInstanceId>1:0</nodeInstanceId>
+</org.drools.audit.event.RuleFlowNodeLogEvent>
+<org.drools.audit.event.RuleFlowNodeLogEvent>
+  <type>26</type>
+  <processId>SubProcess</processId>
+  <processName>Minimal SubProcess</processName>
+  <processInstanceId>1</processInstanceId>
+  <nodeId>2:1</nodeId>
+  <nodeName>StartSubProcess</nodeName>
+  <nodeInstanceId>1:0</nodeInstanceId>
+</org.drools.audit.event.RuleFlowNodeLogEvent>
+<org.drools.audit.event.RuleFlowNodeLogEvent>
+  <type>24</type>
+  <processId>SubProcess</processId>
+  <processName>Minimal SubProcess</processName>
+  <processInstanceId>1</processInstanceId>
+  <nodeId>2:2</nodeId>
+  <nodeName>Hello1</nodeName>
+  <nodeInstanceId>1:1</nodeInstanceId>
+</org.drools.audit.event.RuleFlowNodeLogEvent>
+<org.drools.audit.event.RuleFlowNodeLogEvent>
+  <type>26</type>
+  <processId>SubProcess</processId>
+  <processName>Minimal SubProcess</processName>
+  <processInstanceId>1</processInstanceId>
+  <nodeId>2:2</nodeId>
+  <nodeName>Hello1</nodeName>
+  <nodeInstanceId>1:1</nodeInstanceId>
+</org.drools.audit.event.RuleFlowNodeLogEvent>
+<org.drools.audit.event.RuleFlowNodeLogEvent>
+  <type>24</type>
+  <processId>SubProcess</processId>
+  <processName>Minimal SubProcess</processName>
+  <processInstanceId>1</processInstanceId>
+  <nodeId>2:3</nodeId>
+  <nodeName>Hello2</nodeName>
+  <nodeInstanceId>1:2</nodeInstanceId>
+</org.drools.audit.event.RuleFlowNodeLogEvent>
+<org.drools.audit.event.RuleFlowVariableLogEvent>
+  <type>32</type>
+  <processId>SubProcess</processId>
+  <processName>Minimal SubProcess</processName>
+  <processInstanceId>1</processInstanceId>
+  <variableId>2:x</variableId>
+  <variableInstanceId>1:x</variableInstanceId>
+  <objectToString>Hello</objectToString>
+</org.drools.audit.event.RuleFlowVariableLogEvent>
+<org.drools.audit.event.RuleFlowVariableLogEvent>
+  <type>33</type>
+  <processId>SubProcess</processId>
+  <processName>Minimal SubProcess</processName>
+  <processInstanceId>1</processInstanceId>
+  <variableId>2:x</variableId>
+  <variableInstanceId>1:x</variableInstanceId>
+  <objectToString>Hello</objectToString>
+</org.drools.audit.event.RuleFlowVariableLogEvent>
+<org.drools.audit.event.RuleFlowNodeLogEvent>
+  <type>26</type>
+  <processId>SubProcess</processId>
+  <processName>Minimal SubProcess</processName>
+  <processInstanceId>1</processInstanceId>
+  <nodeId>2:3</nodeId>
+  <nodeName>Hello2</nodeName>
+  <nodeInstanceId>1:2</nodeInstanceId>
+</org.drools.audit.event.RuleFlowNodeLogEvent>
+<org.drools.audit.event.RuleFlowNodeLogEvent>
+  <type>24</type>
+  <processId>SubProcess</processId>
+  <processName>Minimal SubProcess</processName>
+  <processInstanceId>1</processInstanceId>
+  <nodeId>2:4</nodeId>
+  <nodeName>Hello3</nodeName>
+  <nodeInstanceId>1:3</nodeInstanceId>
+</org.drools.audit.event.RuleFlowNodeLogEvent>
+<org.drools.audit.event.RuleFlowNodeLogEvent>
+  <type>26</type>
+  <processId>SubProcess</processId>
+  <processName>Minimal SubProcess</processName>
+  <processInstanceId>1</processInstanceId>
+  <nodeId>2:4</nodeId>
+  <nodeName>Hello3</nodeName>
+  <nodeInstanceId>1:3</nodeInstanceId>
+</org.drools.audit.event.RuleFlowNodeLogEvent>
+<org.drools.audit.event.RuleFlowNodeLogEvent>
+  <type>24</type>
+  <processId>SubProcess</processId>
+  <processName>Minimal SubProcess</processName>
+  <processInstanceId>1</processInstanceId>
+  <nodeId>2:5</nodeId>
+  <nodeName>EndSubProcess</nodeName>
+  <nodeInstanceId>1:4</nodeInstanceId>
+</org.drools.audit.event.RuleFlowNodeLogEvent>
+<org.drools.audit.event.RuleFlowNodeLogEvent>
+  <type>26</type>
+  <processId>SubProcess</processId>
+  <processName>Minimal SubProcess</processName>
+  <processInstanceId>1</processInstanceId>
+  <nodeId>2:5</nodeId>
+  <nodeName>EndSubProcess</nodeName>
+  <nodeInstanceId>1:4</nodeInstanceId>
+</org.drools.audit.event.RuleFlowNodeLogEvent>
+<org.drools.audit.event.RuleFlowNodeLogEvent>
+  <type>26</type>
+  <processId>SubProcess</processId>
+  <processName>Minimal SubProcess</processName>
+  <processInstanceId>1</processInstanceId>
+  <nodeId>2</nodeId>
+  <nodeName>Hello</nodeName>
+  <nodeInstanceId>1</nodeInstanceId>
+</org.drools.audit.event.RuleFlowNodeLogEvent>
+<org.drools.audit.event.RuleFlowNodeLogEvent>
+  <type>24</type>
+  <processId>SubProcess</processId>
+  <processName>Minimal SubProcess</processName>
+  <processInstanceId>1</processInstanceId>
+  <nodeId>3</nodeId>
+  <nodeName>Goodbye</nodeName>
+  <nodeInstanceId>2</nodeInstanceId>
+</org.drools.audit.event.RuleFlowNodeLogEvent>
+<org.drools.audit.event.RuleFlowNodeLogEvent>
+  <type>26</type>
+  <processId>SubProcess</processId>
+  <processName>Minimal SubProcess</processName>
+  <processInstanceId>1</processInstanceId>
+  <nodeId>3</nodeId>
+  <nodeName>Goodbye</nodeName>
+  <nodeInstanceId>2</nodeInstanceId>
+</org.drools.audit.event.RuleFlowNodeLogEvent>
+<org.drools.audit.event.RuleFlowNodeLogEvent>
+  <type>24</type>
+  <processId>SubProcess</processId>
+  <processName>Minimal SubProcess</processName>
+  <processInstanceId>1</processInstanceId>
+  <nodeId>4</nodeId>
+  <nodeName>EndProcess</nodeName>
+  <nodeInstanceId>3</nodeInstanceId>
+</org.drools.audit.event.RuleFlowNodeLogEvent>
+<org.drools.audit.event.RuleFlowNodeLogEvent>
+  <type>26</type>
+  <processId>SubProcess</processId>
+  <processName>Minimal SubProcess</processName>
+  <processInstanceId>1</processInstanceId>
+  <nodeId>4</nodeId>
+  <nodeName>EndProcess</nodeName>
+  <nodeInstanceId>3</nodeInstanceId>
+</org.drools.audit.event.RuleFlowNodeLogEvent>
+<org.drools.audit.event.RuleFlowLogEvent>
+  <type>10</type>
+  <processId>SubProcess</processId>
+  <processName>Minimal SubProcess</processName>
+  <processInstanceId>1</processInstanceId>
+</org.drools.audit.event.RuleFlowLogEvent>
+<org.drools.audit.event.RuleFlowLogEvent>
+  <type>11</type>
+  <processId>SubProcess</processId>
+  <processName>Minimal SubProcess</processName>
+  <processInstanceId>1</processInstanceId>
+</org.drools.audit.event.RuleFlowLogEvent>
+<org.drools.audit.event.RuleFlowNodeLogEvent>
+  <type>27</type>
+  <processId>SubProcess</processId>
+  <processName>Minimal SubProcess</processName>
+  <processInstanceId>1</processInstanceId>
+  <nodeId>4</nodeId>
+  <nodeName>EndProcess</nodeName>
+  <nodeInstanceId>3</nodeInstanceId>
+</org.drools.audit.event.RuleFlowNodeLogEvent>
+<org.drools.audit.event.RuleFlowNodeLogEvent>
+  <type>25</type>
+  <processId>SubProcess</processId>
+  <processName>Minimal SubProcess</processName>
+  <processInstanceId>1</processInstanceId>
+  <nodeId>4</nodeId>
+  <nodeName>EndProcess</nodeName>
+  <nodeInstanceId>3</nodeInstanceId>
+</org.drools.audit.event.RuleFlowNodeLogEvent>
+<org.drools.audit.event.RuleFlowNodeLogEvent>
+  <type>27</type>
+  <processId>SubProcess</processId>
+  <processName>Minimal SubProcess</processName>
+  <processInstanceId>1</processInstanceId>
+  <nodeId>3</nodeId>
+  <nodeName>Goodbye</nodeName>
+  <nodeInstanceId>2</nodeInstanceId>
+</org.drools.audit.event.RuleFlowNodeLogEvent>
+<org.drools.audit.event.RuleFlowNodeLogEvent>
+  <type>25</type>
+  <processId>SubProcess</processId>
+  <processName>Minimal SubProcess</processName>
+  <processInstanceId>1</processInstanceId>
+  <nodeId>3</nodeId>
+  <nodeName>Goodbye</nodeName>
+  <nodeInstanceId>2</nodeInstanceId>
+</org.drools.audit.event.RuleFlowNodeLogEvent>
+<org.drools.audit.event.RuleFlowNodeLogEvent>
+  <type>27</type>
+  <processId>SubProcess</processId>
+  <processName>Minimal SubProcess</processName>
+  <processInstanceId>1</processInstanceId>
+  <nodeId>2</nodeId>
+  <nodeName>Hello</nodeName>
+  <nodeInstanceId>1</nodeInstanceId>
+</org.drools.audit.event.RuleFlowNodeLogEvent>
+<org.drools.audit.event.RuleFlowNodeLogEvent>
+  <type>27</type>
+  <processId>SubProcess</processId>
+  <processName>Minimal SubProcess</processName>
+  <processInstanceId>1</processInstanceId>
+  <nodeId>2:5</nodeId>
+  <nodeName>EndSubProcess</nodeName>
+  <nodeInstanceId>1:4</nodeInstanceId>
+</org.drools.audit.event.RuleFlowNodeLogEvent>
+<org.drools.audit.event.RuleFlowNodeLogEvent>
+  <type>25</type>
+  <processId>SubProcess</processId>
+  <processName>Minimal SubProcess</processName>
+  <processInstanceId>1</processInstanceId>
+  <nodeId>2:5</nodeId>
+  <nodeName>EndSubProcess</nodeName>
+  <nodeInstanceId>1:4</nodeInstanceId>
+</org.drools.audit.event.RuleFlowNodeLogEvent>
+<org.drools.audit.event.RuleFlowNodeLogEvent>
+  <type>27</type>
+  <processId>SubProcess</processId>
+  <processName>Minimal SubProcess</processName>
+  <processInstanceId>1</processInstanceId>
+  <nodeId>2:4</nodeId>
+  <nodeName>Hello3</nodeName>
+  <nodeInstanceId>1:3</nodeInstanceId>
+</org.drools.audit.event.RuleFlowNodeLogEvent>
+<org.drools.audit.event.RuleFlowNodeLogEvent>
+  <type>25</type>
+  <processId>SubProcess</processId>
+  <processName>Minimal SubProcess</processName>
+  <processInstanceId>1</processInstanceId>
+  <nodeId>2:4</nodeId>
+  <nodeName>Hello3</nodeName>
+  <nodeInstanceId>1:3</nodeInstanceId>
+</org.drools.audit.event.RuleFlowNodeLogEvent>
+<org.drools.audit.event.RuleFlowNodeLogEvent>
+  <type>27</type>
+  <processId>SubProcess</processId>
+  <processName>Minimal SubProcess</processName>
+  <processInstanceId>1</processInstanceId>
+  <nodeId>2:3</nodeId>
+  <nodeName>Hello2</nodeName>
+  <nodeInstanceId>1:2</nodeInstanceId>
+</org.drools.audit.event.RuleFlowNodeLogEvent>
+<org.drools.audit.event.RuleFlowNodeLogEvent>
+  <type>25</type>
+  <processId>SubProcess</processId>
+  <processName>Minimal SubProcess</processName>
+  <processInstanceId>1</processInstanceId>
+  <nodeId>2:3</nodeId>
+  <nodeName>Hello2</nodeName>
+  <nodeInstanceId>1:2</nodeInstanceId>
+</org.drools.audit.event.RuleFlowNodeLogEvent>
+<org.drools.audit.event.RuleFlowNodeLogEvent>
+  <type>27</type>
+  <processId>SubProcess</processId>
+  <processName>Minimal SubProcess</processName>
+  <processInstanceId>1</processInstanceId>
+  <nodeId>2:2</nodeId>
+  <nodeName>Hello1</nodeName>
+  <nodeInstanceId>1:1</nodeInstanceId>
+</org.drools.audit.event.RuleFlowNodeLogEvent>
+<org.drools.audit.event.RuleFlowNodeLogEvent>
+  <type>25</type>
+  <processId>SubProcess</processId>
+  <processName>Minimal SubProcess</processName>
+  <processInstanceId>1</processInstanceId>
+  <nodeId>2:2</nodeId>
+  <nodeName>Hello1</nodeName>
+  <nodeInstanceId>1:1</nodeInstanceId>
+</org.drools.audit.event.RuleFlowNodeLogEvent>
+<org.drools.audit.event.RuleFlowNodeLogEvent>
+  <type>27</type>
+  <processId>SubProcess</processId>
+  <processName>Minimal SubProcess</processName>
+  <processInstanceId>1</processInstanceId>
+  <nodeId>2:1</nodeId>
+  <nodeName>StartSubProcess</nodeName>
+  <nodeInstanceId>1:0</nodeInstanceId>
+</org.drools.audit.event.RuleFlowNodeLogEvent>
+<org.drools.audit.event.RuleFlowNodeLogEvent>
+  <type>25</type>
+  <processId>SubProcess</processId>
+  <processName>Minimal SubProcess</processName>
+  <processInstanceId>1</processInstanceId>
+  <nodeId>2:1</nodeId>
+  <nodeName>StartSubProcess</nodeName>
+  <nodeInstanceId>1:0</nodeInstanceId>
+</org.drools.audit.event.RuleFlowNodeLogEvent>
+<org.drools.audit.event.RuleFlowNodeLogEvent>
+  <type>25</type>
+  <processId>SubProcess</processId>
+  <processName>Minimal SubProcess</processName>
+  <processInstanceId>1</processInstanceId>
+  <nodeId>2</nodeId>
+  <nodeName>Hello</nodeName>
+  <nodeInstanceId>1</nodeInstanceId>
+</org.drools.audit.event.RuleFlowNodeLogEvent>
+<org.drools.audit.event.RuleFlowNodeLogEvent>
+  <type>27</type>
+  <processId>SubProcess</processId>
+  <processName>Minimal SubProcess</processName>
+  <processInstanceId>1</processInstanceId>
+  <nodeId>1</nodeId>
+  <nodeName>StartProcess</nodeName>
+  <nodeInstanceId>0</nodeInstanceId>
+</org.drools.audit.event.RuleFlowNodeLogEvent>
+<org.drools.audit.event.RuleFlowNodeLogEvent>
+  <type>25</type>
+  <processId>SubProcess</processId>
+  <processName>Minimal SubProcess</processName>
+  <processInstanceId>1</processInstanceId>
+  <nodeId>1</nodeId>
+  <nodeName>StartProcess</nodeName>
+  <nodeInstanceId>0</nodeInstanceId>
+</org.drools.audit.event.RuleFlowNodeLogEvent>
+<org.drools.audit.event.RuleFlowLogEvent>
+  <type>9</type>
+  <processId>SubProcess</processId>
+  <processName>Minimal SubProcess</processName>
+  <processInstanceId>1</processInstanceId>
+</org.drools.audit.event.RuleFlowLogEvent>
+</object-stream>

@@ -404,6 +404,8 @@ public class AppInstanceResource extends AHEResource{
 	       			  //to get steerer uri from database (endPoint)
 	       			  //String uri_pre = job_service.toString();
 	    			  passedInfo = endPoint;
+	    			  passedInfo = job_id + "!" + passedInfo;
+	    				System.out.println("========= passedInfo: " + passedInfo);
         			return passedInfo;
         		}
     	       		

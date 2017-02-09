@@ -1454,6 +1454,7 @@ public class NegotiationDB {
 			contract.setNumjobs(Integer.parseInt(rs.getString("numjobs")));
 			contract.setNefold(Integer.parseInt(rs.getString("nefold")));
 			contract.setDeadline(rs.getString("deadline"));
+			contract.setLevel(Integer.parseInt(rs.getString("level")));
 			
 			service.setCharge(Float.parseFloat(rs.getString("charge")));
 			service.setCost(Float.parseFloat(rs.getString("cost")));

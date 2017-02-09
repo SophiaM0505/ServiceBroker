@@ -48,6 +48,8 @@ public class RedQueenTimer extends TimerTask {
 			e1.printStackTrace();
 		}
 		completeTask();
+		JobSubmissionHandler.cluster_timer.cancel();
+		JobSubmissionHandler.cluster_timer.purge();
 		try {
 			Redqueen.getRedqueenJobId(broker_job_id);
 		} catch (NumberFormatException e) {
@@ -74,8 +76,8 @@ public class RedQueenTimer extends TimerTask {
 
 	private void completeTask() {
         try {
-            //assuming it takes 20 secs to complete the task
-            Thread.sleep(60000);           
+            //assuming it takes 50 secs to complete the task
+            Thread.sleep(50000);           
             System.out.println("**********");
         } catch (InterruptedException e) {
             e.printStackTrace();
