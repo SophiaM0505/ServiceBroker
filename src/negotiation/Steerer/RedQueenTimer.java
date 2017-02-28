@@ -39,7 +39,7 @@ public class RedQueenTimer extends TimerTask {
 		+ numjobs + " " + nefold + " " + broker_job_id + " " + level ;
 		//final String command = "/opt/test/job_submit_broker_expect.sh 5 7 " + broker_job_id + " " + "2" ;
 		
-		System.out.println("%%%%%%%%%%% submitted command: " + command);
+		//System.out.println("%%%%%%%%%%% submitted command: " + command);
 		Runtime rt = Runtime.getRuntime();
 		try {
 			rt.exec(command);
@@ -52,6 +52,7 @@ public class RedQueenTimer extends TimerTask {
 		JobSubmissionHandler.cluster_timer.purge();
 		try {
 			Redqueen.getRedqueenJobId(broker_job_id);
+			return;
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -76,8 +77,8 @@ public class RedQueenTimer extends TimerTask {
 
 	private void completeTask() {
         try {
-            //assuming it takes 50 secs to complete the task
-            Thread.sleep(50000);           
+            //assuming it takes 35 secs to finish job submission
+            Thread.sleep(23000);           
             System.out.println("**********");
         } catch (InterruptedException e) {
             e.printStackTrace();

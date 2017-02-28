@@ -11,6 +11,7 @@ public class Service {
 	private String instance;
 	//1 for true, 0 for false
 	private String measurement;
+	private String os;
 
 	
 	/*public void setService_name(String service_name){
@@ -75,6 +76,14 @@ public class Service {
 	
 	public String getMeasurement(){
 		return measurement;
+	}
+	
+	public void setOs(String os){
+		this.os = os;
+	}
+	
+	public String getOs(){
+		return os;
 	}
 	
 	

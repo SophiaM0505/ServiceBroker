@@ -92,6 +92,7 @@ public class RestAPI {
 	public static Map<String, String[]> app_shares = new HashMap<String, String[]>();
 	public static Map<String, String> share_policy = new HashMap<String, String>();
 	public static Map<String, String> worker_endpoint = new HashMap<String, String>();
+	public static Timer accounting_timer = new Timer(true);
 	
 	public static void main(String[] arg){
 		
@@ -112,6 +113,7 @@ public class RestAPI {
 			share_policy.put("ClusterShare", "ClusterPolicy");
 			share_policy.put("UnicoreShare", "UnicorePolicy");
 			share_policy.put("CloudShare", "CloudPolicy");
+			//share_policy.put("MaxShare", "MaxPolicy");
 			
 			/*String[] shares_test = new String[1];
 			shares_test[0] = "ResvShare";
@@ -135,24 +137,29 @@ public class RestAPI {
 			
 			rest.createServer(8080);
 			
-			/*TimerTask accounting_timer = new AccountingTimer();
+			TimerTask thisTask = new AccountingTimer();
 			Timer timer = new Timer();
-			timer.scheduleAtFixedRate(accounting_timer, 0, 1200*1000);
+			
+			accounting_timer.purge();
+			accounting_timer.cancel();
+			accounting_timer = timer;
+			timer.schedule(thisTask, 200*1000);
+			//timer.scheduleAtFixedRate(accounting_timer, 0, 1200*1000);
 			//timer.scheduleAtFixedRate(accounting_timer, 120*1000, 1200*1000);
 			
 			try {
-	            Thread.sleep(2400*1000);
+	            Thread.sleep(10*1000);
 	        } catch (InterruptedException e) {
 	            e.printStackTrace();
 	        }
-	        timer.cancel();
-	        timer.purge();
+	        //timer.cancel();
+	        //timer.purge();
 	        System.out.println("******* accounting timer cancelled");
 	        try {
-	            Thread.sleep(30000);
+	            Thread.sleep(5000);
 	        } catch (InterruptedException e) {
 	            e.printStackTrace();
-	        }*/
+	        }
 		
 			//final String command = "/opt/test/job_submit_broker_expect.sh" ;
 			/*System.out.println("%%%%%%%%%%% submitted command: " + command);

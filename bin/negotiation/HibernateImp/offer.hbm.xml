@@ -36,6 +36,7 @@
     <property name="memory" />
     <property name="provider" />
     <property name="measurement" />
+    <property name="os" />
 </component>
 </class>
 </hibernate-mapping>

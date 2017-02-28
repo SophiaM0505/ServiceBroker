@@ -133,46 +133,115 @@ public class AppInstanceResource extends AHEResource{
     
     	// user clicks on agree button to send AcceptAck
     	if(form.getNames().contains("contract_id") && !form.getNames().contains("end_time") && 
-    			!form.getNames().contains("core") && !form.getNames().contains("complete")){
+    			!form.getNames().contains("core") && !form.getNames().contains("complete") && !form.getNames().contains("stop")){
     		//System.out.println("contract********");
     		//Executable.writeout("1 step");
     		contract_id = Long.parseLong(form.getFirstValue("contract_id"));
-    		
     		//long job_id = Long.parseLong(form.getFirstValue("job_id"));
     		//String provider = NegotiationDB.getContProvider(contract_id);
     		//int re_neg = Integer.parseInt(form.getFirstValue("contract_id"));
     		//contract_id = Long.parseLong(form.getFirstValue("contract_id"));
     		
     		String current_state = NegotiationDB.getContractStatus(contract_id);
+    		System.out.println("Service Broker, the current negotiation state of the received contract is: " + current_state);
     		String workflow;
     		//String passedInfo = "";
     		if(form.getNames().contains("terminate")){
+    			System.out.println("Service Broker received a termination request for the contract: " + contract_id);
     			
     			// to check if contract in 'Completed' state, if it is, inform user, indicating that
     			// balance already reduced in both Grid and Cloud cases
-    			if (current_state.equalsIgnoreCase(NegState.Completed.toString())){
+    			if (current_state.equalsIgnoreCase(NegState.completed.toString())){
     				return "error: contract completed. Cannot be re-negotiated.";
     			}
     			
     			// to check if Contract is in 'Contracted' state; if it does, allow termination
-    			if (current_state.equalsIgnoreCase(NegState.Contracted.toString())){
-    				NegotiationDB.updateOfferState(contract_id, NegState.ReqTerminated);
-    				NegotiationDB.updateContractState(contract_id, NegState.ReqTerminated);
+    			if (current_state.equalsIgnoreCase(NegState.contracted.toString())){
+    				NegotiationDB.updateOfferState(contract_id, NegState.reqTerminated);
+    				NegotiationDB.updateContractState(contract_id, NegState.reqTerminated);
     				// to check if contract requires penalty, if it does, update ontology as well 
     			    return "error: user terminated";
     			}
     			else {
-    				long neg_id = NegotiationDB.getNegID(contract_id);
-			    	String all_offers = NegotiationDB.getNegOffers(neg_id);
-			    	String[] all_offers_arry = all_offers.split(";");
-			    	for(String offer : all_offers_arry){
-			    		long temp_offer_id = Long.parseLong(offer.split("-")[0]);
-			    		NegotiationDB.updateOfferState(temp_offer_id, NegState.Uncontracted);
+    				
+			    	if(!NegotiationDB.getOfferSub(contract_id).isEmpty()){
+			    		long neg_id = NegotiationDB.getNegID(contract_id);
+			    		String all_offers = NegotiationDB.getNegOffers(neg_id);
+			    	//if(!all_offers.isEmpty()){
+			    		String[] all_offers_arry = all_offers.split(";");
+				    	for(String offer : all_offers_arry){
+				    		long temp_offer_id = Long.parseLong(offer.split("=")[0]);
+				    		NegotiationDB.updateOfferState(temp_offer_id, NegState.uncontracted);
+				    	}
 			    	}
-			    	NegotiationDB.updateContractState(contract_id, NegState.Uncontracted);
+			    	
+			    	System.out.println("Service Broker updated the contract state to uncontracted.");
+			    	NegotiationDB.updateContractState(contract_id, NegState.uncontracted);
 			    	
     				return contract_id + ":" + "terminated";
     			}
+    		}
+    		else if(form.getNames().contains("revocation")){
+    			System.out.println("Service Broker received a revocation request for contract: " + contract_id);
+    			if (current_state.equalsIgnoreCase(NegState.completed.toString()) ||
+				    current_state.equalsIgnoreCase(NegState.uncontracted.toString()) ||
+				    current_state.equalsIgnoreCase(NegState.terminated.toString())){
+    				return "error: requested offer already in a final state";
+    			}
+    			else{
+    				// how to enable it continue with the negotiation procedure?
+    				// to create a method for the below function??
+    				// decision 1: revocation rejected
+    				int decision = 1;
+    				String revoke_res;
+    				
+    				//to calculate for decision
+    				Random rand = new Random();
+
+    			    // nextInt is normally exclusive of the top value,
+    			    // so add 1 to make it inclusive
+    			    int randomNum = rand.nextInt(10000 + 1);
+    			    
+    			    System.out.println("randomNum generated: " + randomNum);
+    			    decision = randomNum % 2;
+    			    //decision = 0;
+    			    String return_decision;
+    			    //if revocation accepted, update negotiation state of this offer to Uncontracted
+    			    if(decision == 0){
+    			    	return_decision = "revocation accepted";
+    			    	System.out.println("Service Broker, revocation request for contract " + contract_id + " is ACCEPTED.");
+    			    	NegotiationDB.updateOfferState(contract_id, NegState.uncontracted);
+    			    	//NegotiationDB.updateContractState(contract_id, NegState.Uncontracted);
+    			    	long neg_id = NegotiationDB.getNegID(contract_id);
+    			    	String all_offers = NegotiationDB.getNegOffers(neg_id);
+    			    	System.out.println("=========== all offers: " + all_offers);
+    			    	String other_offers = "";
+    			    	String[] all_offers_arry = all_offers.split(";");
+    			    	for(String offer : all_offers_arry){
+    			    		long temp_offer_id = Long.parseLong(offer.split("-")[0]);
+    			    		if(temp_offer_id != contract_id){
+    			    			other_offers = other_offers + offer;
+    			    		}
+    			    	}
+    			    	if(other_offers.isEmpty())
+    			    	{
+    			    		revoke_res = "no other offers available";
+              		        return revoke_res;
+    			    	}
+    			    	else {
+    			    		return other_offers;
+    			    	}
+    			    }
+    			    else{
+    			    	System.out.println("Service Broker, revocation request for contract " + contract_id + " is REJECTED.");
+    			    	return_decision = "revocation rejected";
+    			    }
+    			    
+    				revoke_res = contract_id + ":" + return_decision;
+      		        return revoke_res;
+          
+    			}
+    			     
     		}
     		// to deal with re-negotiation, if received AcceptAck contains job_id, indicating its a re-negotiated contract
     		/*if(form.getNames().contains("job_id")){
@@ -194,18 +263,19 @@ public class AppInstanceResource extends AHEResource{
     			long job_id = 0;
     			boolean if_reneg;
         		//******* need to update negotiation state in db
-    			System.out.println("%%%%%%%%%***** inside acceptAck current negotiation state: " + current_state);
+    			System.out.println("Service Broker received an AcceptAck for an contract with conract ID:" + contract_id);
+    			//System.out.println("%%%%%%%%%***** inside acceptAck current negotiation state: " + current_state);
     			// to check negotiation state is not completed or terminated
-    			if (current_state.equalsIgnoreCase(NegState.Completed.toString()) ||
+    			if (current_state.equalsIgnoreCase(NegState.completed.toString()) ||
     					//current_state.equalsIgnoreCase(NegState.ReqTerminated.toString()) ||
-    					current_state.equalsIgnoreCase(NegState.Terminated.toString())){
+    					current_state.equalsIgnoreCase(NegState.terminated.toString())){
     				System.out.println("error: negotiation state is Completed or Terminated.");
     				return "error: negotiation state is Completed or ReqTerminated.";
     			}
     			
-    			if (current_state.equalsIgnoreCase(NegState.ReqTerminated.toString())){
+    			if (current_state.equalsIgnoreCase(NegState.reqTerminated.toString())){
     				System.out.println("alarm: negotiation is terminated by manager.");
-    				return "alarm: negotiation is terminated by manager.";
+    				return "alarm: negotiation is already terminated by manager.";
     			}
     			
     			// duplicate AcceptAck
@@ -226,6 +296,7 @@ public class AppInstanceResource extends AHEResource{
     				String offers_comb = NegotiationDB.getOfferSub(contract_id);
     				if(offers_comb.equalsIgnoreCase("")){
     					provider = OntUpdate.shareMaxReduce(contract_id);
+    					//provider = OntUpdate.mPolicyShareMaxReduce(contract_id);
     				}
     				else{
     					String[] offers_arr = offers_comb.split(";");
@@ -234,13 +305,15 @@ public class AppInstanceResource extends AHEResource{
     				
              			long temp_con_id = Long.parseLong(offer);
         		        provider = OntUpdate.shareMaxReduce(temp_con_id);
+        		        NegotiationDB.updateContractJob(temp_con_id, NegState.contracted, job_id);
+             			//provider = OntUpdate.mPolicyShareMaxReduce(temp_con_id);
         		        
              		  }
     				}
         		    //JobSubmissionHandler.timer.purge();
         		    //JobSubmissionHandler.timer.cancel();
              		 job_id = Long.parseLong(form.getFirstValue("job_id"));
-     		         System.out.println("********* renegotiation received job id: " + job_id);
+     		         //System.out.println("********* re-negotiation received job id: " + job_id);
      		    
      		        NegotiationDB.setRenegTag(job_id, 1);
         		    
@@ -253,7 +326,14 @@ public class AppInstanceResource extends AHEResource{
     	    		//boolean virtual = Boolean.parseBoolean(proMax[1]);
     	    		// to get if user's privilege is over written from database
 
+    				Calendar cal1 = Calendar.getInstance();
+    			    SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy.MM.dd");
+    			    Calendar cal2 = Calendar.getInstance();
+    			    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+    		     	String start_date = sdf1.format(cal1.getTime()) + "T" + sdf.format(cal2.getTime()) + "+7:00";
+    		     	NegotiationDB.updateContractStartT(contract_id, start_date);
     	    		provider = OntUpdate.mPolicyShareMaxReduce(contract_id);
+    	    		System.out.println("Service Broker, the time stamp for contract fomation is: " + start_date);
 
     	    		Random rand2 = new Random();
 		   	        job_id = rand2.nextInt(10000 + 1);
@@ -286,7 +366,8 @@ public class AppInstanceResource extends AHEResource{
     				//to generate and set job id for a contract
     					//NegotiationDB.updateContractState(contract_id, NegState.Contracted);
         				//NegotiationDB.updateOfferState(contract_id, NegState.Contracted);
-    				NegotiationDB.updateContractJob(contract_id, NegState.Contracted, job_id);
+    				NegotiationDB.updateContractJob(contract_id, NegState.contracted, job_id);
+    				System.out.println("Service Broker updated the contract state to contracted.");
     				//create table for job+contract
     				//tag 0 for negotiation, 1 for re-negotiation.
     				if(!if_reneg){
@@ -353,7 +434,7 @@ public class AppInstanceResource extends AHEResource{
         		else{
         			appinst_prepare(ResourceUtil.getArgumentMap(form));
         		}*/
-        		System.out.println("================================" + registry.size());
+        		//System.out.println("================================" + registry.size());
         		//System.out.println("================================" + form.);
         		appinst_prepare(ResourceUtil.getArgumentMap(registry));
         		//if(if_reneg){
@@ -391,7 +472,7 @@ public class AppInstanceResource extends AHEResource{
     	       		  }
     				}
     				passedInfo = job_id + "!" + passedInfo;
-    				System.out.println("========= passedInfo: " + passedInfo);
+    				//System.out.println("========= passedInfo: " + passedInfo);
     	       		return passedInfo;
         		}
         		else{
@@ -405,7 +486,7 @@ public class AppInstanceResource extends AHEResource{
 	       			  //String uri_pre = job_service.toString();
 	    			  passedInfo = endPoint;
 	    			  passedInfo = job_id + "!" + passedInfo;
-	    				System.out.println("========= passedInfo: " + passedInfo);
+	    				//System.out.println("========= passedInfo: " + passedInfo);
         			return passedInfo;
         		}
     	       		
@@ -464,19 +545,21 @@ public class AppInstanceResource extends AHEResource{
         		//String offer_id_s = form.getFirstValue("offer_id");
         		long offer_id = Long.parseLong(form.getFirstValue("offer_id"));
         		String current_state = NegotiationDB.getOfferStatus(offer_id);
+        		System.out.println("Service Broker received an Offer with an offer ID: " + offer_id);
+				//System.out.println("Service Broker, the current negotiation state for the received offer is: " + current_state);
         		
         		if(form.getNames().contains("terminate")){
         			// terminate during negotiation does not introduce penalty
-        			if (current_state.equalsIgnoreCase(NegState.Negotiation.toString())){
+        			if (current_state.equalsIgnoreCase(NegState.negotiating.toString())){
         			    long neg_id = NegotiationDB.getNegID(offer_id);
 			    	    String all_offers = NegotiationDB.getNegOffers(neg_id);
 			    	    String[] all_offers_arry = all_offers.split(";");
 			    	    for(String offer : all_offers_arry){
 			    		    long temp_offer_id = Long.parseLong(offer.split("-")[0]);
 			    		    if(temp_offer_id == offer_id){
-			    		        NegotiationDB.updateContractState(contract_id, NegState.Uncontracted);
+			    		        NegotiationDB.updateContractState(contract_id, NegState.uncontracted);
 			    		    }
-			    		    NegotiationDB.updateOfferState(temp_offer_id, NegState.Uncontracted);
+			    		    NegotiationDB.updateOfferState(temp_offer_id, NegState.uncontracted);
 			    	    }
 			    	
         			//NegotiationDB.updateOfferState(offer_id, NegState.Uncontracted);
@@ -485,10 +568,10 @@ public class AppInstanceResource extends AHEResource{
         		}
         		
         		if(form.getNames().contains("revocation")){
-        			if (current_state.equalsIgnoreCase(NegState.Completed.toString()) ||
-					    current_state.equalsIgnoreCase(NegState.Uncontracted.toString()) ||
-					    current_state.equalsIgnoreCase(NegState.Terminated.toString())){
-        				return "error: requested offer already in a final state";
+        			if (current_state.equalsIgnoreCase(NegState.completed.toString()) ||
+					    current_state.equalsIgnoreCase(NegState.uncontracted.toString()) ||
+					    current_state.equalsIgnoreCase(NegState.terminated.toString())){
+        				return "error: requested offer already in a " + current_state + " state";
         			}
         			else{
         				// how to enable it continue with the negotiation procedure?
@@ -510,8 +593,8 @@ public class AppInstanceResource extends AHEResource{
         			    
         			    //if revocation accepted, update negotiation state of this offer to Uncontracted
         			    if(decision == 0){
-        			    	NegotiationDB.updateOfferState(offer_id, NegState.Uncontracted);
-        			    	NegotiationDB.updateContractState(contract_id, NegState.Uncontracted);
+        			    	NegotiationDB.updateOfferState(offer_id, NegState.uncontracted);
+        			    	NegotiationDB.updateContractState(contract_id, NegState.uncontracted);
         			    	long neg_id = NegotiationDB.getNegID(offer_id);
         			    	String all_offers = NegotiationDB.getNegOffers(neg_id);
         			    	System.out.println("=========== all offers: " + all_offers);
@@ -540,10 +623,9 @@ public class AppInstanceResource extends AHEResource{
         			     
         		}
         		else{
-        			System.out.println("negotiation current state: " + current_state);
-        			if(current_state.equalsIgnoreCase(NegState.Initiating.toString()))
+        			//System.out.println("negotiation current state: " + current_state);
+        			if(current_state.equalsIgnoreCase(NegState.initiating.toString()))
         			{
-        		
         		      Calendar cal1 = Calendar.getInstance();
         		      SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy.MM.dd");
         		//sdf1.format(cal1.getTime());
@@ -563,9 +645,9 @@ public class AppInstanceResource extends AHEResource{
                    			  Contract contract = NegotiationDB.offerToContract(temp_offer_id, date);
                          	  
               	              contract.setContractDate(date);
-              	              contract.setStatus(NegState.Negotiation.toString());
+              	              contract.setStatus(NegState.negotiating.toString());
           		              NegHibConnect.hibContract(contract);
-          		              NegotiationDB.updateOfferState(offer_id, NegState.Negotiation);
+          		              NegotiationDB.updateOfferState(offer_id, NegState.negotiating);
                    			  
                    		  }
                    		  //to deal with combined-offer to combined-contract
@@ -573,22 +655,24 @@ public class AppInstanceResource extends AHEResource{
                      	  
               	        contract.setContractDate(date);
               	        //contract.setStartTime(date);
-              	        contract.setStatus(NegState.Negotiation.toString());
+              	        contract.setStatus(NegState.negotiating.toString());
               	        // generate an entry in db for newly agreed contract
           		        NegHibConnect.hibContract(contract);
-          		        NegotiationDB.updateOfferState(offer_id, NegState.Negotiation);
+          		        NegotiationDB.updateOfferState(offer_id, NegState.negotiating);
                    	  }
                    	  
             
                    	  else{
-                      Contract contract = NegotiationDB.offerToContract(offer_id, date);
+                          Contract contract = NegotiationDB.offerToContract(offer_id, date);
                    	  
-            	      contract.setContractDate(date);
+            	          contract.setContractDate(date);
             	      //contract.setStartTime(date);
-            	      contract.setStatus(NegState.Negotiation.toString());
+            	          contract.setStatus(NegState.negotiating.toString());
             	     // generate an entry in db for newly agreed contract
-        		      NegHibConnect.hibContract(contract);
-        		      NegotiationDB.updateOfferState(offer_id, NegState.Negotiation);
+        		          NegHibConnect.hibContract(contract);
+        		          
+        		          System.out.println("Service Broker initiates the offer's state to negotiating.");
+        		          NegotiationDB.updateOfferState(offer_id, NegState.negotiating);
                    	  
                    	  }
                    	 
@@ -630,6 +714,9 @@ public class AppInstanceResource extends AHEResource{
                 //return "*****" + groupV;
                 //String groupV = form.getFirstValue("acd_vo_group");
                 appname = form.getFirstValue("appname");
+                
+                System.out.println("Service Broker received a Quote Request with user name: " + username + "; group name: " + group
+                		+ "; application name: " + appname + ".");
                // System.out.println(appV);
                 //startT = form.getFirstValue("startT");
                 //duration = form.getFirstValue("duration");
@@ -679,6 +766,7 @@ public class AppInstanceResource extends AHEResource{
         			    long neg_id = rand.nextInt(10000 + 1);
         			    //WRONG: to get neg_id from offer in database
         			    NegotiationDB.insertNeg(neg_id, offers);
+        			    System.out.println("Service Broker returns satisfying Quote(s): " + offers);
         				return offers;
         				//return "hello";
         			}
@@ -727,6 +815,8 @@ public class AppInstanceResource extends AHEResource{
                 String job_type = form.getFirstValue("jobtype");
                 String deadline = form.getFirstValue("deadline");
                 
+                System.out.println("Service Broker received a Quote Request with user name: " + username + "; group name: " + group
+                		+ "; application name: " + appname + "; job type: " + job_type + "; and deadline: " + deadline);
                 //if 'numjobs'>1, 'resource' = 'parallel'; if 'numjobs' = 1, 'resource' = 'serial'
                 int numjobs = Integer.parseInt(form.getFirstValue("numjobs"));
                 int nefold = Integer.parseInt(form.getFirstValue("nefold"));
@@ -746,17 +836,20 @@ public class AppInstanceResource extends AHEResource{
  
         		offers = OntReasoning.getOffersFromSharesComp(username, group, appname, resource, numjobs, nefold, deadline);
 
-        			if(!offers.isEmpty()){
+        			if(!offers.contains("Rejected")){
 
         			    Random rand = new Random();
         			    long neg_id = rand.nextInt(10000 + 1);
         			    NegotiationDB.insertNeg(neg_id, offers);
+        			    System.out.println("Service Broker returns satisfying Quote(s): " + offers);
         				return offers;
         				//return "hello";
         			}
         			// if no existing service found, try to search for new service providers
         			else{
-        				return "Rejected: requester cannot run jobs parallel.";
+        				//System.out.println("Service Broker returns Rejected: requester cannot run jobs parallel.");
+        				System.out.println(offers);
+        				return offers;
         				
         			}
         		}
@@ -766,10 +859,13 @@ public class AppInstanceResource extends AHEResource{
         		group = form.getFirstValue("group");
         		username = form.getFirstValue("username");
         		appname = form.getFirstValue("appname");
+        		pay = form.getFirstValue("start_time");
         		
         		int core = Integer.parseInt(form.getFirstValue("core"));
         		String offers;
         		
+        		 System.out.println("Service Broker received a Quote Request with user name: " + username + "; group name: " + group
+                 		+ "; application name: " + appname + "; core number required: " + core);
         		//3rd parameter: core number; 4th parameter: duration; 5th parameter: as soon as possible
         		offers = OntReasoning.getOffersFromShares(username, group, appname, core, 0, pay, 0);
         		
@@ -778,11 +874,13 @@ public class AppInstanceResource extends AHEResource{
     				//String workerN = offers.values().iterator().next();
     				//System.out.println("******workerN: " + workerN);
     				//return workerN;
+        			System.out.println("Service Broker returns satisfying Quote(s): " + offers);
     				return offers;
     				//return "hello";
     			}
         		else{
-        			return "offer empty";
+        			System.out.println("Service Broker returned empty quotes");
+        			return "quote empty";
         		}
         	}
         	
@@ -801,16 +899,18 @@ public class AppInstanceResource extends AHEResource{
         		
         		int core = Integer.parseInt(form.getFirstValue("core"));
         		String offers;
-        		
+        		System.out.println("Service Broker received a re-negotiation request for contract " + contract_id  + ", the new core number required is " + core);
         		//to re-negotiate with existing contract
         		//offers = OntReasoning.reNegotiate(contract_id, core);
         		String current_state = NegotiationDB.getContractStatus(contract_id);
-        		
-        		if(current_state.equalsIgnoreCase(NegState.Contracted.toString())){
+        		System.out.println("Service Broker, the current state of the required re-negotiated contract " + contract_id + 
+        				" is " + current_state);
+        		if(current_state.equalsIgnoreCase(NegState.contracted.toString())){
         		//4th parameter: core number; 5th parameter: duration; 6th parameter: as soon as possible; 7th: for re-neg
         		    //offers = OntReasoning.getOffersFromShares(username, groupname, appname, core, 0, pay, contract_id);
         		    
         			//to get the Share which formed the contract
+        			System.out.println("Service Broker is checking if the contracted resource can meet demands.");
         			offers = OntReasoning.resourceSearch(username, groupname, appname, share, pay, core, contract_id);
         			
         		    if(!offers.isEmpty()){
@@ -823,20 +923,28 @@ public class AppInstanceResource extends AHEResource{
         		    	//String[] offer_arr = offers.split(";");
         				//String content = offer_arr[1].split("-")[0];
     				    //return content;
+        		    	//System.out.println("Service Broker verified that the contracted resource CAN meet demands.");
+        		    	System.out.println("Service Broker returns satisfying Quote(s) for the re-negotiation request: " + offers);
         		    	return offers;
     				//return "hello";
     			    }
         		    else{
         		    	//should negotiation with other shares for this app
         		    	offers = OntReasoning.getOffersFromOtherShares(username, groupname, appname, core, 0, pay, contract_id, share);
-        			    return offers;
+        		    	if(!offers.isEmpty()){
+        		    	    System.out.println("Service Broker returns satisfying Quote(s) from new providers for the re-negotiation request: " + offers);
+        		    	    return offers;
+        		    	}
+        		    	else{
+        		    		return "empty offer";
+        		    	}
         		    	//String[] offer_arr = offers.split(";");
         				//String content = offer_arr[1].split("-")[0];
     				    //return content;
         		    }
         		}
         		else{
-        			return "error: something wrong during re-negotiation";
+        			return "empty offer";
         		}
         	}
         	
@@ -882,13 +990,13 @@ public class AppInstanceResource extends AHEResource{
         	    //execution before job complete
         	if(form.getNames().contains("stop")){
         		String end_time = null;
-        		System.out.println("************ Im here");
+        		//System.out.println("************ Im here");
         		//boolean stop_site = false;
         		//to stop the timer set by 'maxDuration'
         		JobSubmissionHandler.timer.cancel();
         		JobSubmissionHandler.timer.purge();
-        		System.out.println("TimerTask stopped by user request");
-    	        System.out.println("Timer task stopped by user request at:"+new Date());
+        		//System.out.println("TimerTask stopped by user request");
+    	        //System.out.println("Timer task stopped by user request at:"+new Date());
         		
         		//for test case only
         		/*Calendar cal1 = Calendar.getInstance();
@@ -899,6 +1007,7 @@ public class AppInstanceResource extends AHEResource{
         		
                 // suppose the values from SteererService include end_time;	     		
         		long contract_id = Long.parseLong(form.getFirstValue("contract_id"));
+        		System.out.println("Service Broker received a stop command for contract " + contract_id);
         		//long job_id = Long.parseLong(form.getFirstValue("job_id"));
         		//int tag = NegotiationDB.getRenegTag(job_id); 
         		
@@ -915,15 +1024,16 @@ public class AppInstanceResource extends AHEResource{
         		    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
         	     	end_time = sdf1.format(cal1.getTime()) + "T" + sdf.format(cal2.getTime()) + "+7:00";
         		//}
-        		
+        	    System.out.println("Service Broker, the time stamp of the contract " + contract_id + " termination is: " + end_time);
         		//String[] meta = NegotiationDB.getRenegMeta(contract_id);
         		//String current_state = NegotiationDB.getContractStatus(contract_id);
         		String current_state = NegotiationDB.getContractStatus(contract_id);
+        		System.out.println("Service Broker, the current state of the contract " + contract_id + " is: " + current_state);
         		//String stop_uri;
         		long job_id = NegotiationDB.getJobId(contract_id);
             	 int tag = NegotiationDB.getRenegTag(job_id); 
         		
-        		if(current_state.equalsIgnoreCase(NegState.Contracted.toString())){
+        		if(current_state.equalsIgnoreCase(NegState.contracted.toString())){
         			
         			//if(stop_site){
         				//get site from database, send 'stop' to site's corresponding steerer
@@ -948,15 +1058,17 @@ public class AppInstanceResource extends AHEResource{
                  		  String[] contracts_arr = contracts_comb.split(";");
                  		  for(String contract: contracts_arr){
                  			  long temp_contract_id = Long.parseLong(contract);
-                 			  NegotiationDB.updateContractStateEndT(temp_contract_id, NegState.Completed, end_time);
+                 			  NegotiationDB.updateContractStateEndT(temp_contract_id, NegState.reqTerminated, end_time);
 
+                 			 System.out.println("Service Broker, the state of the contract " + contract_id + " is updated to: reqTerminated");
                  			  //to update balances in ontologies
                  			  OntUpdate.mPolicyShareCompleteReduce(temp_contract_id, end_time);
                  			  
                  			  //to call corresponding steerer's 'stop' api
                  		  }
                  		  //to update the state of combined contract
-                 		 NegotiationDB.updateContractStateEndT(contract_id, NegState.Completed, end_time);
+                 		 NegotiationDB.updateContractStateEndT(contract_id, NegState.reqTerminated, end_time);
+                 		System.out.println("Service Broker, the state of the contract " + contract_id + " is updated to: reqTerminated");
 
                  	  }
                  	  //if re-negotiation
@@ -968,7 +1080,7 @@ public class AppInstanceResource extends AHEResource{
            				//meta = NegotiationDB.getRenegMeta(old_contract);
            				String old_contract_state = NegotiationDB.getContractStatus(old_contract);
            				//String old_contract_state = NegotiationDB.getContractStatus(old_contract);
-           				if(!old_contract_state.equalsIgnoreCase(NegState.ReqTerminated.toString())){
+           				if(!old_contract_state.equalsIgnoreCase(NegState.reqTerminated.toString())){
            					
            					//if(stop_site){
            					    //String[] meta1 = NegotiationDB.getRenegMeta(old_contract);
@@ -978,7 +1090,8 @@ public class AppInstanceResource extends AHEResource{
            					//StopConnect.stopConnect(stop_uri);
            					
            				    OntUpdate.mPolicyShareCompleteReReduce(old_contract, end_time);
-           				   NegotiationDB.updateContractStateEndT(contract_id, NegState.Completed, end_time);
+           				    NegotiationDB.updateContractStateEndT(contract_id, NegState.reqTerminated, end_time);
+           				    System.out.println("Service Broker, the state of the contract " + old_contract + " is updated to: ReqTerminated");
                		        //NegotiationDB.updateOfferState(old_contract, NegState.Completed, end_time);
            				   
            				    //to call corresponding steerer's 'stop' api
@@ -987,14 +1100,15 @@ public class AppInstanceResource extends AHEResource{
                  	
                  	  //basic case, for cluster case as well
                  	  else{
-                 		 NegotiationDB.updateContractStateEndT(contract_id, NegState.Completed, end_time);
+                 		 NegotiationDB.updateContractStateEndT(contract_id, NegState.reqTerminated, end_time);
+                 		System.out.println("Service Broker, the state of the contract " + contract_id + " is updated to: reqTerminated");
                  		 OntUpdate.mPolicyShareCompleteReduce(contract_id, end_time);
                  		 //to update balances in ontologies
-                 		 
+                 		 //cannot the cluster case
                  		 //if its cluster case, need to call SteerService 'stop' api to stop job execution
-                 	     if(appname.equalsIgnoreCase("CompSteering")){
+                 	     /*if(appname.equalsIgnoreCase("CompSteering")){
                  	    	//to call SteerService 'stop' api to stop job execution
-                 	     }
+                 	     }*/
                  	     //for Junyi's case, but not going to happen.
                  	     /*else{
                  	    	 //to call corresponding steerer's 'stop' api
@@ -1017,7 +1131,7 @@ public class AppInstanceResource extends AHEResource{
         			//NegotiationDB.updateContractState(contract_id, NegState.ReqTerminated, end_time);
         		    //NegotiationDB.updateOfferState(contract_id, NegState.ReqTerminated, end_time);
         			
-        		    return "ontology";
+        		    return "stop command received and balance update done.";
         		}
         		else{
         			return "error: cannot find required contract.";
@@ -1026,14 +1140,16 @@ public class AppInstanceResource extends AHEResource{
         	}
         	//'complete' is called by SteerService in cluster case
         	//'complete' is called by worker node in Junyi's case
-        	if(form.getNames().contains("complete") && form.getNames().contains("contract_id")){
-        		System.out.println("************ Im here");
+        	if(form.getNames().contains("complete") && form.getNames().contains("job_id")){
+        		
+        		System.out.println("Service Broker receives a complete notification for contract: " + contract_id);
+        		//System.out.println("************ Im here");
         		//boolean stop_site = false;
         		//to stop the timer set by 'maxDuration'
         		JobSubmissionHandler.timer.cancel();
         		JobSubmissionHandler.timer.purge();
-        		System.out.println("TimerTask stopped by job complete");
-    	        System.out.println("Timer task stopped by job complete at:"+new Date());
+        		//System.out.println("TimerTask stopped by job complete");
+    	       // System.out.println("Timer task stopped by job complete at:"+new Date());
         		
         		//for test case only
         		/*Calendar cal1 = Calendar.getInstance();
@@ -1052,13 +1168,13 @@ public class AppInstanceResource extends AHEResource{
         		    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
         	     	String end_time = sdf1.format(cal1.getTime()) + "T" + sdf.format(cal2.getTime()) + "+7:00";
         		//}
-        		
+        		System.out.println("Service Broker, the timestamp for the contract " + contract_id + " completing the job is: " + end_time);
         		String current_state = NegotiationDB.getContractStatus(contract_id);
-        		
+        		System.out.println("Service Broker, the current state of the requested contract " + contract_id + " is: "  + current_state);
         		long job_id = NegotiationDB.getJobId(contract_id);
            	    int tag = NegotiationDB.getRenegTag(job_id); 
        		
-       		    if(current_state.equalsIgnoreCase(NegState.Contracted.toString())){
+       		    if(current_state.equalsIgnoreCase(NegState.contracted.toString())){
        			
        			
        			//to deal with if the job contains sub-contracts
@@ -1070,13 +1186,15 @@ public class AppInstanceResource extends AHEResource{
                 		  String[] contracts_arr = contracts_comb.split(";");
                 		  for(String contract: contracts_arr){
                 			  long temp_contract_id = Long.parseLong(contract);
-                			  NegotiationDB.updateContractStateEndT(temp_contract_id, NegState.Completed, end_time);
+                			  NegotiationDB.updateContractStateEndT(temp_contract_id, NegState.completed, end_time);
+                			  System.out.println("Service Broker, the state of the contract " + temp_contract_id + " is updated to completed state.");
 
                 			  //to update balances in ontologies
                 			  OntUpdate.mPolicyShareCompleteReduce(temp_contract_id, end_time);
                 		  }
                 		  //to update the state of combined contract
-                		 NegotiationDB.updateContractStateEndT(contract_id, NegState.Completed, end_time);
+                		 NegotiationDB.updateContractStateEndT(contract_id, NegState.completed, end_time);
+                		 System.out.println("Service Broker, the state of the contract " + contract_id + " is updated to completed state.");
 
                 	  }
                 	  
@@ -1088,7 +1206,7 @@ public class AppInstanceResource extends AHEResource{
           				//meta = NegotiationDB.getRenegMeta(old_contract);
           				    String old_contract_state = meta[0];
           				//String old_contract_state = NegotiationDB.getContractStatus(old_contract);
-          				    if(!old_contract_state.equalsIgnoreCase(NegState.ReqTerminated.toString())){
+          				    if(!old_contract_state.equalsIgnoreCase(NegState.reqTerminated.toString())){
           					
           					//if(stop_site){
           					    //String[] meta1 = NegotiationDB.getRenegMeta(old_contract);
@@ -1098,13 +1216,15 @@ public class AppInstanceResource extends AHEResource{
           					//StopConnect.stopConnect(stop_uri);
           					
           				        OntUpdate.mPolicyShareCompleteReReduce(old_contract, end_time);
-          				        NegotiationDB.updateContractStateEndT(contract_id, NegState.Completed, end_time);
+          				        NegotiationDB.updateContractStateEndT(contract_id, NegState.completed, end_time);
+          				        System.out.println("Service Broker, the state of the contract " + contract_id + " is updated to completed state.");
               		        //NegotiationDB.updateOfferState(old_contract, NegState.Completed, end_time);
           				    }
           			  }
                 		         
                 	  else{
-                		 NegotiationDB.updateContractStateEndT(contract_id, NegState.Completed, end_time);
+                		 NegotiationDB.updateContractStateEndT(contract_id, NegState.completed, end_time);
+                		 System.out.println("Service Broker, the state of the contract " + contract_id + " is updated to completed state.");
                 		 OntUpdate.mPolicyShareCompleteReduce(contract_id, end_time);
                 		 //to update balances in ontologies             		 
                 	  }
@@ -1124,7 +1244,7 @@ public class AppInstanceResource extends AHEResource{
        			//NegotiationDB.updateContractState(contract_id, NegState.ReqTerminated, end_time);
        		    //NegotiationDB.updateOfferState(contract_id, NegState.ReqTerminated, end_time);
        			
-       		    return "ontology";
+       		    return "received complete notification.";
        		}
        		else{
        			return "error: cannot find required contract.";
@@ -1132,28 +1252,35 @@ public class AppInstanceResource extends AHEResource{
         		//return "ok";
         	}
         	//to deal with complete with job_id case
-        	if(form.getNames().contains("complete") && form.getNames().contains("job_id")){
-        		System.out.println("************ Im here");
+        	if(form.getNames().contains("complete") && form.getNames().contains("contract_id")){
+        		//System.out.println("************ Im here");
         		//boolean stop_site = false;
         		//to stop the timer set by 'maxDuration'
         		JobSubmissionHandler.timer.cancel();
         		JobSubmissionHandler.timer.purge();
-        		System.out.println("TimerTask stopped by job complete");
-    	        System.out.println("Timer task stopped by job complete at:"+new Date());
+        		//System.out.println("TimerTask stopped by job complete");
+    	        //System.out.println("Timer task stopped by job complete at:"+new Date());
     	     
-    	        long job_id = Long.parseLong(form.getFirstValue("job_id"));
-        		int if_reg = NegotiationDB.getRenegTag(job_id);
+        		long contract_id = Long.parseLong(form.getFirstValue("contract_id"));
+    	        //long job_id = Long.parseLong(form.getFirstValue("job_id"));
+        		//int if_reg = NegotiationDB.getRenegTag(job_id);
         		
         		Calendar cal1 = Calendar.getInstance();
     		    SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy.MM.dd");
     		    Calendar cal2 = Calendar.getInstance();
     		    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
     	     	String comp_time = sdf1.format(cal1.getTime()) + "T" + sdf.format(cal2.getTime()) + "+7:00";
-    	     	String state;
-    	     	long contract = NegotiationDB.getConFromJob(job_id);
+    	  
+    	     	String current_state = NegotiationDB.getContractStatus(contract_id);
+        		System.out.println("Service Broker, the current state of the requested contract " + contract_id + " is: "  + current_state);
+        		if(current_state.equalsIgnoreCase(NegState.contracted.toString())){
+        			System.out.println("Service Broker updates the state of the contract " + contract_id + " to: completed.");
+    	     	    NegFunctions.updateComplete(contract_id,comp_time);
+        		}
+    	     	//long contract = NegotiationDB.getConFromJob(job_id);
     	     	
     	     	 //tag 0 for negotiation, 1 for re-negotiation.
-        		if(if_reg == 0){
+        		/*if(if_reg == 0){
         			//to update contract/contracts
         			NegFunctions.updateComplete(contract, comp_time);
         		}
@@ -1164,7 +1291,7 @@ public class AppInstanceResource extends AHEResource{
         			//to update old contract
                	    long old_con = NegotiationDB.getOldContract(job_id);
                	    NegFunctions.updateComplete(old_con, comp_time);
-        		}
+        		}*/
         		return "Completed";
         	}
         	
@@ -1185,7 +1312,7 @@ public class AppInstanceResource extends AHEResource{
     	     	String state = NegotiationDB.getContractStatus(contract);
     	     	
     	     	 //tag 0 for negotiation, 1 for re-negotiation.
-    			if(state.equalsIgnoreCase(NegState.Contracted.toString())){
+    			if(state.equalsIgnoreCase(NegState.contracted.toString())){
         		    if(if_reg == 0){
         			//to update contract/contracts
         			    NegFunctions.updateComplete(contract, comp_time);
@@ -1212,7 +1339,7 @@ public class AppInstanceResource extends AHEResource{
 		    	    String[] all_offers_arry = all_offers.split(";");
 		    	    for(String offer : all_offers_arry){
 		    		    long temp_offer_id = Long.parseLong(offer.split("-")[0]);
-		    		    NegotiationDB.updateOfferState(temp_offer_id, NegState.Uncontracted);
+		    		    NegotiationDB.updateOfferState(temp_offer_id, NegState.uncontracted);
 		    	    }
         		}
         		return "terminated";

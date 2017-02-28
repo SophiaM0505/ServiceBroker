@@ -263,13 +263,13 @@ public class JobSubmissionHandler {
 			        timer.cancel();
 			        Timer this_timer = new Timer();
 			        timer = this_timer;
-	                System.out.println("***begin Timer task for contract " + contract + " started at:"+new Date());
+	                //System.out.println("***begin Timer task for contract " + contract + " started at:"+new Date());
 	                //Helper.writeout("***begin TimerTask started at:"+new Date());
 	                this_timer.schedule(timerTask, 0);
 	                //Helper.writeout("***end TimerTask started at:"+new Date());
-	                System.out.println("***end Timer task for contract " + contract + " started at:"+new Date());
+	                //System.out.println("***end Timer task for contract " + contract + " started at:"+new Date());
 	                ///timer.scheduleAtFixedRate(timerTask, 0, 10*1000);
-	                System.out.println("TimerTask started***");
+	                //System.out.println("TimerTask started***");
 	                //cancel after sometime
 	            try {
 	                Thread.sleep(30000);
@@ -304,7 +304,7 @@ public class JobSubmissionHandler {
 		}
 		else if(res.equalsIgnoreCase(ResourceCode.REDQUEEN.toString())){
 			// to call steerer service Sim_attach api here with parameters user+app
-			System.out.println("***************************");
+			//System.out.println("***************************");
 			provider_info = ModuleAccess.getModuleProvider().getModuleProperty(AHEConfigurationProperty.module_jobservice_redqueen.toString());
 			// steerer service uri
 			job_service = new URI(provider_info[0]);
@@ -331,7 +331,7 @@ public class JobSubmissionHandler {
 			int core = Integer.parseInt(results[2]);*/
 			//long job_id = NegotiationDB.getJobId(contract);
 			//long job_id = NegotiationDB.getJobIdFromInst(inst_id);
-			System.out.println("contract id fetched in job submission handler: " + contract);
+			System.out.println("Contract id fetched in job submission handler: " + contract);
 			
        	    //NegotiationDB.updateContractStartT(contract, date);
        	    //final String uri = "http://localhost:8070/steerservice";
@@ -375,9 +375,14 @@ public class JobSubmissionHandler {
 			//String uri = "http://ec2-52-31-37-191.eu-west-1.compute.amazonaws.com:8080/steering/start";
 			
 			//to get numjobs and nefold from database
-			int service_level;
-			String numjobs = "5";
-			String nefold = "12";
+			/*String[] submit_data = new String[3];
+			submit_data = NegotiationDB.getRedQueenSubmission(contract);
+			String numjobs = submit_data[0];
+			String nefold = submit_data[1];
+			int service_level = Integer.parseInt(submit_data[2]);*/
+			//int service_level;
+			//String numjobs = "5";
+			//String nefold = "12";
 			
 			//to submit job to redqueen via scripts, it also copies job_unread.txt to broker instance
 			/*final String command = "/opt/test/job_submit_broker_expect.sh " + numjobs + " " + nefold + " " + job_id + " " + "1" ;
@@ -404,7 +409,7 @@ public class JobSubmissionHandler {
 			//Redqueen.getRedqueenJobId(job_id);
 			
 			
-			System.out.println("@@@@@@@@@@@@@ " + job_service.toString());
+			//System.out.println("@@@@@@@@@@@@@ " + job_service.toString());
 			//this timer is for deadline timer where deadline is specified by a user
 			TimerTask deadline_timerTask = new SteererTimer();
             //running timer task as daemon thread
@@ -413,13 +418,13 @@ public class JobSubmissionHandler {
 	        timer.cancel();
 	        Timer deadline_timer = new Timer();
 	        timer = deadline_timer;
-            System.out.println("***begin Timer task for contract " + contract + " started at:"+new Date());
+            //System.out.println("***begin Timer task for contract " + contract + " started at:"+new Date());
             //Helper.writeout("***begin TimerTask started at:"+new Date());
             deadline_timer.schedule(deadline_timerTask, 0);
             //Helper.writeout("***end TimerTask started at:"+new Date());
-            System.out.println("***end Timer task for contract " + contract + " started at:"+new Date());
+            //System.out.println("***end Timer task for contract " + contract + " started at:"+new Date());
             ///timer.scheduleAtFixedRate(timerTask, 0, 10*1000);
-            System.out.println("TimerTask started***");
+            //System.out.println("TimerTask started***");
             
             try {
                 Thread.sleep(2000);

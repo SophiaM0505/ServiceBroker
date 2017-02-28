@@ -16,13 +16,22 @@ import negotiation.Negotiation.NegState;
 import negotiation.Ontology.OntUpdate;
 
 public class BrokerAccounting {
-	public static void brokerAccounting() throws IOException{
+	public static void brokerAccounting() throws IOException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, OWLOntologyCreationException, OWLOntologyStorageException, InterruptedException{
 	//public static void main(String[] args) throws IOException, OWLOntologyCreationException, OWLOntologyStorageException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, InterruptedException {
 		// to execute fetch_file_broker.sh to get accounting data from cluster
 		// it will copy job_duration.txt to /opt/AHE3/
 		String command = "/opt/test/fetch_file_broker.sh";
 		Runtime rt = Runtime.getRuntime();
 		Process p = rt.exec(command);
+		System.out.println("Service Broker is fetching accounting data from the local Cluster.");
+		long start_2 = System.currentTimeMillis();
+		//System.out.println("sophia 2" + start_2);
+        long end_2 = start_2 + 35*1000; // 60 seconds * 1000 ms/sec
+        //System.out.println("hi     " + end_2);
+        while (System.currentTimeMillis() < end_2)
+            {
+            }
+        //System.out.println("lasse 2 " + System.currentTimeMillis());
 		
 		BufferedReader reader =
                 new BufferedReader(new InputStreamReader(p.getInputStream()));
@@ -61,12 +70,17 @@ public class BrokerAccounting {
 				duration = Double.parseDouble(new_line.split(":")[1]);
 				System.out.println("*********** " + broker_job_id + "**** " + duration);
 				//to get contract_id of the broker_job_id
-				/*long contract_id = NegotiationDB.getConFromJob(broker_job_id);
+				long contract_id = NegotiationDB.getConFromJob(broker_job_id);
 				String state = NegotiationDB.getContractStatus(contract_id);
-		   		  if(state.equalsIgnoreCase(NegState.Contracted.toString())){
+				System.out.println("Service Broker, the current state of the contract " + contract_id + " is: " + state);
+		   		  if(state.equalsIgnoreCase(NegState.completed.toString()) || state.equalsIgnoreCase(NegState.reqTerminated.toString())){
 				      OntUpdate.mPolicyShareCompleteReduce(contract_id, duration);
-		   		  }*/
+		   		  }
 			}
+			return;
+		}
+		else{
+			return;
 		}
 	    
 	}

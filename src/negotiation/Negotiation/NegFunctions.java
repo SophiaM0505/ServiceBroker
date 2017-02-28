@@ -16,9 +16,9 @@ public class NegFunctions {
    	    if(contracts_comb.isEmpty()){
    		  //to check state first
    		  state = NegotiationDB.getContractStatus(contract_id);
-   		  if(state.equalsIgnoreCase(NegState.Contracted.toString())){
+   		  if(state.equalsIgnoreCase(NegState.contracted.toString())){
    			//to update state
-   			NegotiationDB.updateContractStateEndT(contract_id, NegState.Completed, comp_time);
+   			NegotiationDB.updateContractStateEndT(contract_id, NegState.completed, comp_time);
 
 			//to update balances in ontologies
 		    OntUpdate.mPolicyShareCompleteReduce(contract_id, comp_time);
@@ -29,13 +29,13 @@ public class NegFunctions {
    		 String[] contracts_arr = contracts_comb.split(";");
    		  for(String temp_con: contracts_arr){
  			      long temp_contract_id = Long.parseLong(temp_con);
- 			      NegotiationDB.updateContractStateEndT(temp_contract_id, NegState.Completed, comp_time);
+ 			      NegotiationDB.updateContractStateEndT(temp_contract_id, NegState.completed, comp_time);
 
  			      //to update balances in ontologies
  			      OntUpdate.mPolicyShareCompleteReduce(temp_contract_id, comp_time);
  		      }
  		     //to update the state of combined contract
- 		     NegotiationDB.updateContractStateEndT(contract_id, NegState.Completed, comp_time);
+ 		     NegotiationDB.updateContractStateEndT(contract_id, NegState.completed, comp_time);
    	  }
 	}
 }

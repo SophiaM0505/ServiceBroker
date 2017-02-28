@@ -64,22 +64,18 @@ public class SteererTimer extends TimerTask {
         //String worker = data[2];
         //String share = data[3];
         long job_id = Long.parseLong(data[1]);
-        long old_contract = 6;
+        long old_contract = 0;
         long max_duration;
         
         //if job_id == 0
         //String policy = share.substring(0, share.length()-5) + "Policy";
         
-        System.out.println("Timer task in SteererTimer for contract " + contract_id + " started at: "+new Date());
+        //System.out.println("Timer task in SteererTimer for contract " + contract_id + " started at: "+new Date());
         //Helper.writeout("Timer task in SteererTimer started at:"+new Date());
         //completeTask();
         //Helper.writeout("Timer task in SteererTimer finished at:"+new Date());
         //Executable.writeout("Timer task in SteererTimer finished at:"+new Date());
-        System.out.println("Timer task in SteererTimer for contract " + contract_id + " finished at: "+new Date()); 
-        
-        // to cancel timer
-        JobSubmissionHandler.timer.cancel();
-        JobSubmissionHandler.timer.purge();
+        //System.out.println("Timer task in SteererTimer for contract " + contract_id + " finished at: "+new Date()); 
         
         Calendar cal1 = Calendar.getInstance();
 	    SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy.MM.dd");
@@ -116,9 +112,16 @@ public class SteererTimer extends TimerTask {
         	//String response = SteererConnect.connectSteerer(uri, user, app, contract_id);
         	//String response = "stopped";
         	max_duration = Long.parseLong(data[0]);
-            System.out.println("max duration fetched is: " + max_duration);
-            duration_ms = 120 * 1000;
+        	System.out.println("Service Broker, according to the max cost set, the max duration (s) of the job is: " + max_duration);
+            //System.out.println("The max duration defined  is: " + max_duration);
+            duration_ms = max_duration * 1000;
+            
             completeTask();
+         // to cancel timer
+            JobSubmissionHandler.timer.cancel();
+            JobSubmissionHandler.timer.purge();
+            System.out.println("Service Broker, the maximum cost set by the manager is reached.");
+            System.out.println("The current time is: " + stop_date);
         	//if(!response.equalsIgnoreCase("stopped")){
         		//for Cloud's case, does not need to update when max reaches
         		//but need to update contract state
@@ -140,22 +143,22 @@ public class SteererTimer extends TimerTask {
            		      System.out.println("******* sub offer id: " + offer);
            			  //long temp_con_id = Long.parseLong(offer);
         		      //OntUpdate.mPolicyShareCompleteReduce(temp_con_id, stop_date);
-        		      NegotiationDB.updateOfferState(contract_id, NegState.ReqTerminated, stop_date);
-            	      String uri_pre = NegotiationDB.updateContractStateComp(contract_id, NegState.ReqTerminated, stop_date);
+        		      NegotiationDB.updateOfferState(contract_id, NegState.reqTerminated, stop_date);
+            	      String uri_pre = NegotiationDB.updateContractStateComp(contract_id, NegState.reqTerminated, stop_date);
             	      // to send stop command to steerer
             	      steerer_uri = uri_pre + post;
-            	      StopConnect.stopConnect(steerer_uri);
+            	      //StopConnect.stopConnect(steerer_uri);
            		    }
            		    
            		    //update the combined contract of sub-contracts' state
-           		    NegotiationDB.updateOfferState(contract_id, NegState.ReqTerminated, stop_date);
-					NegotiationDB.updateContractStateEndT(contract_id, NegState.ReqTerminated, stop_date);
-        		    System.out.println("-------complete balance reduced");
+           		    NegotiationDB.updateOfferState(contract_id, NegState.reqTerminated, stop_date);
+					NegotiationDB.updateContractStateEndT(contract_id, NegState.reqTerminated, stop_date);
+        		    //System.out.println("-------complete balance reduced");
         		    String old_contract_state = null;
         			try {
-        				System.out.println("====== job id: " + old_contract);
+        				//System.out.println("====== job id: " + old_contract);
         				//old_contract = NegotiationDB.getOldContract(job_id);
-        				System.out.println("====== old contract number: " + old_contract);
+        				//System.out.println("====== old contract number: " + old_contract);
         				old_contract_state = NegotiationDB.getContractStatus(old_contract);
         			} catch (InstantiationException e) {
         				// TODO Auto-generated catch block
@@ -170,17 +173,17 @@ public class SteererTimer extends TimerTask {
         				// TODO Auto-generated catch block
         				e.printStackTrace();
         			}
-        		    if(!old_contract_state.equalsIgnoreCase(NegState.ReqTerminated.toString())){
+        		    if(!old_contract_state.equalsIgnoreCase(NegState.reqTerminated.toString())){
         				//String contract_status = NegotiationDB.getContractStatus(old_contract);
         				//if(contract_status.equalsIgnoreCase(NegState.Contracted.toString())){
         				    try {
         						//OntUpdate.mPolicyShareCompleteReReduce(old_contract, stop_date);
-        						NegotiationDB.updateOfferState(old_contract, NegState.ReqTerminated, stop_date);
-        						String uri_pre = NegotiationDB.updateContractStateComp(contract_id, NegState.ReqTerminated, stop_date);
+        						NegotiationDB.updateOfferState(old_contract, NegState.reqTerminated, stop_date);
+        						String uri_pre = NegotiationDB.updateContractStateComp(contract_id, NegState.reqTerminated, stop_date);
         	            	      // to send stop command to steerer
-        	            	      steerer_uri = uri_pre + post;
-        	            	      StopConnect.stopConnect(steerer_uri);
-        						System.out.println("-------complete balance for renegotiation reduced");
+        	            	      //steerer_uri = uri_pre + post;
+        	            	      //StopConnect.stopConnect(steerer_uri);
+        						//System.out.println("-------complete balance for renegotiation reduced");
         					} catch (InstantiationException e) {
         						// TODO Auto-generated catch block
         						e.printStackTrace();
@@ -203,11 +206,12 @@ public class SteererTimer extends TimerTask {
                 	if(tag == 0){
 
                 	      //OntUpdate.mPolicyShareCompleteReduce(contract_id, stop_date);
-                	      NegotiationDB.updateOfferState(contract_id, NegState.ReqTerminated, stop_date);
-                	      String uri_pre = NegotiationDB.updateContractStateComp(contract_id, NegState.ReqTerminated, stop_date);
+                	      NegotiationDB.updateOfferState(contract_id, NegState.reqTerminated, stop_date);
+                	      String uri_pre = NegotiationDB.updateContractStateComp(contract_id, NegState.reqTerminated, stop_date);
+                	      System.out.println("Service Broker updated the contract state to reqTerminated with a stime stamp for the termination: " + stop_date);
                 	      // to send stop command to steerer
-                	      steerer_uri = uri_pre + post;
-                	      StopConnect.stopConnect(steerer_uri);
+                	      //steerer_uri = uri_pre + post;
+                	      //StopConnect.stopConnect(steerer_uri);
                		    
                 	}
                 }
@@ -267,7 +271,7 @@ public class SteererTimer extends TimerTask {
 	        int min = Integer.parseInt(convert(current_time.substring(3, 5)));
 	        int sec = Integer.parseInt(convert(current_time.substring(6, 8)));
        	    //String date = sdf1.format(cal1.getTime()) + "T" + sdf.format(cal2.getTime()) + "+7:00";
-	        System.out.println("************** deadline: " + deadline);
+	        //System.out.println("************** deadline: " + deadline);
 	        int d_hour = Integer.parseInt(convert(deadline.substring(11, 13)));
 	        int d_min = Integer.parseInt(convert(deadline.substring(14, 16)));
 	        int d_sec = Integer.parseInt(convert(deadline.substring(17, 19)));
@@ -308,22 +312,52 @@ public class SteererTimer extends TimerTask {
 	        		count_h = d_hour - hour;
 	        	}
 	        }
+	        //max_duration = Long.parseLong(data[2]);
 	        count_down = count_s + count_m*60 + count_h*3600;
+	        /*if(count_down < max_duration){
+	            duration_ms = count_down * 1000;
+	        }
+	        else{
+	        	duration_ms = max_duration * 1000;
+	        }*/
 	        duration_ms = count_down * 1000;
+	        System.out.println("Service Broker, the duration is: " + duration_ms + "(ms)");
 	        completeTask();
+	     // to cancel timer
+	        JobSubmissionHandler.timer.cancel();
+	        JobSubmissionHandler.timer.purge();
      		try {
      			//if return true, meaning job completed, no need to update ontologies
      			    //it would be updated by broker calling programs in desktop/redqueen
      			//if return false, meaning job not completed, but as deadline reaches, need to kill the job
      			    //but no need to update ontologies, as dont know how many resources consumed, would be killed by broker 
      			      //fetching file as well
-				if(Redqueen.checkRedqueenComplete(job_id)){
-					NegotiationDB.updateContractStateTermi(contract_id, NegState.Completed, stop_date);
+     			
+     			//----------------- for max case
+     			/*System.out.println("The current time is: " + current_time + ". The maximum CPU time set by the manager reaches.");
+     			NegotiationDB.updateContractStateTermi(contract_id, NegState.reqTerminated, stop_date);
+     			System.out.println("Service Broker, the time stamp for termination is: " + stop_date);
+     			//OntUpdate.mPolicyShareCompleteReduce(contract_id, stop_date);
+				return;*/
+				//--------------------
+				
+     			System.out.println("The current time is: " + current_time + ". The deadline set by the reqesuter reaches.");
+				if(Redqueen.checkRedqueenComplete(job_id)){				
+					//System.out.println();
+					NegotiationDB.updateContractState(contract_id, NegState.completed);
+					//NegotiationDB.updateContractStateTermi(contract_id, NegState.completed, stop_date);
+					System.out.println("Service Broker verified that the job in the local Cluster has been completed.");
+					return;
 					//update = false;
 					//return;
 				}
 				else{
-					NegotiationDB.updateContractStateTermi(contract_id, NegState.Terminated, stop_date);
+					System.out.println("Service Broker verified that the job in the local Cluster has been not completed.");
+					//NegotiationDB.updateContractStateTermi(contract_id, NegState.reqTerminated, stop_date);
+					NegotiationDB.updateContractState(contract_id, NegState.reqTerminated);
+					System.out.println("Service Broker terminted the unfinished job in the local Cluster which is with contract ID: "
+							+ contract_id + "; the time stamp for termination is: " + stop_date);
+					return;
 					//update = false;
 				}
 			} catch (InstantiationException e) {

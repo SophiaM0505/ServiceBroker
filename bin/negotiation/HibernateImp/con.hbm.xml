@@ -35,6 +35,7 @@
     <property name="memory" />
     <property name="provider" />
     <property name="measurement" />
+    <property name="os" />
 </component>
 <property column="status" name="status" type="string" />
 </class>

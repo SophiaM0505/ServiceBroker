@@ -2,7 +2,7 @@ package negotiation.Negotiation;
 
 public enum NegState {
 	//server negotiation states
-	Initiating, // received request from user
+	initiating, // received request from user
 	OfferAck, //sent offerAck to user
 	Revoking, //received revoke request from user
 	RevAccpet, //sent revoke accept to user
@@ -12,16 +12,16 @@ public enum NegState {
 	AccessProving, //sent access proving to user
 	AccessProved, //sent access proved to user
 	AccessDenied, //sent access denied to user
-	Terminated, //sent/received terminate to user
+	terminated, //sent/received terminate to user
 	Reject, //sent reject to user
 	ManTerminated, //received terminate from manager
-	ReqTerminated, //received terminate to user
-	ProTerminated, //received terminate from provider
+	reqTerminated, //received terminate to user
+	proTerminated, //received terminate from provider
 	
-	Negotiation,
-	Contracted,
-	Uncontracted,
-	Completed,
+	negotiating,
+	contracted,
+	uncontracted,
+	completed,
 	
 	Error;
 }

@@ -1486,6 +1486,7 @@ public class NegotiationDB {
 		      {
 				contract.setId(Long.parseLong(rs.getString("id")));
 				contract.setSub(rs.getString("sub"));
+				contract.setMaxDuration(Long.parseLong(rs.getString("maxDuration")));
 		      }
 			
 			sta.close();
@@ -1509,6 +1510,7 @@ public class NegotiationDB {
 	        //String app = rs.getString("APP");
 			data[0] = String.valueOf(rs.getLong("maxDuration"));
 			data[1] = String.valueOf(rs.getLong("jobId"));
+			data[2] = String.valueOf(rs.getLong("maxTotalCpuT"));
 			//data[1] = String.valueOf(rs.getDouble("maxCost"));
 			//data[2] = rs.getString("worker");
 			//data[3] = rs.getString("share");
