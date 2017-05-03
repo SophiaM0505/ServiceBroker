@@ -1,0 +1,397 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://www.owl-ontologies.com/alliance#"
+     xml:base="http://www.owl-ontologies.com/alliance"
+     xmlns:protege="http://protege.stanford.edu/plugins/owl/protege#"
+     xmlns:ontBase="file:///opt/AHE3/ontology/ontBase#"
+     xmlns:xsp="http://www.owl-ontologies.com/2005/08/07/xsp.owl#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:swrl="http://www.w3.org/2003/11/swrl#"
+     xmlns:owl2xml="http://www.w3.org/2006/12/owl2-xml#"
+     xmlns:ResvPolicy="file:///opt/AHE3/ontology/ClusterPolicy#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:swrlb="http://www.w3.org/2003/11/swrlb#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+    <owl:Ontology rdf:about="file:///opt/AHE3/ontology/ClusterShare">
+        <owl:imports rdf:resource="file:///opt/AHE3/ontology/ontBase.owl"/>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.owl-ontologies.com/alliance#AHE3 -->
+
+    <rdf:Description rdf:about="http://www.owl-ontologies.com/alliance#AHE3">
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">The Workflow Broker in Steering site.</rdfs:comment>
+    </rdf:Description>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://www.owl-ontologies.com/alliance#AHE3 -->
+
+    <owl:Thing rdf:about="http://www.owl-ontologies.com/alliance#AHE3">
+        <rdf:type rdf:resource="http://www.owl-ontologies.com/alliance#Middleware"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+        <hasInstalledSoftware rdf:resource="http://www.owl-ontologies.com/alliance#AHE3_1.0"/>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.owl-ontologies.com/alliance#AHE3_1.0 -->
+
+    <owl:Thing rdf:about="http://www.owl-ontologies.com/alliance#AHE3_1.0">
+        <rdf:type rdf:resource="http://www.owl-ontologies.com/alliance#AHE3"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.owl-ontologies.com/alliance#ClusterPolicy -->
+
+    <owl:Thing rdf:about="http://www.owl-ontologies.com/alliance#ClusterPolicy">
+        <rdf:type rdf:resource="http://www.owl-ontologies.com/alliance#MappingPolicy"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.owl-ontologies.com/alliance#ClusterShare -->
+
+    <owl:Thing rdf:about="http://www.owl-ontologies.com/alliance#ClusterShare">
+        <rdf:type rdf:resource="http://www.owl-ontologies.com/alliance#Share"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">steering</hasName>
+        <hasMiddleware rdf:resource="http://www.owl-ontologies.com/alliance#AHE3"/>
+        <hasMappingPolicy rdf:resource="http://www.owl-ontologies.com/alliance#ClusterPolicy"/>
+        <hasAppEnvironment rdf:resource="http://www.owl-ontologies.com/alliance#CompSteering"/>
+        <hasUserDomain rdf:resource="http://www.owl-ontologies.com/alliance#ManGroup"/>
+        <hasAdminDomain rdf:resource="http://www.owl-ontologies.com/alliance#UoM"/>
+        <hasProviderDomain rdf:resource="http://www.owl-ontologies.com/alliance#Uom_cluster"/>
+        <hasService rdf:resource="http://www.owl-ontologies.com/alliance#normal"/>
+        <hasService rdf:resource="http://www.owl-ontologies.com/alliance#super"/>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.owl-ontologies.com/alliance#CompSteering -->
+
+    <owl:NamedIndividual rdf:about="http://www.owl-ontologies.com/alliance#CompSteering">
+        <rdf:type rdf:resource="http://www.owl-ontologies.com/alliance#ApplicationEnvironment"/>
+        <hasExeEnvironment rdf:resource="http://www.owl-ontologies.com/alliance#CompSteering_ee"/>
+        <hasJobType rdf:resource="http://www.owl-ontologies.com/alliance#SteeringJob"/>
+        <hasApp rdf:resource="http://www.owl-ontologies.com/alliance#simLib"/>
+        <needLib rdf:resource="http://www.owl-ontologies.com/alliance#steering_lib"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.owl-ontologies.com/alliance#CompSteering_ee -->
+
+    <owl:NamedIndividual rdf:about="http://www.owl-ontologies.com/alliance#CompSteering_ee">
+        <rdf:type rdf:resource="http://www.owl-ontologies.com/alliance#ExecutionEnvironment"/>
+        <hasOSFamily rdf:resource="http://www.owl-ontologies.com/alliance#Linux"/>
+        <hasResource rdf:resource="http://www.owl-ontologies.com/alliance#resvTest.resource"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.owl-ontologies.com/alliance#Endpoint1_UoM -->
+
+    <owl:Thing rdf:about="http://www.owl-ontologies.com/alliance#Endpoint1_UoM">
+        <rdf:type rdf:resource="http://www.owl-ontologies.com/alliance#Endpoint"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">31114</hasName>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.owl-ontologies.com/alliance#GridBenchmark1 -->
+
+    <owl:Thing rdf:about="http://www.owl-ontologies.com/alliance#GridBenchmark1">
+        <rdf:type rdf:resource="http://www.owl-ontologies.com/alliance#Benchmark"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GridBenchmark1</hasName>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.owl-ontologies.com/alliance#GridBenchmark2 -->
+
+    <owl:Thing rdf:about="http://www.owl-ontologies.com/alliance#GridBenchmark2">
+        <rdf:type rdf:resource="http://www.owl-ontologies.com/alliance#Benchmark"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GridBenchmark2</hasName>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.owl-ontologies.com/alliance#IP_CE101_UoM -->
+
+    <owl:Thing rdf:about="http://www.owl-ontologies.com/alliance#IP_CE101_UoM">
+        <rdf:type rdf:resource="http://www.owl-ontologies.com/alliance#IP"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">194.42.17.231</hasName>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.owl-ontologies.com/alliance#IP_WN108_UoM_besso -->
+
+    <owl:Thing rdf:about="http://www.owl-ontologies.com/alliance#IP_WN108_UoM_besso">
+        <rdf:type rdf:resource="http://www.owl-ontologies.com/alliance#IP"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">194.42.17.244</hasName>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.owl-ontologies.com/alliance#IP_WN109_UoM_besso -->
+
+    <owl:NamedIndividual rdf:about="http://www.owl-ontologies.com/alliance#IP_WN109_UoM_besso"/>
+    
+
+
+    <!-- http://www.owl-ontologies.com/alliance#Intel_Xeon -->
+
+    <owl:Thing rdf:about="http://www.owl-ontologies.com/alliance#Intel_Xeon">
+        <rdf:type rdf:resource="http://www.owl-ontologies.com/alliance#CPU"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.owl-ontologies.com/alliance#Linux -->
+
+    <owl:Thing rdf:about="http://www.owl-ontologies.com/alliance#Linux">
+        <rdf:type rdf:resource="http://www.owl-ontologies.com/alliance#Linux"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.owl-ontologies.com/alliance#ManGroup -->
+
+    <owl:Thing rdf:about="http://www.owl-ontologies.com/alliance#ManGroup">
+        <rdf:type rdf:resource="http://www.owl-ontologies.com/alliance#UserDomain"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.owl-ontologies.com/alliance#Scientific_Linux -->
+
+    <owl:Thing rdf:about="http://www.owl-ontologies.com/alliance#Scientific_Linux">
+        <rdf:type rdf:resource="http://www.owl-ontologies.com/alliance#Linux"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string">A linux OS.</rdfs:comment>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.owl-ontologies.com/alliance#SteeringJob -->
+
+    <owl:Thing rdf:about="http://www.owl-ontologies.com/alliance#SteeringJob">
+        <rdf:type rdf:resource="http://www.owl-ontologies.com/alliance#InteractiveJob"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">SteeringJob</hasName>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.owl-ontologies.com/alliance#UoM -->
+
+    <owl:Thing rdf:about="http://www.owl-ontologies.com/alliance#UoM">
+        <rdf:type rdf:resource="http://www.owl-ontologies.com/alliance#RealityGrid"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+        <hasOwner rdf:resource="http://www.owl-ontologies.com/alliance#UoM_CS"/>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.owl-ontologies.com/alliance#UoM_CS -->
+
+    <owl:Thing rdf:about="http://www.owl-ontologies.com/alliance#UoM_CS">
+        <rdf:type rdf:resource="http://www.owl-ontologies.com/alliance#Owner"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.owl-ontologies.com/alliance#Uom_cluster -->
+
+    <owl:Thing rdf:about="http://www.owl-ontologies.com/alliance#Uom_cluster">
+        <rdf:type rdf:resource="http://www.owl-ontologies.com/alliance#ProviderDomain"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.owl-ontologies.com/alliance#besso_large_endpoint -->
+
+    <owl:Thing rdf:about="http://www.owl-ontologies.com/alliance#besso_large_endpoint">
+        <rdf:type rdf:resource="http://www.owl-ontologies.com/alliance#Endpoint"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Redqueen Endpoint</hasName>
+        <url rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://redqueen.com:8080/steering/attach</url>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.owl-ontologies.com/alliance#besso_normal_endpoint -->
+
+    <owl:Thing rdf:about="http://www.owl-ontologies.com/alliance#besso_normal_endpoint">
+        <rdf:type rdf:resource="http://www.owl-ontologies.com/alliance#Endpoint"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">AWS Endpoint</hasName>
+        <url rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://ec2-52-31-37-191.eu-west-1.compute.amazonaws.com:8080/steering/attach</url>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.owl-ontologies.com/alliance#ce302.uom.resource -->
+
+    <owl:NamedIndividual rdf:about="http://www.owl-ontologies.com/alliance#ce302.uom.resource">
+        <rdf:type rdf:resource="http://www.owl-ontologies.com/alliance#Resource"/>
+        <clockSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">3.3</clockSpeed>
+        <hasCPUModel rdf:resource="http://www.owl-ontologies.com/alliance#Intel_Xeon"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.owl-ontologies.com/alliance#ce303.uom.resource -->
+
+    <owl:NamedIndividual rdf:about="http://www.owl-ontologies.com/alliance#ce303.uom.resource"/>
+    
+
+
+    <!-- http://www.owl-ontologies.com/alliance#cluster.uom.large -->
+
+    <owl:Thing rdf:about="http://www.owl-ontologies.com/alliance#cluster.uom.large">
+        <rdf:type rdf:resource="http://www.owl-ontologies.com/alliance#ExecutionEnvironment"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+        <physicalCpus rdf:datatype="http://www.w3.org/2001/XMLSchema#int">5</physicalCpus>
+        <availableInstance rdf:datatype="http://www.w3.org/2001/XMLSchema#int">5</availableInstance>
+        <virtualMemorySize rdf:datatype="http://www.w3.org/2001/XMLSchema#double">5.0</virtualMemorySize>
+        <cpuTime rdf:datatype="http://www.w3.org/2001/XMLSchema#double">699986.0</cpuTime>
+        <virtualMachine rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</virtualMachine>
+        <measurement rdf:datatype="http://www.w3.org/2001/XMLSchema#string">second</measurement>
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">wn109.redqueen</hasName>
+        <hasID rdf:resource="http://www.owl-ontologies.com/alliance#IP_WN109_UoM_besso"/>
+        <hasOSFamily rdf:resource="http://www.owl-ontologies.com/alliance#Scientific_Linux"/>
+        <hasEndpoint rdf:resource="http://www.owl-ontologies.com/alliance#besso_large_endpoint"/>
+        <hasResource rdf:resource="http://www.owl-ontologies.com/alliance#ce303.uom.resource"/>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.owl-ontologies.com/alliance#cluster.uom.micro -->
+
+    <owl:Thing rdf:about="http://www.owl-ontologies.com/alliance#cluster.uom.micro">
+        <rdf:type rdf:resource="http://www.owl-ontologies.com/alliance#ExecutionEnvironment"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+        <availableInstance rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</availableInstance>
+        <physicalCpus rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</physicalCpus>
+        <virtualMemorySize rdf:datatype="http://www.w3.org/2001/XMLSchema#double">1.0</virtualMemorySize>
+        <cpuTime rdf:datatype="http://www.w3.org/2001/XMLSchema#double">699986.0</cpuTime>
+        <virtualMachine rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</virtualMachine>
+        <measurement rdf:datatype="http://www.w3.org/2001/XMLSchema#string">second</measurement>
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">wn108.amazon.ec2</hasName>
+        <hasID rdf:resource="http://www.owl-ontologies.com/alliance#IP_WN108_UoM_besso"/>
+        <hasOSFamily rdf:resource="http://www.owl-ontologies.com/alliance#Scientific_Linux"/>
+        <hasEndpoint rdf:resource="http://www.owl-ontologies.com/alliance#besso_normal_endpoint"/>
+        <hasResource rdf:resource="http://www.owl-ontologies.com/alliance#ce302.uom.resource"/>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.owl-ontologies.com/alliance#normal -->
+
+    <owl:NamedIndividual rdf:about="http://www.owl-ontologies.com/alliance#normal">
+        <rdf:type rdf:resource="http://www.owl-ontologies.com/alliance#Service"/>
+        <serviceLevel rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</serviceLevel>
+        <paymentMethod rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dynamic</paymentMethod>
+        <hasAppEnvironment rdf:resource="http://www.owl-ontologies.com/alliance#GridBenchmark1"/>
+        <hasExeEnvironment rdf:resource="http://www.owl-ontologies.com/alliance#cluster.uom.micro"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.owl-ontologies.com/alliance#resvTest.resource -->
+
+    <owl:NamedIndividual rdf:about="http://www.owl-ontologies.com/alliance#resvTest.resource">
+        <rdf:type rdf:resource="http://www.owl-ontologies.com/alliance#Resource"/>
+        <clockSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">2.6</clockSpeed>
+        <hasCPUModel rdf:resource="http://www.owl-ontologies.com/alliance#Intel_Xeon"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.owl-ontologies.com/alliance#simLib -->
+
+    <owl:Thing rdf:about="http://www.owl-ontologies.com/alliance#simLib">
+        <rdf:type rdf:resource="http://www.owl-ontologies.com/alliance#Application"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+        <physicalCpus rdf:datatype="http://www.w3.org/2001/XMLSchema#int">1</physicalCpus>
+        <minCpuTime rdf:datatype="http://www.w3.org/2001/XMLSchema#double">3600.0</minCpuTime>
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">resvApp</hasName>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.owl-ontologies.com/alliance#steering_lib -->
+
+    <owl:Thing rdf:about="http://www.owl-ontologies.com/alliance#steering_lib">
+        <rdf:type rdf:resource="http://www.owl-ontologies.com/alliance#libsteering"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+        <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">reality lib</hasName>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.owl-ontologies.com/alliance#super -->
+
+    <owl:NamedIndividual rdf:about="http://www.owl-ontologies.com/alliance#super">
+        <rdf:type rdf:resource="http://www.owl-ontologies.com/alliance#Service"/>
+        <serviceLevel rdf:datatype="http://www.w3.org/2001/XMLSchema#int">2</serviceLevel>
+        <paymentMethod rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dynamic</paymentMethod>
+        <hasAppEnvironment rdf:resource="http://www.owl-ontologies.com/alliance#GridBenchmark1"/>
+        <hasExeEnvironment rdf:resource="http://www.owl-ontologies.com/alliance#cluster.uom.large"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://www.owl-ontologies.com/alliance#uom_se101_alliance -->
+
+    <owl:Thing rdf:about="http://www.owl-ontologies.com/alliance#uom_se101_alliance">
+        <rdf:type rdf:resource="http://www.owl-ontologies.com/alliance#StorageService"/>
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+        <hasEndpoint rdf:resource="http://www.owl-ontologies.com/alliance#Endpoint1_UoM"/>
+        <hasID rdf:resource="http://www.owl-ontologies.com/alliance#IP_CE101_UoM"/>
+    </owl:Thing>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 1.3.8.1099) http://owlapi.sourceforge.net -->
+
