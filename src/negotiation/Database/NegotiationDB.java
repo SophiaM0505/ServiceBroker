@@ -306,6 +306,7 @@ public class NegotiationDB {
             String stime;
             String worker;
             String share;
+            String policy;
             String measurement;
             double maxCost;
             long maxTotalCpuT;
@@ -330,6 +331,7 @@ public class NegotiationDB {
 				stime = rs2.getString("startTime");
 				worker = rs2.getString("worker");
 				share = rs2.getString("share");
+				policy = rs2.getString("policy");
 				measurement = rs2.getString("measurement");
 				maxCost = rs2.getDouble("maxCost");
 				maxTotalCpuT = rs2.getLong("maxTotalCpuT");
@@ -341,6 +343,7 @@ public class NegotiationDB {
 				values.put("startTime", stime);
 				values.put("worker", worker);
 				values.put("share", share);
+				values.put("policy", policy);
 				values.put("measurement", measurement);
 				values.put("maxCost", String.valueOf(maxCost));
 				values.put("maxTotalCpuT", String.valueOf(maxTotalCpuT));
@@ -1444,6 +1447,7 @@ public class NegotiationDB {
 			//contract.setContractDate(date);
 			contract.setWorker(rs.getString("worker"));
 			contract.setShare(rs.getString("share"));
+			contract.setPolicy(rs.getString("policy"));
 			contract.setMaxCost(Float.parseFloat(rs.getString("maxCost")));
 			contract.setMaxTotalCpuT(Long.parseLong(rs.getString("maxTotalCpuT")));
 			contract.setMaxDuration(Long.parseLong(rs.getString("maxDuration")));

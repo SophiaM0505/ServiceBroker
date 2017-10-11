@@ -252,7 +252,9 @@ public class JobSubmissionHandler {
 			//String uri = "http://ec2-52-31-37-191.eu-west-1.compute.amazonaws.com:8080/steering/start";
 			
 			//System.out.println("@@@@@@@@@@@@@ " + job_service.toString());
-			try{
+			
+			//to comment out for performance data collection
+			/*try{
 		    //if (response.equalsIgnoreCase("started")){
 
 		            //timer job
@@ -284,7 +286,7 @@ public class JobSubmissionHandler {
 		    	AHEMessage exception = new AHEMessage();
 				exception.setException(new String[]{e.getStatus() + " : " + e.getMessage()});
 				return exception;
-		    }
+		    }*/
 	        //System.out.println("TimerTask stopped");
 	        //System.out.println("Timer task stopped at:"+new Date());
 		    

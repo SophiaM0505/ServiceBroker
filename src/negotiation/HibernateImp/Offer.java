@@ -17,6 +17,7 @@ public class Offer {
 	private String status;
 	private String worker;
 	private String share;
+	private String policy;
 	private int level;
 	private int overPrivilege; // 0 for true, 1 for false.
 	private String endTime;
@@ -173,6 +174,14 @@ public class Offer {
 	
 	public void setShare(String share){
 		this.share = share;
+	}
+	
+	public String getPolicy(){
+		return policy;
+	}
+	
+	public void setPolicy(String policy){
+		this.policy = policy;
 	}
 	
 	public int getRequiredCpuNo(){

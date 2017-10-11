@@ -24,6 +24,7 @@ public class Contract {
 	private String status;
 	private String worker;
 	private String share;
+	private String policy;
 	private long maxDuration;
 	private long maxTotalCpuT;
 	private long minCpuTime;
@@ -178,6 +179,13 @@ public class Contract {
 		this.share = share;
 	}
 	
+	public String getPolicy(){
+		return policy;
+	}
+	
+	public void setPolicy(String policy){
+		this.policy = policy;
+	}
 	
 	public void setOverPrivilege(int overPrivilege){
 		this.overPrivilege = overPrivilege;

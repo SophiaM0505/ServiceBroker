@@ -137,7 +137,7 @@ public class RestAPI {
 			
 			rest.createServer(8080);
 			
-			TimerTask thisTask = new AccountingTimer();
+			/*TimerTask thisTask = new AccountingTimer();
 			Timer timer = new Timer();
 			
 			accounting_timer.purge();
@@ -151,10 +151,10 @@ public class RestAPI {
 	            Thread.sleep(10*1000);
 	        } catch (InterruptedException e) {
 	            e.printStackTrace();
-	        }
+	        }*/
 	        //timer.cancel();
 	        //timer.purge();
-	        System.out.println("******* accounting timer cancelled");
+	        //System.out.println("******* accounting timer cancelled");
 	        try {
 	            Thread.sleep(5000);
 	        } catch (InterruptedException e) {

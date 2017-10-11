@@ -124,8 +124,8 @@ public class OntReasoning {
 	
 	final static String ns = "http://www.owl-ontologies.com/alliance#";
 
-	final static String mfile_path = "file:/opt/AHE3/ontology/";
-	//final static String mfile_path = "file:/Users/zeqianmeng/Desktop/ontology/";
+	//final static String mfile_path = "file:/opt/AHE3/ontology/";
+	final static String mfile_path = "file:/Users/zeqianmeng/Desktop/ontology/";
 	//final static Stirng 
 	
 	public static boolean accessCheck(String name, String grp, String app, String shareN, int core, long dur_local) throws OWLOntologyCreationException{
@@ -190,7 +190,7 @@ public class OntReasoning {
 		//System.out.println("*************START1");
 		////OWLDataProperty  mem_pro = manager.getOWLDataFactory().getOWLDataProperty(IRI.create(ns + "mainMemorySize"));
 		//System.out.println("*************START2");
-		OWLClass insC = manager.getOWLDataFactory().getOWLClass(IRI.create(ns + "Share"));
+		OWLClass insC = manager.getOWLDataFactory().getOWLClass(IRI.create(ns + "ComputingShare"));
 		//Share instances
 		NodeSet<OWLNamedIndividual> ins = reasoner.getInstances(insC, false);
 		
@@ -620,7 +620,7 @@ public class OntReasoning {
 		OWLClass enCla = manager.getOWLDataFactory().getOWLClass(IRI.create(ns + "ExecutionEnvironment"));
 		NodeSet<OWLNamedIndividual> enSet = reasoner.getInstances(enCla, false);
 		
-		OWLClass serCla = manager.getOWLDataFactory().getOWLClass(IRI.create(ns + "Service"));
+		OWLClass serCla = manager.getOWLDataFactory().getOWLClass(IRI.create(ns + "ComputingService"));
 		NodeSet<OWLNamedIndividual> serSet = reasoner.getInstances(serCla, false);
 		
 		//String test = "RealityGrid2";
@@ -664,7 +664,7 @@ public class OntReasoning {
 		String temp_offers_comb = "";
 		//long neg_id = 0;
 		Random rand1 = new Random();
-   	    long neg_id = rand1.nextInt(10000 + 1);
+   	    long neg_id = 100000 + rand1.nextInt(900000);
    	    //String measurement;
    	    
    	    boolean reneg = (con_id != 0);
@@ -811,6 +811,7 @@ public class OntReasoning {
 		}
 	    boolean coallo = false;
 	    //boolean coallo_done = false;
+	    requiredCpuN = core;
 	    requiredTotalCpuN = requiredCpuN;
 	    boolean mix_offer = false;
 	    ArrayList offer_cpu = new ArrayList();
@@ -995,16 +996,17 @@ public class OntReasoning {
 							offer.setNumjobs(0);
 							
 							NegHibConnect.hibOffer(offer);*/
-							//String offer_contents = "=" + endpoint + "^";
+							String offer_contents = "=" + endpoint + ";^";
+							//String offer_contents = "=" + endpoint + ";";
 							
-						String offer_contents = "= Provider: "+ provider + ", instance: " +
+						/*String offer_contents = "= Provider: "+ provider + ", instance: " +
 	    		        		workerN + ", CPU Number: " +
 							aCpuNo + ", required CPU Number: " +
-							requiredCpuN + ", unit cost: "+ charge + ", type: Cloud^";
+							requiredCpuN + ", unit cost: "+ charge + ", type: Cloud;";*/
 		                offers = offers + offer_no + offer_contents;
 		                cloud_offer = true;
 		                //System.out.println("=========== 1 " + offers);
-		                //return offers;
+		                return offers;
 					}
 					else{
 						//coallo_done = true;
@@ -1050,11 +1052,11 @@ public class OntReasoning {
 						    /*String temp_offer_contents = "worker: " +
 	    		        		workerN + ", CPU Number: " +
 							aCpuNo +  ", Mem: " + mem + ", unit cost: "+ charge + ", type: Cloud;";*/
-							String temp_offer_contents = "= Provider: "+ provider + ", instance: " +
+							/*String temp_offer_contents = "= Provider: "+ provider + ", instance: " +
 		    		        		workerN + ", CPU Number: " +
 								aCpuNo + ", required CPU Number: " +
-								requiredCpuN + ", unit cost: "+ charge + ", type: Cloud;";
-							//String temp_offer_contents = endpoint + "^";
+								requiredCpuN + ", unit cost: "+ charge + ", type: Cloud;";*/
+							String temp_offer_contents = endpoint + ";^";
 							temp_offers = temp_offers + offer_no + "," + temp_offer_contents;
 						    temp_offers_comb = temp_offers_comb + offer_no;
 						    //offer.setSub(temp_offers_comb);
@@ -1123,11 +1125,11 @@ public class OntReasoning {
 							
 							NegHibConnect.hibOffer(offer); */
 							
-							//String temp_offer_contents = endpoint + ";";
-							String temp_offer_contents = "= Provider: "+ provider + ", instance: " +
+							String temp_offer_contents = endpoint + ";";
+							/*String temp_offer_contents = "= Provider: "+ provider + ", instance: " +
 		    		        		workerN + ", CPU Number: " +
 								aCpuNo + ", required CPU Number: " +
-								requiredCpuN + ", unit cost: "+ charge + ", type: Cloud;";
+								requiredCpuN + ", unit cost: "+ charge + ", type: Cloud;";*/
 							
 					/*String temp_offer_contents = "worker: " +
     		        		workerN + ", CPU Number: " + aCpuNo +  ", Mem: " + mem + ", unit cost: "+ charge + "; ";*/
@@ -1407,7 +1409,8 @@ public class OntReasoning {
 	    		// cost here is minCost
 	    		if(cost<=site_balance && cost <= userMaxCost_value && cost <= user_balance_value){
 	    			Random rand = new Random();
-			   	    long offer_no = rand.nextInt(10000 + 1);
+	    			long offer_no = 100000 + rand.nextInt(900000);
+			   	    //long offer_no = rand.nextInt(10000 + 1);
 			   	    //long temp_offer_num = rand.nextInt(10000 + 1);
 	    			//to calculate max_duration
 			   	    userMaxCost_value = Math.min(userMaxCost_value, Math.min(site_balance, user_balance_value));
@@ -1494,9 +1497,12 @@ public class OntReasoning {
 	    		        		workerN + ", CPU Number: " +
 							aCpuNo + ", required CPU Number: " +
 							requiredCpuN +  ", Mem: " + mem + ", unit cost: "+ charge + ", type: Cloud;";*/
-						
+						//System.out.println("++++++++++++++++++++ requiredCpuN is: " + requiredCpuN);
+						//System.out.println("++++++++++++++++++++ aCpuNo is: " + aCpuNo);
 						if(requiredCpuN<=aCpuNo){
+							//System.out.println("++++++++++++++++++++ coallo is " + coallo); 
 							if(!coallo){
+								//System.out.println("*************I am here 1");
 								Service service = new Service();
 						    	service.setProvider(provider);
 						    	//service.setService_name(workerN);
@@ -1505,7 +1511,7 @@ public class OntReasoning {
 						    	service.setCost(cost);
 						    	service.setMeasurement(measurement);
 						    	//service.setMemory(mem);
-						    	
+						    	//zeqian
 						    	Offer offer = new Offer();
 						
 									//contract = new Contract();
@@ -1525,6 +1531,7 @@ public class OntReasoning {
 									offer.setLevel(level);
 									offer.setWorker(workerN);
 									offer.setShare(shareN);
+									offer.setPolicy("CloudPolicy");
 									offer.setRequiredCpuT(totalCpuT);
 									offer.setRequiredCpuNo(requiredCpuN);
 									offer.setUserBalance(user_balance_value);
@@ -1534,19 +1541,20 @@ public class OntReasoning {
 									offer.setNumjobs(0);
 									
 									NegHibConnect.hibOffer(offer);
-									//String offer_contents = "=" + endpoint + "|";
-								String offer_contents = ": Provider: "+ provider + ", instance: " +
+									String offer_contents = "=" + endpoint + ";^";
+								/*String offer_contents = ": Provider: "+ provider + ", instance: " +
 			    		        		workerN + ", CPU Number: " +
 									aCpuNo + ", required CPU Number: " +
-									requiredCpuN +  ", Mem: " + mem + ", unit cost: "+ charge + ", type: Cloud^";
+									requiredCpuN +  ", Mem: " + mem + ", unit cost: "+ charge + ", type: Cloud^";*/
 	    		                offers = offers + offer_no + offer_contents;
 	    		                requiredCpuN = requiredTotalCpuN;
 	    		                cloud_offer = true;
-	    		                System.out.println("=========== 1 " + offers);
+	    		                //System.out.println("=========== 1 " + offers);
 	    		                //return offers;
 							}
 							else{
 								//coallo_done = true;
+								//System.out.println("*************I am here 2");
 								if(!workerN.equalsIgnoreCase(contracted_node)){
 								    Service service = new Service();
 						    	    service.setProvider(provider);
@@ -1576,6 +1584,7 @@ public class OntReasoning {
 									offer.setLevel(level);
 									offer.setWorker(workerN);
 									offer.setShare(shareN);
+									offer.setPolicy("CloudPolicy");
 									offer.setRequiredCpuT(totalCpuT);
 									offer.setRequiredCpuNo(requiredCpuN);
 									offer.setUserBalance(user_balance_value);
@@ -1586,16 +1595,17 @@ public class OntReasoning {
 									
 									NegHibConnect.hibOffer(offer);
 									
-								    String temp_offer_contents = "instance: " +
+								    /*String temp_offer_contents = "instance: " +
 			    		        		workerN + ", CPU Number: " +
-									aCpuNo +  ", Mem: " + mem + ", unit cost: "+ charge + ", type: Cloud^";
-									//String temp_offer_contents = endpoint + "|";
+									aCpuNo +  ", Mem: " + mem + ", unit cost: "+ charge + ", type: Cloud^";*/
+									String temp_offer_contents = endpoint + ";^";
 									temp_offers = temp_offers + offer_no + "," + temp_offer_contents;
 								    temp_offers_comb = temp_offers_comb + offer_no;
 								    //offer.setSub(temp_offers_comb);
 								
 								    Random rand_comb_offer = new Random();
-						   	        long comb_offer_id = rand_comb_offer.nextInt(10000 + 1);
+								    long comb_offer_id = 100000 + rand_comb_offer.nextInt(900000);
+						   	        //long comb_offer_id = rand_comb_offer.nextInt(10000 + 1);
 								    Offer comb_offer = new Offer();
 								    comb_offer.setId(comb_offer_id);
 								    comb_offer.setSub(temp_offers_comb);
@@ -1628,6 +1638,7 @@ public class OntReasoning {
 						
 						//sub-offers
 						else{
+							//System.out.println("*************I am here 3");
 							if(!workerN.equalsIgnoreCase(contracted_node)){
 								Service service = new Service();
 						    	service.setProvider(provider);
@@ -1657,6 +1668,7 @@ public class OntReasoning {
 									offer.setLevel(level);
 									offer.setWorker(workerN);
 									offer.setShare(shareN);
+									offer.setPolicy("CloudPolicy");
 									offer.setRequiredCpuT(totalCpuT);
 									offer.setRequiredCpuNo(requiredCpuN);
 									offer.setUserBalance(user_balance_value);
@@ -1667,17 +1679,17 @@ public class OntReasoning {
 									
 									NegHibConnect.hibOffer(offer);
 									
-									//String temp_offer_contents = endpoint + ";";
-							String temp_offer_contents = "instance: " +
-		    		        		workerN + ", CPU Number: " + aCpuNo +  ", Mem: " + mem + ", unit cost: "+ charge + ", type: Cloud;";
+									String temp_offer_contents = endpoint + ";";
+							/*String temp_offer_contents = "instance: " +
+		    		        		workerN + ", CPU Number: " + aCpuNo +  ", Mem: " + mem + ", unit cost: "+ charge + ", type: Cloud;";*/
 							temp_offers = temp_offers + offer_no + "," + temp_offer_contents;
 							temp_offers_comb = temp_offers_comb + offer_no + ";";
 							 //int offer_cpu[];
 							 //int offer_count=0;
 						    
 						    
-							System.out.println("$$$$$$$$$$$ temp_offer: " + temp_offers);
-							System.out.println("$$$$$$$$$$$ temp_offers_comb: " + temp_offers_comb);
+							//System.out.println("$$$$$$$$$$$ temp_offer: " + temp_offers);
+							//System.out.println("$$$$$$$$$$$ temp_offers_comb: " + temp_offers_comb);
 							requiredCpuN = requiredCpuN - aCpuNo;
 							int current_requiredCpuN = requiredCpuN;
 							used_cpuNo = used_cpuNo + aCpuNo;
@@ -1820,8 +1832,9 @@ public class OntReasoning {
 					    //return offers;
 	    		}
 	    		// this could be reserved, as even if for parallel nodes, the requiredCpuN would be the remainded one to be searched for
+	    		//else if (cost <= userMaxCost_value && cost <= user_balance_value){
 	    		else if (requiredCpuN>aCpuNo && cost <= userMaxCost_value && cost <= user_balance_value){
-	    			
+	    			System.out.println("hello 1 ********************");
 	    			resource_search = true;
 	    		}
 	    		//if a cloud provider cannot meet all apps' demands, search for partly satisfied ones
@@ -1829,6 +1842,7 @@ public class OntReasoning {
 	    		else{
 	    			//finalRes = false;
 	    			//return offers;
+	    			//System.out.println("hello 2 ********************");
 	    		    cloud_offer = false;
 	    			//separateCloudSearch(int cpuN, int unit_cost, long duration, double balance)
 	    		    
@@ -2054,10 +2068,11 @@ public class OntReasoning {
 		//if this Share cannot provide resources for required single apps
 		else{
 			
-			if(offers.isEmpty() & resource_search){
+			if(offers.isEmpty() && resource_search){
+				System.out.println("hello 2 ********************");
 				//resource-oriented matchmaking by ServiceReasoning
 				//parameters passed: os, cpu-model, cpu-speed, cpu-no
-				String[] resource = getAppInfo("ResvShare"); 
+				String[] resource = getAppInfo("CloudShare"); 
 				//System.out.println("*******" + resource[0]);
 				/*String user_name= username;
 				String os_input = app_os;
@@ -2071,7 +2086,9 @@ public class OntReasoning {
 				resource[2] = cpu_model;
 				resource[3] = cpu_speed;
 				resource[4] = cpu_no;*/
-				offers = ServiceReasoning.providerSearch(resource, "ResvPolicy");
+				//offers = cloudProviderSearch(resource);
+				offers = ServiceReasoning.providerSearch(resource, "CloudPolicy");
+				//offers = ServiceReasoning.providerSearch(resource, "ResvPolicy");
 				//System.out.println("*******" + ServiceReasoning.providerSearch(resource, "ResvPolicy"));
 				//System.out.println("im here");
 				return offers;
@@ -2415,7 +2432,7 @@ public class OntReasoning {
 		double ser_cpu_t;
 		
 		Random rand1 = new Random();
-   	    long neg_id = rand1.nextInt(10000 + 1);
+		long neg_id = 100000 + rand1.nextInt(900000);
    	    
    	    System.out.println("Service Broker, the MAX CPU time set by the manager for a job is: " + maxTotalCpuT);
 		
@@ -2460,8 +2477,8 @@ public class OntReasoning {
 		    	   
 
 		    	   Random rand = new Random();
-		   	       long offer_no = rand.nextInt(10000 + 1);
-		   	       Service service = new Service();
+		    	   long offer_no = 100000 + rand.nextInt(900000);
+		   	       /*Service service = new Service();
 		    	   service.setProvider("UoM_cluster");
 		    	   //service.setService_name(workerN);
 		    	   service.setCpuNo(aCpuNo);
@@ -2499,14 +2516,14 @@ public class OntReasoning {
 					offer.setNumjobs(numjobs);
 					offer.setDeadline(deadline);
 					
-					NegHibConnect.hibOffer(offer);
+					NegHibConnect.hibOffer(offer);*/
 					
 					//String offer_contents = "=" + endpoint + "^";
 		   	       //System.out.println(workerN);
 					//String offer_contents = "= provider: UoM_cluster, resource level: " + resource + ", deadline: " + deadline + ";";
 				String offer_contents = "=Provider: UoM_cluster" + ", worker: " +
 		        		workerN + ", OS: " + os + ", measurement: " +
-		        		measurement + ", type: Cluster;";
+		        		measurement + ", type: Cluster;^";
                 offers = offers + offer_no + offer_contents;
                 return offers;
 			}
@@ -2987,15 +3004,15 @@ public static String getOffersFromOtherShares(String name, String group, String 
 		return result;
 	}
 	//main methord
-	//public static void main(String[] args) throws OWLOntologyCreationException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, OWLOntologyStorageException, InterruptedException, IOException {
-		//System.out.println(accessCheck("Sofia", "ManGroup", "CompSteering", "MaxShare", 0, 0));
-		//String offers = clusterSearch("Sofia", "ManGroup", "CompSteering", "MaxShare", "super", 1, 1, "20170215");
-		//System.out.println(accessCheck("Sofia", "ManGroup", "WaterSteering", "CloudShare", 2, 0));
+	/*public static void main(String[] args) throws OWLOntologyCreationException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, OWLOntologyStorageException, InterruptedException, IOException {
+		System.out.println(accessCheck("Sofia", "ManGroup", "CompSteering", "ClusterShare", 0, 0));
+		String offers = clusterSearch("Sofia", "ManGroup", "CompSteering", "ClusterShare", "super", 1, 1, "20170215");
+		//System.out.println(accessCheck("Sofia", "ManGroup", "WaterSteering", "CloudShare", 1, 0));
 		
 		//resourceSearch(String name, String grp, String app, String shareN, String pay_method, int core, long con_id)
-		//String offers = resourceSearch("Sofia", "ManGroup", "WaterSteering", "CloudShare", "asap", 2, 0);
-		//System.out.println(offers);
-	//}
+		//String offers = resourceSearch("Sofia", "ManGroup", "WaterSteering", "CloudShare", "asap", 1, 0);
+		System.out.println(offers);
+	}*/
 		//System.out.println(accessCheck("Sofia", "ManGroup", "ResvApp", "ResvShare", 0, 0));
 	    //String offers = resourceSearch("Sofia", "ManGroup", "ResvApp", "ResvShare", true);
 		/*int i;
@@ -3350,7 +3367,8 @@ public static String getOffersFromOtherShares(String name, String group, String 
 		String ns = "http://www.owl-ontologies.com/alliance#";
 		//String ns1 = "http://www.w3.org/TR/2003/PR-owl-guide-20031209/wine#";
 		//String file = "file:/opt/AHE3/ontology/ResvShare.owl";
-		String file = "file:/Users/zeqianmeng/Desktop/ontology/ResvShare.owl";
+		//String file = "file:/Users/zeqianmeng/Desktop/ontology/ResvShare.owl";
+		String file = "file:/Users/zeqianmeng/Desktop/ontology/CloudShare.owl";
 		//System.out.print("Reading SHARE file " + file + "...");
 		OWLOntologyManager manager = OWLManager.createOWLOntologyManager();
 		OWLOntology ontology = manager.loadOntology(IRI.create(file));
@@ -3469,8 +3487,8 @@ public static String[] getAppInfo(String share) throws OWLOntologyCreationExcept
 	    //cpuModel = CPU_Intel;
 		String provider_name = "";
 		String service_name = "";
-		float cost;
-		int mem;
+		double cost;
+		double mem;
 	    String instance;
 	    int cpu_no = 0;
 
@@ -3487,18 +3505,19 @@ public static String[] getAppInfo(String share) throws OWLOntologyCreationExcept
 	    String cpuModel = app_cpu_model;
 	    String cpuSpeed = app_cpu_speed;
 	    //user_name = resource.get("username");
-	    duration = resource.get("duration");
+	    //duration = resource.get("duration");
+	    duration = "1";
 	    //cpuNo = Integer.parseInt(resource.get("cpuNo"));
 	
 		boolean result = false;
 		
 		String offers = "";
-		long offer_no = 1;
+		long offer_no;
 
 		String ns = "http://www.owl-ontologies.com/alliance#";
 		//String ns1 = "http://www.w3.org/TR/2003/PR-owl-guide-20031209/wine#";
 		//String service_file = "file:/opt/AHE3/ontology/service.owl";
-	    String service_file = "file:/Users/zeqianmeng/Desktop/ontology/service.owl";
+	    String service_file = "file:/Users/zeqianmeng/Desktop/ontology/AwsServices.owl";
 		//String file = "file:/Users/zeqianmeng/Desktop/ontology/cgo_backup/backup3/cgoTest.owl";
 		System.out.println("Reading ontology file " + service_file + "...");
 		OWLOntologyManager ser_manager = OWLManager.createOWLOntologyManager();
@@ -3507,8 +3526,8 @@ public static String[] getAppInfo(String share) throws OWLOntologyCreationExcept
 		PelletReasoner reasoner = PelletReasonerFactory.getInstance().createReasoner( ser_ontology );
 		
 		//initiate for policy reasoning
-		String file2 = "file:/opt/AHE3/ontology/mPolicy.owl";
-		//String file2 = "file:/Users/zeqianmeng/Desktop/ontology/mPolicy.owl";
+		//String file2 = "file:/opt/AHE3/ontology/CloudPolicy.owl";
+		String file2 = "file:/Users/zeqianmeng/Desktop/ontology/CloudPolicy.owl";
 		//String file = "file:/Users/zeqianmeng/Desktop/ontology/cgo_backup/backup3/cgoTest.owl";
 		System.out.println("Reading ontology file " + file2 + "...");
 		OWLOntologyManager manager2 = OWLManager.createOWLOntologyManager();
@@ -3533,7 +3552,7 @@ public static String[] getAppInfo(String share) throws OWLOntologyCreationExcept
 		
 		String hasOs = "hasOSFamily";
 		String hasCpu = "hasCPUModel";
-		String cpu_No = "PhysicalCPUs";
+		String cpu_No = "physicalCpus";
 		
 		String aOs;
 		String aCpu;
@@ -3552,9 +3571,9 @@ public static String[] getAppInfo(String share) throws OWLOntologyCreationExcept
 		//System.out.println(reasoner.getObjectPropertyValues(csSet.iterator().next().getRepresentativeElement(), hasCpuOP));
 		//OWLDataProperty  mem = manager.getOWLDataFactory().getOWLDataProperty(IRI.create(ns + "Mem"));
 		OWLDataProperty  cpuNoPro = ser_manager.getOWLDataFactory().getOWLDataProperty(IRI.create(ns + cpu_No));
-		OWLDataProperty  cpuSp = ser_manager.getOWLDataFactory().getOWLDataProperty(IRI.create(ns + "ClockSpeed"));
+		OWLDataProperty  cpuSp = ser_manager.getOWLDataFactory().getOWLDataProperty(IRI.create(ns + "clockSpeed"));
 		
-		OWLNamedIndividual service_ind = ser_manager.getOWLDataFactory().getOWLNamedIndividual(IRI.create(ns + "AWS_EC2_Services"));
+		OWLNamedIndividual service_ind = ser_manager.getOWLDataFactory().getOWLNamedIndividual(IRI.create(ns + "AwsServices"));
         Set<OWLIndividual> ser_set = service_ind.getObjectPropertyValues(hasSer, ser_ontology);
 		//System.out.println("@@@@@@@@@@@@@@" + ser_ind.getObjectPropertyValues(hasEn, ontology).toString());
 		//OWLClass serCla = manager.getOWLDataFactory().getOWLClass(IRI.create(ns + "ComputingService"));
@@ -3566,7 +3585,7 @@ public static String[] getAppInfo(String share) throws OWLOntologyCreationExcept
 		for(OWLIndividual csInds : ser_set){ 
 			//Computing Service
 			service_name = csInds.getIndividualsInSignature().iterator().next().toStringID().substring(39);
-			System.out.println("@@@@@@@********" + service_name);
+			//System.out.println("@@@@@@@********" + service_name);
 			OWLNamedIndividual sv = csInds.asOWLNamedIndividual();
 
 			Set<OWLIndividual> inds_oss = sv.getObjectPropertyValues(hasEn, ser_ontology).iterator().next().getObjectPropertyValues(hasOsOP, ser_ontology);
@@ -3578,7 +3597,12 @@ public static String[] getAppInfo(String share) throws OWLOntologyCreationExcept
 		    boolean output2 = inds_res.iterator().next().hasObjectPropertyValue(hasCpuOP, cpu, ser_ontology);
 		    boolean output;
 		    if(output1&&output2){
-		    	cpu_no = inds_res.iterator().next().getDataPropertyValues(cpuNoPro, ser_ontology).iterator().next().parseInteger();
+		    	//System.out.println("================= " + inds_res.toString());
+		    	//System.out.println("================= " + cpuNo);
+		    	cpu_no = sv.getObjectPropertyValues(hasEn, ser_ontology).iterator().next().getDataPropertyValues(cpuNoPro, ser_ontology).iterator().next().parseInteger();		    	
+		    	//System.out.println("================= " + cpu_no);
+		    	//System.out.println("================= " + cpuSpeed);
+		    	//cpu_no = inds_res.iterator().next().getDataPropertyValues(cpuNoPro, ser_ontology).iterator().next().parseInteger();
 		    	boolean output3 = cpu_no >= cpuNo;
 		    	boolean output4 = inds_res.iterator().next().getDataPropertyValues(cpuSp, ser_ontology)
 		    			.iterator().next().parseDouble() >= Double.parseDouble(cpuSpeed);
@@ -3598,7 +3622,7 @@ public static String[] getAppInfo(String share) throws OWLOntologyCreationExcept
 			result = false;
 		}
 		result = output;
-		System.out.println("@@@@@@@********" +  result);
+		//System.out.println("@@@@@@@********" +  result);
 	  if(result){
 			//for(OWLIndividual csIndss : ser_set){
 				
@@ -3606,9 +3630,9 @@ public static String[] getAppInfo(String share) throws OWLOntologyCreationExcept
 				
 				provider_name = service_ind.getObjectPropertyValues(hasPro, ser_ontology).iterator().next().toStringID().substring(TRANCATION);
 				//OWLNamedIndividual ser = serInd.getRepresentativeElement();
-				System.out.println("@@@@@@@******** provider: " +  provider_name);
+				//System.out.println("@@@@@@@******** provider: " +  provider_name);
 
-				System.out.println("provider: " + provider_name + "; service: " + service_name);
+				//System.out.println("provider: " + provider_name + "; service: " + service_name);
 
 			
 			System.out.println("*************PART2 START: to calculate cost for available services");
@@ -3620,11 +3644,11 @@ public static String[] getAppInfo(String share) throws OWLOntologyCreationExcept
 			OWLDataProperty  bal_pro = manager2.getOWLDataFactory().getOWLDataProperty(IRI.create(ns + bal_s));
 			URemBal = userAPol.getDataPropertyValues(bal_pro, ontology2).iterator().next().parseDouble();
 			
-			OWLDataProperty  mem_pro = manager2.getOWLDataFactory().getOWLDataProperty(IRI.create(ns + "Mem"));
+			OWLDataProperty  mem_pro = manager2.getOWLDataFactory().getOWLDataProperty(IRI.create(ns + "virtualMemorySize"));
 			//OWLDataProperty  bal_pro = manager2.getOWLDataFactory().getOWLDataProperty(IRI.create(ns + bal_s));
 			
 	    //OWLDataProperty  charge_pro = manager.getOWLDataFactory().getOWLDataProperty(IRI.create(ns + "charge"));
-	    OWLObjectProperty  instance_pro = ser_manager.getOWLDataFactory().getOWLObjectProperty(IRI.create(ns + "hasInstanceModel"));
+	    //OWLObjectProperty  instance_pro = ser_manager.getOWLDataFactory().getOWLObjectProperty(IRI.create(ns + "hasInstanceModel"));
 	    //System.out.println(reasoner.getObjectPropertyValues(cs, hasSer).getFlattened().iterator().hasNext());
 	    //Set<OWLLiteral> inds_charge = reasoner.getObjectPropertyValues(sv, hasEn).iterator().next().getRepresentativeElement().getDataPropertyValues(charge_pro, ontology);
 	    //Set<OWLLiteral> inds_charge = reasoner.getObjectPropertyValues(cs, hasSer).iterator().next().getRepresentativeElement().getDataPropertyValues(charge, ontology);
@@ -3635,15 +3659,19 @@ public static String[] getAppInfo(String share) throws OWLOntologyCreationExcept
 	    Set<OWLLiteral> inds_charge = sv.getObjectPropertyValues(hasEn, ser_ontology).iterator().next().getDataPropertyValues(charge_pro, ser_ontology);
 	    //Set<OWLLiteral> inds_charge = reasoner.getObjectPropertyValues(cs, hasSer).iterator().next().getRepresentativeElement().getDataPropertyValues(charge, ontology);
 	    System.out.println("charge is: " + inds_charge.iterator().next().getLiteral());
-	    float charge = inds_charge.iterator().next().parseFloat();
+	    double charge = inds_charge.iterator().next().parseDouble();
+	    
 	    //service1.setCost(inds_charge.iterator().next().getLiteral());
 	    cost = charge * Long.parseLong(duration);
 	    result = (cost <= URemBal);
+	    Random rand = new Random();
 	    if (result){
-	    	
-	    	mem = inds_res.iterator().next().getDataPropertyValues(mem_pro, ser_ontology).iterator().next().parseInteger();
-	    	instance = inds_res.iterator().next().getObjectPropertyValues(instance_pro, ser_ontology).iterator().next().toStringID().substring(TRANCATION);
-	    	
+	    	mem = sv.getObjectPropertyValues(hasEn, ser_ontology).iterator().next().getDataPropertyValues(mem_pro, ser_ontology).iterator().next().parseDouble();
+	    	//mem = inds_res.iterator().next().getDataPropertyValues(mem_pro, ser_ontology).iterator().next().parseInteger();
+	    	//instance = inds_res.iterator().next().getObjectPropertyValues(instance_pro, ser_ontology).iterator().next().toStringID().substring(TRANCATION);
+	    	instance = sv.getObjectPropertyValues(hasEn, ser_ontology).toString().substring(39);
+	    	//System.out.println("************ instance: " + instance);
+	    	offer_no = 100000 + rand.nextInt(900000);
 	    	Service service1 = new Service();
 	    	
 	    	//service1.setService_name(service_name);
@@ -3653,6 +3681,7 @@ public static String[] getAppInfo(String share) throws OWLOntologyCreationExcept
 			service1.setInstance(instance);
 			service1.setCharge(charge);
 			service1.setCost(cost);
+			service1.setMeasurement("hour");
 			
 			Offer offer = new Offer();
 			
@@ -3664,17 +3693,21 @@ public static String[] getAppInfo(String share) throws OWLOntologyCreationExcept
 			offer.setGroupname(grpInput);
 			offer.setService(service1);
 			offer.setStartTime(startT);
+			offer.setSub("");
+			offer.setWorker(instance);
+			offer.setShare("AwsServices");
+			offer.setPolicy("CloudPolicy");
 			//offer.setDuration(duration);
-			offer.setStatus(NegState.negotiating.toString());
+			offer.setStatus(NegState.initiating.toString());
 			
 			// need to change services to offers, and update hibernate db
 			NegHibConnect.hibOffer(offer);
 			
 			//serviceMap.put(service_name, service1);
-			offers = offers + offer_no + "- Provider: "+ provider_name + ", Instance type: " + instance +
-			", CPU Number: " + cpuNo +  ", Mem: " + mem + ", cost: "+ cost + ", type: Cloud;";
+			offers = offers + offer_no + "=Provider: "+ provider_name + ", Instance type: " + instance +
+			", CPU Number: " + cpuNo +  ", Mem: " + mem + ", cost: "+ cost + ", type: Cloud;^";
 			offer_no++;
-			System.out.println("offers returned include: " + offers);
+			//System.out.println("offers returned include: " + offers);
 	    	/*System.out.println("charge is: " + charge);
 		    System.out.println("total cost is: " + cost);
 		    System.out.println("cpu no is: " + cpu_no);
@@ -3685,7 +3718,7 @@ public static String[] getAppInfo(String share) throws OWLOntologyCreationExcept
 	    //System.out.println("charge is: " + inds_charge.iterator().next().getLiteral());
 		}
 		//return result;
-		System.out.println("the reasoning output is: " + result);
+		//System.out.println("the reasoning output is: " + result);
 		//}			
 		}
 		return offers;

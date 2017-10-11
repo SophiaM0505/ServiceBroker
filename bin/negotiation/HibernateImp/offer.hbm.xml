@@ -17,6 +17,7 @@
 <property column="appname" name="appname" type="string" />
 <property column="worker" name="worker" type="string" />
 <property column="share" name="share" type="string" />
+<property column="policy" name="policy" type="string" />
 <property column="startTime" name="startTime" type="string" />
 <property column="endTime" name="endTime" type="string" />
 <property column="status" name="status" type="string" />

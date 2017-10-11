@@ -325,18 +325,42 @@ public class AppInstanceResource extends AHEResource{
     	    		//String provider = proMax[0];
     	    		//boolean virtual = Boolean.parseBoolean(proMax[1]);
     	    		// to get if user's privilege is over written from database
-
     				Calendar cal1 = Calendar.getInstance();
+    			    SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy.MM.dd");
+    			    Calendar cal2 = Calendar.getInstance();
+    			    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+    		     	String start_date = sdf1.format(cal1.getTime()) + "T" + sdf.format(cal2.getTime()) + "+7:00";
+    				
+    				String offers_comb = NegotiationDB.getOfferSub(contract_id);
+    				NegotiationDB.updateContractStartT(contract_id, start_date);
+    				if(offers_comb.equalsIgnoreCase("")){    					
+    					provider = OntUpdate.mPolicyShareMaxReduce(contract_id);
+    					//provider = OntUpdate.mPolicyShareMaxReduce(contract_id);
+    				}
+    				else{
+    					String[] offers_arr = offers_comb.split(";");
+    				
+             		    for(String offer: offers_arr){
+             			long temp_con_id = Long.parseLong(offer);
+             			//NegotiationDB.updateContractStartT(contract_id, start_date);
+             			NegotiationDB.updateContractStartT(temp_con_id, start_date);
+             			provider = OntUpdate.mPolicyShareMaxReduce(temp_con_id);
+        		        NegotiationDB.updateContractJob(temp_con_id, NegState.contracted, job_id);
+             			//provider = OntUpdate.mPolicyShareMaxReduce(temp_con_id);
+        		        
+             		  }
+    				}
+    				/*Calendar cal1 = Calendar.getInstance();
     			    SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy.MM.dd");
     			    Calendar cal2 = Calendar.getInstance();
     			    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
     		     	String start_date = sdf1.format(cal1.getTime()) + "T" + sdf.format(cal2.getTime()) + "+7:00";
     		     	NegotiationDB.updateContractStartT(contract_id, start_date);
     	    		provider = OntUpdate.mPolicyShareMaxReduce(contract_id);
-    	    		System.out.println("Service Broker, the time stamp for contract fomation is: " + start_date);
+    	    		System.out.println("Service Broker, the time stamp for contract fomation is: " + start_date);*/
 
     	    		Random rand2 = new Random();
-		   	        job_id = rand2.nextInt(10000 + 1);
+		   	        job_id = 100000 + rand2.nextInt(900000);
 		   	     System.out.println("********* negotiation created job id: " + job_id);
     			}
 
@@ -386,7 +410,7 @@ public class AppInstanceResource extends AHEResource{
     				    for(String offer:offers_array){
     					    temp_offer_id = Long.parseLong(offer.split("=")[0]);
     					    if(temp_offer_id != contract_id){
-    						    NegotiationDB.updateOfferState(temp_offer_id, NegState.Uncontracted);
+    						    NegotiationDB.updateOfferState(temp_offer_id, NegState.uncontracted);
     					}
     				}
     				}*/
@@ -471,7 +495,8 @@ public class AppInstanceResource extends AHEResource{
     	       			//System.out.println("********* re-neg passed information to SteerService: " + passedInfo);
     	       		  }
     				}
-    				passedInfo = job_id + "!" + passedInfo;
+    				passedInfo = job_id + "!" + contract_id;
+    				//passedInfo = job_id + "!" + passedInfo;
     				//System.out.println("========= passedInfo: " + passedInfo);
     	       		return passedInfo;
         		}
@@ -772,12 +797,12 @@ public class AppInstanceResource extends AHEResource{
         			}
         			// if no existing service found, try to search for new service providers
         			else{
-        				return "Rejected: no matched resources found.";
+        				//return "Rejected: no sufficient balance.";
         				//existing providers cannot satisfy user's demands
         				//activate negotiation with other providers directly, then returns satisfied providers
         				// for user confirmation/selection
         				// then continue with policy update and hibernate contract generation
-        				/*
+        				
         				HashMap<String, String> request = new HashMap<String, String>();
         				request = OntReasoning.getAppInfo();
         				request.put("appname", appname);
@@ -795,7 +820,7 @@ public class AppInstanceResource extends AHEResource{
         				}
         				else{
         					return service;
-        				}*/
+        				}
         				//return "negotiation activated to search for new providers";
         				
         			}
@@ -869,7 +894,8 @@ public class AppInstanceResource extends AHEResource{
         		//3rd parameter: core number; 4th parameter: duration; 5th parameter: as soon as possible
         		offers = OntReasoning.getOffersFromShares(username, group, appname, core, 0, pay, 0);
         		
-        		if(!offers.isEmpty()){
+        		if(!offers.contains("empty")){
+        		//if(!offers.isEmpty()){
     				//******* you need to trim offer info to string for return message to client
     				//String workerN = offers.values().iterator().next();
     				//System.out.println("******workerN: " + workerN);
@@ -879,8 +905,26 @@ public class AppInstanceResource extends AHEResource{
     				//return "hello";
     			}
         		else{
-        			System.out.println("Service Broker returned empty quotes");
-        			return "quote empty";
+        			HashMap<String, String> request = new HashMap<String, String>();
+    				request = OntReasoning.getAppInfo();
+    				request.put("appname", appname);
+    				request.put("duration", duration);
+    				request.put("username", username);
+    				request.put("startT", startT);
+    				request.put("group", group);
+    				
+    			    //String service = ServiceReasoning.providerSearch(request);
+    				String service = OntReasoning.cloudProviderSearch(request);
+    				System.out.println("negotiation activated to search for new providers");
+    				//System.out.println("******" + service.keySet());
+    				if(service.isEmpty()){
+    					return "Rejected: no matched resources found.";
+    				}
+    				else{
+    					return service;
+    				}
+        			//System.out.println("Service Broker returned empty quotes");
+        			//return "quote empty";
         		}
         	}
         	

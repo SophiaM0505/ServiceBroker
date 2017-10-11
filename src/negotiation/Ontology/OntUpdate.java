@@ -30,8 +30,8 @@ import com.clarkparsia.pellet.owlapiv3.PelletReasonerFactory;
 public class OntUpdate {
 	
 	static double cost;
-	//final static String mfile_path = "file:/Users/zeqianmeng/Desktop/ontology/";
-	final static String mfile_path = "file:/opt/AHE3/ontology/";
+	final static String mfile_path = "file:/Users/zeqianmeng/Desktop/ontology/";
+	//final static String mfile_path = "file:/opt/AHE3/ontology/";
 	final static String ns = "http://www.owl-ontologies.com/alliance#";
 	
 public static void mPolicyGridReduce(String name, String grp, String app) throws OWLOntologyStorageException, OWLOntologyCreationException{
@@ -921,13 +921,19 @@ public static void mPolicyGridReduce(HashMap<String, String> values) throws OWLO
 		// in this program, cost is the total cost of service, while charge is unit price
 		//double charge = Double.parseDouble(values.get("charge"));
 		String username = values.get("username");
-		String share = values.get("share");
-		String policy = share.substring(0, share.length()-5) + "Policy";
+		String share = values.get("share"); // this is the AwsServices in resource-oriented matchmaking case
+		//System.out.println("---------------- sophia " + share);
+		String policy = values.get("policy");
+		//String policy = share.substring(0, share.length()-5) + "Policy";
 		String worker = values.get("worker");
 		String provider = values.get("provider");
 		String measurement = values.get("measurement");
     	String pfile = mfile_path + policy +".owl";
     	
+    	boolean resource_oriented = false;
+    	if (share.contains("Service")){
+    		resource_oriented = true;
+    	}
     	//for test
     	/*String username = "Sofia";
 		String share = "Cluster";
@@ -980,6 +986,7 @@ public static void mPolicyGridReduce(HashMap<String, String> values) throws OWLO
             manager.applyChange(add_change);
             manager.saveOntology(policy_ontology);
         
+            if(!resource_oriented){
             //to update balance in exe env for Share
             String share_file = mfile_path + share + ".owl";
             System.out.println("The Share ontology " + share_file + " is being processed.");
@@ -1008,6 +1015,7 @@ public static void mPolicyGridReduce(HashMap<String, String> values) throws OWLO
 	    
 	        share_balance = share_balance - maxCost;
 	        System.out.println("Service Broker, the NEW balance for instance " + worker_ind.toStringID().substring(39) + " in Share is: " + share_balance);
+            
 	        //System.out.println("******** worker's remaining balance: " + share_balance);
 	    /*OWLEntityRemover remover2 = new OWLEntityRemover(manager2, Collections.singleton(ontology2));
 	    bal_pro.accept(remover2);
@@ -1019,6 +1027,7 @@ public static void mPolicyGridReduce(HashMap<String, String> values) throws OWLO
 		    AddAxiom change2 = new AddAxiom(ontology2, dpass3);
             manager2.applyChange(change2);
             manager2.saveOntology(ontology2);
+            }
 		}
 		else{
 			

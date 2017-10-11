@@ -7,7 +7,7 @@ public class Service {
 	private double cost;
 	private double charge;
 	private int cpuNo;
-	private int memory;
+	private double memory;
 	private String instance;
 	//1 for true, 0 for false
 	private String measurement;
@@ -38,11 +38,11 @@ public class Service {
 		return cpuNo;
 	}
 	
-	public void setMemory(int memory){
-		this.memory = memory;
+	public void setMemory(double mem){
+		this.memory = mem;
 	}
 	
-	public int getMemory(){
+	public double getMemory(){
 		return memory;
 	}
 	

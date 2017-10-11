@@ -93,7 +93,7 @@ public class AHE_API{
 		long inst_id = inst.getId(); 
 		//long con = 6;
 		Random rand = new Random();
-	    int temp_id = rand.nextInt(10000 + 1);
+	    int temp_id = 100000 + rand.nextInt(900000);
 		ContractInst coninst = new ContractInst();
 		coninst.setId(temp_id);
 		//coninst.setCon_id(con);
