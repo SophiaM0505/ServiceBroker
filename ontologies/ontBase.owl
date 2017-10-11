@@ -1,0 +1,2642 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE rdf:RDF [
+<!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+<!ENTITY owl11 "http://www.w3.org/2006/12/owl11#" >
+<!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+<!ENTITY owl11xml "http://www.w3.org/2006/12/owl11-xml#" >
+<!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+<!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+<!ENTITY CR-owl-guide-20030818 "http://www.w3.org/TR/2003/CR-owl-guide-20030818/" >
+<!ENTITY alliance "http://www.owl-ontologies.com/alliance#" >
+]>
+
+
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:protege="http://protege.stanford.edu/plugins/owl/protege#"
+    xmlns:xsp="http://www.owl-ontologies.com/2005/08/07/xsp.owl#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:owl2xml="http://www.w3.org/2006/12/owl2-xml#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:swrl="http://www.w3.org/2003/11/swrl#"
+    xmlns:swrlb="http://www.w3.org/2003/11/swrlb#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns="http://www.owl-ontologies.com/alliance#"
+    xmlns:ClusterPolicy="file:///Users/zeqianmeng/Desktop/ontology/ClusterPolicy#"
+    xmlns:ontBase="file:///Users/zeqianmeng/Desktop/ontology/ontBase#"
+    xmlns:cshare="file:///Users/zeqianmeng/Desktop/ontology/ClusterShare#"
+    xml:base="http://www.owl-ontologies.com/alliance">
+    <owl:Ontology rdf:about=""/>
+
+    <!--
+     ///////////////////////////////////////////////////////////////////////////////////////
+     //Classes
+     //
+     ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+    <!-- Entity -->
+    <owl:Class rdf:about="#GridEntity">
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >Anything related with Grids.</rdfs:comment>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty>
+                    <owl:DatatypeProperty rdf:about="#hasName"/>
+                </owl:onProperty>
+                <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+                    >1</owl:cardinality>
+                <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty>
+                    <owl:DatatypeProperty rdf:about="#hasID"/>
+                </owl:onProperty>
+                <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+                    >1</owl:cardinality>
+                <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+
+    <owl:Class rdf:about="&alliance;Share">
+        <rdfs:subClassOf>
+            <owl:Class rdf:about="&alliance;GridEntity"/>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:allValuesFrom>
+                    <owl:Class rdf:about="&alliance;Manager"/>
+                </owl:allValuesFrom>
+                <owl:onProperty>
+                    <owl:ObjectProperty rdf:about="&alliance;hasManager"/>
+                </owl:onProperty>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:allValuesFrom>
+                    <owl:Class rdf:about="&alliance;UserDomain"/>
+                </owl:allValuesFrom>
+                <owl:onProperty>
+                    <owl:ObjectProperty rdf:about="&alliance;hasUserDomain"/>
+                </owl:onProperty>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:allValuesFrom>
+                    <owl:Class rdf:about="&alliance;ProviderDomain"/>
+                </owl:allValuesFrom>
+                <owl:onProperty>
+                    <owl:ObjectProperty rdf:about="&alliance;hasProviderDomain"/>
+                </owl:onProperty>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:allValuesFrom>
+                    <owl:Class rdf:about="&alliance;Service"/>
+                </owl:allValuesFrom>
+                <owl:onProperty>
+                    <owl:ObjectProperty rdf:about="&alliance;hasService"/>
+                </owl:onProperty>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:allValuesFrom>
+                    <owl:Class rdf:about="&alliance;Resource"/>
+                </owl:allValuesFrom>
+                <owl:onProperty>
+                    <owl:ObjectProperty rdf:about="&alliance;hasResource"/>
+                </owl:onProperty>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:allValuesFrom>
+                    <owl:Class rdf:about="&alliance;Activity"/>
+                </owl:allValuesFrom>
+                <owl:onProperty>
+                    <owl:ObjectProperty rdf:about="&alliance;hasActivity"/>
+                </owl:onProperty>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:allValuesFrom>
+                    <owl:Class rdf:about="&alliance;MappingPolicy"/>
+                </owl:allValuesFrom>
+                <owl:onProperty>
+                    <owl:ObjectProperty rdf:about="&alliance;hasMappingPolicy"/>
+                </owl:onProperty>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+    <!-- StorageShare -->
+    <owl:Class rdf:about="&alliance;StorageShare">
+        <rdfs:subClassOf>
+            <owl:Class rdf:about="&alliance;Share"/>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+    <!-- ComputingShare -->
+    <owl:Class rdf:about="&alliance;ComputingShare">
+        <rdfs:subClassOf>
+            <owl:Class rdf:about="&alliance;Share"/>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+    <!-- Resource -->
+    <owl:Class rdf:about="&alliance;Resource">
+        <rdfs:subClassOf>
+            <owl:Class rdf:about="&alliance;GridEntity"/>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+    <!-- Service -->
+    <owl:Class rdf:about="&alliance;Service">
+        <rdfs:subClassOf>
+            <owl:Class rdf:about="&alliance;GridEntity"/>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+    <!-- ComputingService -->
+    <owl:Class rdf:about="&alliance;ComputingService">
+        <rdfs:subClassOf>
+            <owl:Class rdf:about="&alliance;Service"/>
+        </rdfs:subClassOf>
+        
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:allValuesFrom>
+                    <owl:Class rdf:about="&alliance;Resource"/>
+                </owl:allValuesFrom>
+                <owl:onProperty>
+                    <owl:ObjectProperty rdf:about="&alliance;hasResource"/>
+                </owl:onProperty>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:allValuesFrom>
+                    <owl:Class rdf:about="&alliance;AdminDomain"/>
+                </owl:allValuesFrom>
+                <owl:onProperty>
+                    <owl:ObjectProperty rdf:about="&alliance;hasAdminDomain"/>
+                </owl:onProperty>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+    <!-- manager -->
+    <owl:Class rdf:about="&alliance;Manager">
+        <rdfs:subClassOf>
+            <owl:Class rdf:about="&alliance;GridEntity"/>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+    <owl:Class rdf:about="&alliance;StorageService">
+        <rdfs:subClassOf>
+            <owl:Class rdf:about="&alliance;Service"/>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+    <!-- user domain -->
+    <owl:Class rdf:about="&alliance;UserDomain">
+        <rdfs:subClassOf>
+            <owl:Class rdf:about="&alliance;GridDomain"/>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty>
+                    <owl:ObjectProperty rdf:about="&alliance;hasMappingPolicy"/>
+                </owl:onProperty>
+                <owl:allValuesFrom>
+                    <owl:Class rdf:about="&alliance;MappingPolicy"/>
+                </owl:allValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <equivalentClass rdf:resource="#JobProject"/>
+    </owl:Class>
+    
+    <owl:Class rdf:about="&alliance;JobProject">
+        <rdfs:subClassOf>
+            <owl:Class rdf:about="&alliance;GridDomain"/>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty>
+                    <owl:ObjectProperty rdf:about="&alliance;hasMappingPolicy"/>
+                </owl:onProperty>
+                <owl:allValuesFrom>
+                    <owl:Class rdf:about="&alliance;MappingPolicy"/>
+                </owl:allValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <equivalentClass rdf:resource="#UserDomain"/>
+    </owl:Class>
+    
+    <!-- domain type -->
+    <owl:Class rdf:about="&alliance;DomainType">
+        <rdfs:subClassOf>
+            <owl:Class rdf:about="&alliance;UserDomain"/>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+    <!-- AdminDomain -->
+    <owl:Class rdf:about="&alliance;AdminDomain">
+        <rdfs:subClassOf>
+            <owl:Class rdf:about="&alliance;GridDomain"/>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty>
+                    <owl:ObjectProperty rdf:about="&alliance;gridEntry"/>
+                </owl:onProperty>
+                <owl:allValuesFrom>
+                    <owl:Class rdf:about="&alliance;Endpoint"/>
+                </owl:allValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty>
+                    <owl:ObjectProperty rdf:about="&alliance;hasService"/>
+                </owl:onProperty>
+                <owl:allValuesFrom>
+                    <owl:Class rdf:about="&alliance;Service"/>
+                </owl:allValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:unionOf rdf:parseType="Collection">
+                            <owl:Class rdf:about="&alliance;VO"/>
+                            <owl:Class rdf:about="&alliance;Alliance"/>
+                            <owl:Class rdf:about="&alliance;ResourceRequester"/>
+                        </owl:unionOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+                <owl:onProperty>
+                    <owl:ObjectProperty rdf:about="&alliance;hasRegistered"/>
+                </owl:onProperty>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:allValuesFrom>
+                    <owl:Class rdf:about="&alliance;Cert"/>
+                </owl:allValuesFrom>
+                <owl:onProperty>
+                    <owl:ObjectProperty rdf:about="&alliance;hasID"/>
+                </owl:onProperty>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+    <!-- Owner -->
+    <owl:Class rdf:about="&alliance;Owner">
+        <rdfs:subClassOf>
+            <owl:Class rdf:about="&alliance;AdminDomain"/>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+    <!-- Member of UserDomain -->
+    <owl:Class rdf:about="&alliance;Member">
+        <rdfs:subClassOf>
+            <owl:Class rdf:about="&alliance;UserDomain"/>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+    <!-- UserManager of UserDomain -->
+    <owl:Class rdf:about="&alliance;UserManager">
+        <rdfs:subClassOf>
+            <owl:Class rdf:about="&alliance;UserDomain"/>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+    <!--contact class in AdminDomain-->
+    <owl:Class rdf:about="&alliance;Contact">
+        <rdfs:subClassOf>
+            <owl:Class rdf:about="&alliance;AdminDomain"/>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+    <!--Location class in AdminDomain-->
+    <owl:Class rdf:about="&alliance;Location">
+        <rdfs:subClassOf>
+            <owl:Class rdf:about="&alliance;AdminDomain"/>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+    <!-- resource requester-->
+  <owl:Class rdf:about="&alliance;ResourceRequester">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="&alliance;DomainType"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="&alliance;gridEntry"/>
+        </owl:onProperty>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="&alliance;Endpoint"/>
+        </owl:allValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <owl:Class rdf:about="&alliance;VO"/>
+                    <owl:Class rdf:about="&alliance;Alliance"/>
+                    <owl:Class rdf:about="&alliance;AdminDomain"/>
+                </owl:unionOf>
+            </owl:Class>
+        </owl:someValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="&alliance;hasRegistered"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <owl:Class rdf:about="&alliance;Cert"/>
+                    <owl:Class rdf:about="&alliance;NamePsw"/>
+                </owl:unionOf>
+            </owl:Class>
+        </owl:someValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="&alliance;hasID"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+    
+    <!-- resource provider-->
+    <owl:Class rdf:about="&alliance;ProviderDomain">
+        <rdfs:subClassOf>
+            <owl:Class rdf:about="&alliance;GridDomain"/>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+    <!-- GRAM system-->
+  <owl:Class rdf:about="&alliance;GRAM">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="&alliance;WorkLoadManagement"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+    
+    <!-- Grid support service-->
+    <owl:Class rdf:about="&alliance;GridSupportService">
+        <rdfs:subClassOf>
+            <owl:Class rdf:about="&alliance;Service"/>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+    
+  <owl:Class rdf:about="&alliance;Topo">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="&alliance;NetworkResource"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+    
+
+  <owl:Class rdf:about="&alliance;WorkflowManagement">
+    <rdfs:subClassOf>
+        <owl:Class rdf:about="&alliance;GridSupportService"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="&alliance;WorkflowScheduler">
+    <rdfs:subClassOf>
+        <owl:Class rdf:about="&alliance;GridSupportService"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="&alliance;Linux">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="&alliance;OperatingSystem"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="&alliance;Unicore">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="&alliance;Middleware"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+        <owl:Restriction>
+            <owl:onProperty>
+                <owl:ObjectProperty rdf:about="&alliance;hasComponent"/>
+            </owl:onProperty>
+            <owl:someValuesFrom>
+                <owl:Class>
+                    <owl:unionOf rdf:parseType="Collection">
+                        <owl:Class rdf:about="&alliance;Endpoint"/>
+                        <owl:Class rdf:about="&alliance;Resource"/>
+                        <owl:Class rdf:about="&alliance;Service"/>
+                        <owl:Class rdf:about="&alliance;Manager"/>
+                    </owl:unionOf>
+                </owl:Class>
+            </owl:someValuesFrom>
+        </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+    
+  <owl:Class rdf:about="&alliance;UoM_Cluster">
+        <rdfs:subClassOf>
+            <owl:Class rdf:about="&alliance;Middleware"/>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty>
+                    <owl:ObjectProperty rdf:about="&alliance;hasComponent"/>
+                </owl:onProperty>
+                <owl:someValuesFrom>
+                    <owl:Class>
+                        <owl:unionOf rdf:parseType="Collection">
+                            <owl:Class rdf:about="&alliance;Endpoint"/>
+                            <owl:Class rdf:about="&alliance;Resource"/>
+                            <owl:Class rdf:about="&alliance;Service"/>
+                            <owl:Class rdf:about="&alliance;Manager"/>
+                        </owl:unionOf>
+                    </owl:Class>
+                </owl:someValuesFrom>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+  <owl:Class rdf:about="&alliance;QosCosGrid">
+    <rdfs:subClassOf>
+        <owl:Class rdf:about="&alliance;Middleware"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+        <owl:Restriction>
+            <owl:onProperty>
+                <owl:ObjectProperty rdf:about="&alliance;hasComponent"/>
+            </owl:onProperty>
+            <owl:someValuesFrom>
+                <owl:Class>
+                    <owl:unionOf rdf:parseType="Collection">
+                        <owl:Class rdf:about="&alliance;Endpoint"/>
+                        <owl:Class rdf:about="&alliance;Resource"/>
+                        <owl:Class rdf:about="&alliance;Service"/>
+                        <owl:Class rdf:about="&alliance;Manager"/>
+                    </owl:unionOf>
+                </owl:Class>
+            </owl:someValuesFrom>
+        </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+    
+  <owl:Class rdf:about="&alliance;AWS">
+    <rdfs:subClassOf>
+        <owl:Class rdf:about="&alliance;Middleware"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+        <owl:Restriction>
+            <owl:onProperty>
+                <owl:ObjectProperty rdf:about="&alliance;hasInstalledSoftware"/>
+            </owl:onProperty>
+            <owl:allValuesFrom>
+                <owl:Class rdf:about="&alliance;AWS"/>
+            </owl:allValuesFrom>
+        </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="&alliance;NetworkDomain">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#NetworkResource"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="&alliance;LCG">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Middleware"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="&alliance;hasInstalledSoftware"/>
+        </owl:onProperty>
+        <owl:someValuesFrom>
+          <owl:Class rdf:about="&alliance;Globus2"/>
+        </owl:someValuesFrom>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="&alliance;GlobusGatekeeper">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="&alliance;Security"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#OperatingSystem">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Software"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="&alliance;EdgWl">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#WorkLoadManagement"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="&alliance;Queue">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="&alliance;ComputingManager"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="&alliance;Benchmark">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="&alliance;ExecutionEnvironment"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="&alliance;AuthorizationS">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Security"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+    
+    
+    <!--resource providers-->
+    
+    <owl:Class rdf:about="&alliance;Amazon">
+        <rdfs:subClassOf>
+            <owl:Class rdf:about="#AdminDomain"/>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+    <owl:Class rdf:about="&alliance;EGI">
+        <rdfs:subClassOf>
+            <owl:Class rdf:about="#AdminDomain"/>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+    <owl:Class rdf:about="&alliance;WLCG">
+        <rdfs:subClassOf>
+            <owl:Class rdf:about="#AdminDomain"/>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+    <owl:Class rdf:about="&alliance;Unicore">
+        <rdfs:subClassOf>
+            <owl:Class rdf:about="#AdminDomain"/>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+    <owl:Class rdf:about="&alliance;MAPPER">
+        <rdfs:subClassOf>
+            <owl:Class rdf:about="#AdminDomain"/>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+    <owl:Class rdf:about="&alliance;RealityGrid">
+        <rdfs:subClassOf>
+            <owl:Class rdf:about="#AdminDomain"/>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+  <owl:Class rdf:about="&alliance;PBS">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Portable Batch System.</rdfs:comment>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="&alliance;Queue"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="&alliance;JobScheduler">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#GridSupportService"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="&alliance;MDS">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="&alliance;InformationService"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="&alliance;VOmgt">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#GridSupportService"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+
+  <owl:Class rdf:about="&alliance;Lib">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Platform"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#InformationService">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#GridSupportService"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="&alliance;URL">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="&alliance;URI"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#WorkLoadManagement">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#GridSupportService"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+
+  <owl:Class rdf:about="&alliance;Unix">
+    <rdfs:subClassOf rdf:resource="#OperatingSystem"/>
+  </owl:Class>
+
+  <owl:Class rdf:about="&alliance;Policy">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#GridEntity"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+    
+  <!--mapping rules-->
+  <owl:Class rdf:about="&alliance;MappingRules">
+    <rdfs:subClassOf>
+        <owl:Class rdf:about="#MappingPolicy"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+
+  <!--access rules-->
+  <owl:Class rdf:about="&alliance;AccessRules">
+    <rdfs:subClassOf>
+        <owl:Class rdf:about="#AccessPolicy"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+    
+  <!--mapping policy-->
+  <owl:Class rdf:about="&alliance;MappingPolicy">
+    <rdfs:subClassOf>
+        <owl:Class rdf:about="#Policy"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+        <owl:Restriction>
+            <owl:onProperty>
+                <owl:ObjectProperty rdf:about="&alliance;hasShare"/>
+            </owl:onProperty>
+            <owl:allValuesFrom rdf:resource="#Share"/>
+        </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+    
+  <!--access policy-->
+  <owl:Class rdf:about="&alliance;AccessPolicy">
+    <rdfs:subClassOf>
+        <owl:Class rdf:about="#Policy"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+        <owl:Restriction>
+            <owl:onProperty>
+                <owl:ObjectProperty rdf:about="&alliance;hasEndpoint"/>
+            </owl:onProperty>
+            <owl:allValuesFrom rdf:resource="#Endpoint"/>
+        </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+    
+  <!--mapping schema-->
+  <owl:Class rdf:about="&alliance;MappingSchema">
+    <rdfs:subClassOf>
+        <owl:Class rdf:about="#MappingPolicy"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  
+  <!--access schema-->
+  <owl:Class rdf:about="&alliance;AccessSchema">
+    <rdfs:subClassOf>
+        <owl:Class rdf:about="#AccessPolicy"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+
+  <!--computing manager-->
+  <owl:Class rdf:about="#ComputingManager">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Manager"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+    
+  <!--storage manager-->
+  <owl:Class rdf:about="#StorageManager">
+    <rdfs:subClassOf>
+        <owl:Class rdf:about="#Manager"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+
+  <owl:Class rdf:about="&alliance;GridPortal">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#ComputingEndpoint"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="&alliance;DataResource">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="&alliance;Resource"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+
+  <!--cluster class-->
+  <owl:Class rdf:about="&alliance;Cluster">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#ExecutionEnvironment"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="&alliance;NetworkAdapter">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#NetworkResource"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#Service">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#GridEntity"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class rdf:about="#VO"/>
+        </owl:someValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#hasUserDomain"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+        <owl:Restriction>
+            <owl:onProperty>
+                <owl:ObjectProperty rdf:about="&alliance;hasUserDomain"/>
+            </owl:onProperty>
+            <owl:someValuesFrom>
+                <owl:Class rdf:about="#Alliance"/>
+            </owl:someValuesFrom>
+        </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class>
+            <owl:unionOf rdf:parseType="Collection">
+              <owl:Class rdf:about="#IP"/>
+              <owl:Class rdf:about="#URI"/>
+            </owl:unionOf>
+          </owl:Class>
+        </owl:someValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#hasID"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  
+  <owl:Class rdf:about="#Authorization">
+    <rdfs:subClassOf rdf:resource="#AccessRules"/>
+  </owl:Class>
+    
+  <owl:Class rdf:about="#StorageAccess">
+    <rdfs:subClassOf rdf:resource="#AccessRules"/>
+  </owl:Class>
+    
+  <owl:Class rdf:about="#StorageAccessProtocol">
+    <rdfs:subClassOf rdf:resource="#StorageService"/>
+  </owl:Class>
+    
+    <owl:Class rdf:about="#DataStore">
+        <rdfs:subClassOf rdf:resource="#StorageService"/>
+    </owl:Class>
+  
+  <owl:Class rdf:about="#POSIX">
+    <rdfs:subClassOf rdf:resource="#StorageAccess"/>
+  </owl:Class>
+    
+  <owl:Class rdf:about="#Cert">
+    <rdfs:subClassOf rdf:resource="#Authorization"/>
+  </owl:Class>
+  <owl:Class rdf:about="#NamePsw">
+     <rdfs:subClassOf rdf:resource="#Authorization"/>
+  </owl:Class>
+  
+  <owl:Class rdf:about="#VO">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#DomainType"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="&alliance;hasAccessPolicy"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="#AccessPolicy"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:someValuesFrom>
+          <owl:Class>
+            <owl:unionOf rdf:parseType="Collection">
+              <owl:Class rdf:about="#Service"/>
+              <owl:Class rdf:about="#ResourceRequester"/>
+              <owl:Class rdf:about="#AdminDomain"/>
+            </owl:unionOf>
+          </owl:Class>
+        </owl:someValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#hasRegistered"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#GridDomain">
+    <rdfs:subClassOf>
+        <owl:Class rdf:about="#GridEntity"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+        <owl:Restriction>
+            <owl:onProperty>
+                <owl:ObjectProperty rdf:about="&alliance;hasAccessPolicy"/>
+            </owl:onProperty>
+            <owl:allValuesFrom rdf:resource="#AccessPolicy"/>
+        </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+        <owl:Restriction>
+            <owl:someValuesFrom>
+                <owl:Class>
+                    <owl:unionOf rdf:parseType="Collection">
+                        <owl:Class rdf:about="#VO"/>
+                        <owl:Class rdf:about="#Alliance"/>
+                        <owl:Class rdf:about="#ResourceRequester"/>
+                        <owl:Class rdf:about="#AdminDomain"/>
+                    </owl:unionOf>
+                </owl:Class>
+            </owl:someValuesFrom>
+            <owl:onProperty>
+                <owl:ObjectProperty rdf:about="#hasRegistered"/>
+            </owl:onProperty>
+        </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#Alliance">
+    <rdfs:subClassOf>
+        <owl:Class rdf:about="#DomainType"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+        <owl:Restriction>
+            <owl:onProperty>
+                <owl:ObjectProperty rdf:about="&alliance;hasAccessPolicy"/>
+            </owl:onProperty>
+            <owl:allValuesFrom rdf:resource="#AccessPolicy"/>
+        </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+        <owl:Restriction>
+            <owl:someValuesFrom>
+                <owl:Class>
+                    <owl:unionOf rdf:parseType="Collection">
+                        <owl:Class rdf:about="#VO"/>
+                        <owl:Class rdf:about="#ResourceRequester"/>
+                        <owl:Class rdf:about="#AdminDomain"/>
+                    </owl:unionOf>
+                </owl:Class>
+            </owl:someValuesFrom>
+            <owl:onProperty>
+                <owl:ObjectProperty rdf:about="#hasRegistered"/>
+            </owl:onProperty>
+        </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#Software">
+    <rdfs:subClassOf rdf:resource="#Service"/>
+  </owl:Class>
+  <owl:Class rdf:about="&alliance;Bandwidth">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#NetworkResource"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#NetworkResource">
+    <rdfs:subClassOf rdf:resource="#Resource"/>
+  </owl:Class>
+  <owl:Class rdf:about="&alliance;WINNT">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="&alliance;FileSystem"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#Hardware">
+    <rdfs:subClassOf rdf:resource="#Resource"/>
+  </owl:Class>
+  <owl:Class rdf:about="&alliance;AuthenticationS">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Security"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="&alliance;Memory">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#ExecutionEnvironment"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+    
+  <owl:Class rdf:about="#FileSystem">
+    <rdfs:subClassOf rdf:resource="#StorageService"/>
+  </owl:Class>
+  <owl:Class rdf:about="&alliance;IdentityMappingS">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Security"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+
+  <owl:Class rdf:about="&alliance;EDG">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Middleware"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="&alliance;VOPolicyS">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Security"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#Endpoint">
+    <rdfs:subClassOf rdf:resource="#GridEntity"/>
+  </owl:Class>
+    
+  <owl:Class rdf:about="#ComputingEndpoint">
+    <rdfs:subClassOf rdf:resource="#Endpoint"/>
+    <rdfs:subClassOf>
+          <owl:Restriction>
+              <owl:onProperty>
+                  <owl:DatatypeProperty rdf:about="&alliance;hasComputingEndpoint"/>
+              </owl:onProperty>
+              <owl:allValuesFrom rdf:resource="#ComputingEndpoint"/>
+          </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+    
+  <owl:Class rdf:about="#StorageEndpoint">
+    <rdfs:subClassOf rdf:resource="#Endpoint"/>
+    <rdfs:subClassOf>
+        <owl:Restriction>
+            <owl:onProperty>
+                <owl:DatatypeProperty rdf:about="&alliance;hasStorageEndpoint"/>
+            </owl:onProperty>
+            <owl:allValuesFrom rdf:resource="#StorageEndpoint"/>
+        </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+
+  <owl:Class rdf:about="&alliance;Switcher">
+    <rdfs:subClassOf rdf:resource="#NetworkResource"/>
+  </owl:Class>
+  <owl:Class rdf:about="&alliance;Globus3">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Middleware"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+    
+    <owl:Class rdf:about="&alliance;AHE3">
+        <rdfs:subClassOf>
+            <owl:Class rdf:about="#Middleware"/>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+  <owl:Class rdf:about="&alliance;Host">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#ExecutionEnvironment"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="#Hardware"/>
+  </owl:Class>
+  <owl:Class rdf:about="#UI">
+    <rdfs:subClassOf rdf:resource="#ComputingEndpoint"/>
+  </owl:Class>
+  <owl:Class rdf:about="&alliance;libmpe.a">
+    <rdfs:subClassOf rdf:resource="#Lib"/>
+  </owl:Class>
+    
+    <owl:Class rdf:about="&alliance;libsteering">
+        <rdfs:subClassOf rdf:resource="#Lib"/>
+    </owl:Class>
+    
+  <owl:Class rdf:about="&alliance;GridICE">
+    <rdfs:subClassOf rdf:resource="#InformationService"/>
+  </owl:Class>
+  <owl:Class rdf:about="&alliance;QCGBroker">
+    <rdfs:subClassOf rdf:resource="#InformationService"/>
+  </owl:Class>
+  <owl:Class rdf:about="&alliance;NetworkServer">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#NetworkResource"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="&alliance;RGMA">
+    <rdfs:subClassOf rdf:resource="#InformationService"/>
+  </owl:Class>
+  <owl:Class rdf:about="#URI">
+    <rdfs:subClassOf rdf:resource="#NetworkResource"/>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#hasName"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Uniform Resource Identifier</rdfs:comment>
+  </owl:Class>
+  <owl:Class rdf:about="#IP">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#hasName"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="#URI"/>
+  </owl:Class>
+  <owl:Class rdf:about="#Globus2">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Middleware"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="&alliance;Windows">
+    <rdfs:subClassOf rdf:resource="#OperatingSystem"/>
+  </owl:Class>
+  <owl:Class rdf:about="&alliance;CPU">
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="&alliance;hasModel"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="&alliance;clockSpeed"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="&alliance;hasVendor"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#ExecutionEnvironment"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="&alliance;MPI">
+    <owl:equivalentClass>
+      <owl:Class>
+        <owl:intersectionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#ExecutionEnvironment"/>
+          <owl:Restriction>
+            <owl:someValuesFrom>
+              <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                  <owl:Class rdf:about="&alliance;MPI90"/>
+                  <owl:Class rdf:about="&alliance;MPICC"/>
+                </owl:unionOf>
+              </owl:Class>
+            </owl:someValuesFrom>
+            <owl:onProperty>
+              <owl:ObjectProperty rdf:about="&alliance;hasExeEnvironment"/>
+            </owl:onProperty>
+          </owl:Restriction>
+          <owl:Restriction>
+            <owl:onProperty>
+              <owl:ObjectProperty rdf:about="#needLib"/>
+            </owl:onProperty>
+            <owl:someValuesFrom>
+              <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                  <owl:Class rdf:about="#libmpe.a"/>
+                  <owl:Class rdf:about="&alliance;libmpich.a"/>
+                </owl:unionOf>
+              </owl:Class>
+            </owl:someValuesFrom>
+          </owl:Restriction>
+          <owl:Restriction>
+            <owl:someValuesFrom>
+              <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                  <owl:Class rdf:about="#ComputingManager"/>
+                  <owl:Class rdf:about="&alliance;SSHD"/>
+                </owl:unionOf>
+              </owl:Class>
+            </owl:someValuesFrom>
+            <owl:onProperty>
+              <owl:ObjectProperty rdf:about="#hasInstalledSoftware"/>
+            </owl:onProperty>
+          </owl:Restriction>
+        </owl:intersectionOf>
+      </owl:Class>
+    </owl:equivalentClass>
+  </owl:Class>
+  <owl:Class rdf:about="&alliance;Maui">
+    <rdfs:subClassOf rdf:resource="#JobScheduler"/>
+  </owl:Class>
+  <owl:Class rdf:about="&alliance;UnicoreScheduler">
+    <rdfs:subClassOf rdf:resource="#JobScheduler"/>
+  </owl:Class>
+  <owl:Class rdf:about="&alliance;MacAddr">
+    <rdfs:subClassOf rdf:resource="#NetworkResource"/>
+  </owl:Class>
+  <owl:Class rdf:about="&alliance;PBS_sched">
+    <rdfs:subClassOf rdf:resource="#JobScheduler"/>
+  </owl:Class>
+  <owl:Class rdf:about="&alliance;ServiceBroker">
+    <rdfs:subClassOf rdf:resource="#JobScheduler"/>
+  </owl:Class>
+  <owl:Class rdf:about="&alliance;LSF">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Load Sharing Facility.</rdfs:comment>
+    <rdfs:subClassOf rdf:resource="#Queue"/>
+  </owl:Class>
+  <owl:Class rdf:about="#libmpich.a">
+    <rdfs:subClassOf rdf:resource="#Lib"/>
+  </owl:Class>
+  <owl:Class rdf:about="#Security">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#GridSupportService"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="&alliance;EdgLB">
+    <rdfs:subClassOf rdf:resource="#InformationService"/>
+  </owl:Class>
+  <owl:Class rdf:about="&alliance;CrossGrid">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Middleware"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+
+  <owl:Class rdf:about="&alliance;BDII">
+    <rdfs:subClassOf rdf:resource="#InformationService"/>
+  </owl:Class>
+  <owl:Class rdf:about="&alliance;Accounting">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#GridSupportService"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="&alliance;Job">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#ComputingActivity"/>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#Middleware">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#Platform"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="&alliance;releaseVersion"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="&alliance;MigrateDesktop">
+    <rdfs:subClassOf rdf:resource="#ComputingEndpoint"/>
+  </owl:Class>
+  <owl:Class rdf:about="&alliance;CredentialConversionS">
+    <rdfs:subClassOf rdf:resource="#Security"/>
+  </owl:Class>
+  <owl:Class rdf:about="&alliance;WSDL">
+    <rdfs:subClassOf rdf:resource="#DataResource"/>
+  </owl:Class>
+  <owl:Class rdf:about="#Service">
+    <rdfs:subClassOf>
+      <owl:Class rdf:about="#GridEntity"/>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom>
+          <owl:Class rdf:about="&alliance;Endpoint"/>
+        </owl:allValuesFrom>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="&alliance;hasEndpoint"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:cardinality>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="&alliance;status"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:allValuesFrom rdf:resource="#URI"/>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="#hasID"/>
+        </owl:onProperty>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:ObjectProperty rdf:about="&alliance;descriptor"/>
+        </owl:onProperty>
+        <owl:cardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger"
+        >1</owl:cardinality>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+      <owl:Restriction>
+        <owl:onProperty>
+          <owl:DatatypeProperty rdf:about="#status"/>
+        </owl:onProperty>
+        <owl:allValuesFrom rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+      </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+  <owl:Class rdf:about="#ComputingService">
+    <rdfs:subClassOf rdf:resource="#Service"/>
+  </owl:Class>
+  <owl:Class rdf:about="#Application">
+    <rdfs:subClassOf>
+        <owl:Restriction>
+            <owl:onProperty>
+                <owl:ObjectProperty rdf:about="&alliance;needLib"/>
+            </owl:onProperty>
+            <owl:someValuesFrom rdf:resource="#Lib"/>
+        </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf rdf:resource="#Software"/>
+  </owl:Class>
+  <owl:Class rdf:about="#JobType">
+      <rdfs:subClassOf rdf:resource="#ApplicationEnvironment"/>
+  </owl:Class>
+  <owl:Class rdf:about="#SingleJob">
+      <rdfs:subClassOf rdf:resource="#JobType"/>
+  </owl:Class>
+  <owl:Class rdf:about="#WorkflowJob">
+      <rdfs:subClassOf rdf:resource="#JobType"/>
+  </owl:Class>
+  <owl:Class rdf:about="#InteractiveJob">
+      <rdfs:subClassOf rdf:resource="#JobType"/>
+  </owl:Class>
+  <owl:Class rdf:about="&alliance;SCSI">
+    <rdfs:subClassOf rdf:resource="#StorageEndpoint"/>
+  </owl:Class>
+  <owl:Class rdf:about="#MPI90">
+    <rdfs:subClassOf rdf:resource="#MPI"/>
+  </owl:Class>
+  <owl:Class rdf:about="&alliance;Condor">
+    <rdfs:subClassOf rdf:resource="#Queue"/>
+  </owl:Class>
+
+  <owl:Class rdf:about="&alliance;IDE">
+    <rdfs:subClassOf rdf:resource="#StorageEndpoint"/>
+  </owl:Class>
+  <owl:Class rdf:about="&alliance;AWS_S3">
+    <rdfs:subClassOf rdf:resource="#IDE"/>
+  </owl:Class>
+  <owl:Class rdf:about="&alliance;MacOS">
+    <rdfs:subClassOf rdf:resource="#OperatingSystem"/>
+  </owl:Class>
+  <owl:Class rdf:about="&alliance;SubCluster">
+    <rdfs:subClassOf rdf:resource="#Cluster"/>
+  </owl:Class>
+  <owl:Class rdf:about="#SSHD">
+    <rdfs:subClassOf rdf:resource="#Security"/>
+  </owl:Class>
+  <owl:Class rdf:about="&alliance;LINUXEXT3">
+    <rdfs:subClassOf rdf:resource="#FileSystem"/>
+  </owl:Class>
+  <owl:Class rdf:about="&alliance;ReplicaManagement">
+    <rdfs:subClassOf rdf:resource="#GridSupportService"/>
+  </owl:Class>
+  <owl:Class rdf:about="&alliance;EdgNS">
+    <rdfs:subClassOf rdf:resource="#NetworkServer"/>
+  </owl:Class>
+  <owl:Class rdf:about="#MPICC">
+    <rdfs:subClassOf rdf:resource="#MPI"/>
+  </owl:Class>
+  <owl:Class rdf:about="#ApplicationEnvironment">
+    <rdfs:subClassOf rdf:resource="#ComputingService"/>
+    <rdfs:subClassOf>
+        <owl:Restriction>
+            <owl:allValuesFrom rdf:resource="#Application"/>
+            <owl:onProperty>
+                <owl:ObjectProperty rdf:about="#hasAppEnvironment"/>
+            </owl:onProperty>
+        </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+    
+  <owl:Class rdf:about="#ToStorageService">
+    <rdfs:subClassOf rdf:resource="#NetworkService"/>
+  </owl:Class>
+    
+  <owl:Class rdf:about="#ToComputingService">
+    <rdfs:subClassOf rdf:resource="#NetworkService"/>
+  </owl:Class>
+
+  <owl:Class rdf:about="#NetworkService">
+    <rdfs:subClassOf rdf:resource="#Service"/>
+  </owl:Class>
+    
+  <!--computing activity: represents a single job-->
+  <owl:Class rdf:about="#ComputingActivity">
+    <rdfs:subClassOf rdf:resource="#Activity"/>
+    <rdfs:subClassOf>
+        <owl:Restriction>
+            <owl:allValuesFrom rdf:resource="#ExecutionEnvironment"/>
+            <owl:onProperty>
+                <owl:ObjectProperty rdf:about="#hasExeEnvironment"/>
+            </owl:onProperty>
+        </owl:Restriction>
+    </rdfs:subClassOf>
+    <rdfs:subClassOf>
+        <owl:Restriction>
+            <owl:allValuesFrom rdf:resource="#ApplicationEnvironment"/>
+            <owl:onProperty>
+                <owl:ObjectProperty rdf:about="#hasAppEnvironment"/>
+            </owl:onProperty>
+        </owl:Restriction>
+    </rdfs:subClassOf>
+  </owl:Class>
+    
+  <!--activity-->
+  <owl:Class rdf:about="#Activity">
+    <rdfs:subClassOf rdf:resource="#GridEntity"/>
+  </owl:Class>
+    
+  <owl:Class rdf:about="#ExecutionEnvironment">
+    <rdfs:subClassOf rdf:resource="#ComputingService"/>
+  </owl:Class>
+    
+  <owl:Class rdf:about="#ApplicationEnvironment">
+    <rdfs:subClassOf rdf:resource="#ComputingService"/>
+  </owl:Class>
+
+  <owl:Class rdf:about="#Platform">
+    <rdfs:subClassOf rdf:resource="#ApplicationEnvironment"/>
+  </owl:Class>
+
+  <owl:Class rdf:about="#JobDescription">
+    <rdfs:subClassOf rdf:resource="#ApplicationEnvironment"/>
+  </owl:Class>
+    
+  <owl:Class rdf:about="#GLUE2">
+    <rdfs:subClassOf rdf:resource="#JobDescription"/>
+    <owl:disjointWith rdf:resource="#JSDL"/>
+  </owl:Class>
+
+  <owl:Class rdf:about="#JSDL">
+    <rdfs:subClassOf rdf:resource="#JobDescription"/>
+    <owl:disjointWith rdf:resource="#GLUE2"/>
+  </owl:Class>
+    
+  <owl:Class rdf:about="#ProviderType">
+    <rdfs:subClassOf rdf:resource="#ApplicationEnvironment"/>
+    <rdfs:subClassOf>
+          <owl:Restriction>
+              <owl:allValuesFrom rdf:resource="#AdminDomain"/>
+              <owl:onProperty>
+                  <owl:ObjectProperty rdf:about="#hasAdminDomain"/>
+              </owl:onProperty>
+          </owl:Restriction>
+      </rdfs:subClassOf>
+  </owl:Class>
+    
+    <owl:Class rdf:about="#InstanceModel">
+        <rdfs:subClassOf rdf:resource="#ExecutionEnvironment"/>
+    </owl:Class>
+    
+  
+    <!--
+     ///////////////////////////////////////////////////////////////////////////////////////
+     //
+     // Object Properties
+     //
+     ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+    
+  <owl:ObjectProperty rdf:about="&alliance;hasQueue">
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#ComputingActivity"/>
+          <owl:Class rdf:about="#JobScheduler"/>
+          <owl:Class rdf:about="#ComputingManager"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <rdfs:range rdf:resource="#Queue"/>
+  </owl:ObjectProperty>
+    
+    <owl:ObjectProperty rdf:about="#hasComponent">
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >The policy statement for Grid VOs.</rdfs:comment>
+        <rdfs:domain rdf:resource="#Middleware"/>
+        <rdfs:range>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <owl:Class rdf:about="#Manager"/>
+                    <owl:Class rdf:about="#Resource"/>
+                    <owl:Class rdf:about="#Service"/>
+                    <owl:Class rdf:about="#Endpoint"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:range>
+    </owl:ObjectProperty>
+    
+    <owl:ObjectProperty rdf:about="#hasApp">
+        <rdfs:domain rdf:resource="#ApplicationEnvironment"/>
+        <rdfs:range rdf:resource="#Application"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >The type of Grid middleware for pre-installed application.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+  <!--hasMember-->
+  <owl:ObjectProperty rdf:about="&alliance;hasMember">
+    <rdfs:domain rdf:resource="#UserDomain"/>
+    <rdfs:range rdf:resource="#Member"/>
+  </owl:ObjectProperty>
+    
+  <!--hasUserDomain-->
+  <owl:ObjectProperty rdf:about="&alliance;hasUserDomain">
+    <rdfs:domain rdf:resource="#Share"/>
+    <rdfs:range rdf:resource="#UserDomain"/>
+  </owl:ObjectProperty>
+    
+    <!--hasProviderDomain-->
+    <owl:ObjectProperty rdf:about="&alliance;hasProviderDomain">
+        <rdfs:domain rdf:resource="#Share"/>
+        <rdfs:range rdf:resource="#ProviderDomain"/>
+    </owl:ObjectProperty>
+    
+    <!--hasAdminDomain-->
+    <owl:ObjectProperty rdf:about="&alliance;hasAdminDomain">
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <owl:Class rdf:about="#Share"/>
+                    <owl:Class rdf:about="#Service"/>
+                    <owl:Class rdf:about="#Resource"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="#AdminDomain"/>
+    </owl:ObjectProperty>
+    
+    
+    
+  <!--hasCPUModel-->
+  <owl:ObjectProperty rdf:about="&alliance;hasCPUModel">
+    <rdfs:domain rdf:resource="#Resource"/>
+    <rdfs:range rdf:resource="#CPU"/>
+    <owl:equivalentProperty rdf:resource="#hasCPUArchitecture"/>
+  </owl:ObjectProperty>
+    
+    <owl:ObjectProperty rdf:about="&alliance;hasCPUArchitecture">
+        <rdfs:domain rdf:resource="#Resource"/>
+        <rdfs:range rdf:resource="#CPU"/>
+        <owl:equivalentProperty rdf:resource="#hasCPUModel"/>
+    </owl:ObjectProperty>
+    
+    <owl:ObjectProperty rdf:about="&alliance;hasPhysicalPorcessor">
+        <rdfs:domain rdf:resource="#Resource"/>
+        <rdfs:range rdf:resource="#CPU"/>
+        <owl:equivalentProperty rdf:resource="#hasCPUModel"/>
+    </owl:ObjectProperty>
+    
+ 
+  <!--hasJobDescription-->
+  <owl:ObjectProperty rdf:about="&alliance;hasJobDescription">
+    <rdfs:domain rdf:resource="#ApplicationEnvironment"/>
+    <rdfs:range rdf:resource="#JobDescription"/>
+  </owl:ObjectProperty>
+    
+  <owl:ObjectProperty rdf:about="&alliance;programmeLang"/>
+  <owl:ObjectProperty rdf:about="&alliance;accessControlBaseType"/>
+  <owl:ObjectProperty rdf:about="#hasEndpoint">
+    <rdfs:domain rdf:resource="#GridEntity"/>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >The port number of a Grid service.</rdfs:comment>
+    <rdfs:range rdf:resource="#Endpoint"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="&alliance;RAMSize"/>
+  <owl:ObjectProperty rdf:about="&alliance;hasCreationTime"/>
+  <owl:ObjectProperty rdf:about="&alliance;localOwner"/>
+  <owl:ObjectProperty rdf:about="&alliance;processor"/>
+
+    
+    <!--hasMappingPolicy obejct property-->
+  <owl:ObjectProperty rdf:about="#hasMappingPolicy">
+    <rdfs:domain>
+        <owl:Class>
+            <owl:unionOf rdf:parseType="Collection">
+                <owl:Class rdf:about="#UserDomain"/>
+                <owl:Class rdf:about="#Share"/>
+            </owl:unionOf>
+        </owl:Class>
+    </rdfs:domain>
+    <rdfs:range rdf:resource="#MappingPolicy"/>
+  </owl:ObjectProperty>
+    
+    <owl:ObjectProperty rdf:about="#hasStorageEndpoint">
+        <rdfs:domain rdf:resource="#StorageService"/>
+        <rdfs:range rdf:resource="#StorageEndpoint"/>
+    </owl:ObjectProperty>
+    
+    <!--hasShare obejct property-->
+  <owl:ObjectProperty rdf:about="#hasShare">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >The policy statement for Grid VOs.</rdfs:comment>
+    <rdfs:domain rdf:resource="#UserDomain"/>
+    <rdfs:range rdf:resource="#Share"/>
+  </owl:ObjectProperty>
+    
+    <owl:ObjectProperty rdf:about="#belongToShare">
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >The policy statement for Grid VOs.</rdfs:comment>
+        <rdfs:domain rdf:resource="#MappingPolicy"/>
+        <rdfs:range rdf:resource="#Share"/>
+    </owl:ObjectProperty>
+    
+  <!--hasManager obejct property-->
+  <owl:ObjectProperty rdf:about="#hasManager">
+    <rdfs:domain rdf:resource="#Share"/>
+    <rdfs:range rdf:resource="#Manager"/>
+  </owl:ObjectProperty>
+
+  <!--hasUserDomain obejct property-->
+  <owl:ObjectProperty rdf:about="#hasUserDomain">
+    <rdfs:domain rdf:resource="#Share"/>
+    <rdfs:range rdf:resource="#UserDomain"/>
+  </owl:ObjectProperty>
+    
+  <!--hasService obejct property-->
+  <owl:ObjectProperty rdf:about="#hasService">
+    <rdfs:domain>
+        <owl:Class>
+            <owl:unionOf rdf:parseType="Collection">
+                <owl:Class rdf:about="#Share"/>
+                <owl:Class rdf:about="#AdminDomain"/>
+                <owl:Class rdf:about="#UserDomain"/>
+            </owl:unionOf>
+        </owl:Class>
+    </rdfs:domain>
+    <rdfs:range rdf:resource="#Service"/>
+  </owl:ObjectProperty>
+    
+    <owl:ObjectProperty rdf:about="#hasComputingService">
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <owl:Class rdf:about="#Share"/>
+                    <owl:Class rdf:about="#Service"/>
+                    <owl:Class rdf:about="#AdminDomain"/>
+                    <owl:Class rdf:about="#UserDomain"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <owl:Class rdf:about="#Resource"/>
+                    <owl:Class rdf:about="#ComputingService"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:range>
+    </owl:ObjectProperty>
+    
+    <owl:ObjectProperty rdf:about="#hasJobType">
+        <rdfs:domain rdf:resource="#ApplicationEnvironment"/>
+        <rdfs:range rdf:resource="#JobType"/>
+    </owl:ObjectProperty>
+
+  <!--hasResource obejct property-->
+  <owl:ObjectProperty rdf:about="#hasResource">
+      <rdfs:domain>
+          <owl:Class>
+              <owl:unionOf rdf:parseType="Collection">
+                  <owl:Class rdf:about="#Share"/>
+                  <owl:Class rdf:about="#Service"/>
+                  <owl:Class rdf:about="#AdminDomain"/>
+              </owl:unionOf>
+          </owl:Class>
+      </rdfs:domain>
+    <rdfs:range>
+      <owl:Class>
+          <owl:unionOf rdf:parseType="Collection">
+              <owl:Class rdf:about="#Resource"/>
+          </owl:unionOf>
+      </owl:Class>
+    </rdfs:range>
+  </owl:ObjectProperty>
+
+  <!--hasActivity obejct property-->
+  <owl:ObjectProperty rdf:about="#hasActivity">
+    <rdfs:domain rdf:resource="#Share"/>
+    <rdfs:range rdf:resource="#Activity"/>
+  </owl:ObjectProperty>
+    
+  <!--hasMappingTo obejct property-->
+  <owl:ObjectProperty rdf:about="#hasMappingTo">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >The policy statement for Grid VOs.</rdfs:comment>
+    <rdfs:domain rdf:resource="#UserDomain"/>
+    <rdfs:range>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+            <owl:Class rdf:about="#Resource"/>
+            <owl:Class rdf:about="#Service"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:range>
+  </owl:ObjectProperty>
+    
+  <!--hasAccessTo obejct property-->
+  <owl:ObjectProperty rdf:about="#hasAccessTo">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >The policy statement for Grid VOs.</rdfs:comment>
+    <rdfs:domain rdf:resource="#UserDomain"/>
+    <rdfs:range rdf:resource="#Endpoint"/>
+  </owl:ObjectProperty>
+    
+    <!--hasAccessPolicy obejct property-->
+ <owl:ObjectProperty rdf:about="#hasAccessPolicy">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >The policy statement for Grid VOs.</rdfs:comment>
+    <rdfs:domain rdf:resource="#UserDomain"/>
+    <rdfs:range rdf:resource="#AccessPolicy"/>
+  </owl:ObjectProperty>
+    
+  <owl:ObjectProperty rdf:about="&alliance;onHost"/>
+  <owl:ObjectProperty rdf:about="&alliance;maxWallClockTime"/>
+  <owl:ObjectProperty rdf:about="&alliance;dependency"/>
+  <owl:ObjectProperty rdf:about="&alliance;typeInfo"/>
+
+  <owl:ObjectProperty rdf:about="#needLib">
+    <rdfs:range rdf:resource="#Lib"/>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Grid application need libiary to run.</rdfs:comment>
+    <rdfs:domain rdf:resource="#ApplicationEnvironment"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#hasAppEnvironment">
+    <rdfs:domain rdf:resource="#ApplicationEnvironment"/>
+    <rdfs:range>
+          <owl:Class>
+              <owl:unionOf rdf:parseType="Collection">
+                  <owl:Class rdf:about="#Application"/>
+                  <owl:Class rdf:about="#Platform"/>
+              </owl:unionOf>
+          </owl:Class>
+      </rdfs:range>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >The type of Grid middleware for pre-installed application.</rdfs:comment>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#hasExeEnvironment">
+    <rdfs:domain>
+        <owl:Class>
+            <owl:unionOf rdf:parseType="Collection">
+                <owl:Class rdf:about="#ExecutionEnvironment"/>
+                <owl:Class rdf:about="#ApplicationEnvironment"/>
+            </owl:unionOf>
+        </owl:Class>
+    </rdfs:domain>
+    <rdfs:range>
+        <owl:Class>
+            <owl:unionOf rdf:parseType="Collection">
+                <owl:Class rdf:about="#NetworkService"/>
+                <owl:Class rdf:about="#OperatingSystem"/>
+            </owl:unionOf>
+        </owl:Class>
+    </rdfs:range>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >The type of Grid middleware for pre-installed application.</rdfs:comment>
+  </owl:ObjectProperty>
+    
+    <owl:ObjectProperty rdf:about="#hasStorageService">
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <owl:Class rdf:about="#ExecutionEnvironment"/>
+                    <owl:Class rdf:about="#ApplicationEnvironment"/>
+                    <owl:Class rdf:about="#Resource"/>
+                    <owl:Class rdf:about="#UserDomain"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range>
+            <owl:Class rdf:about="#StorageService"/>
+        </rdfs:range>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >The type of Grid middleware for pre-installed application.</rdfs:comment>
+    </owl:ObjectProperty>
+    
+  <owl:ObjectProperty rdf:about="&alliance;fileSystem"/>
+  <owl:ObjectProperty rdf:about="&alliance;networkAdapterType"/>
+  <owl:ObjectProperty rdf:about="&alliance;readOnly"/>
+  <owl:ObjectProperty rdf:about="&alliance;estimatedResponseTime"/>
+  <owl:ObjectProperty rdf:about="#hasID">
+    <rdfs:domain rdf:resource="#GridEntity"/>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >An unique identifier of a Grid entity.</rdfs:comment>
+    <rdfs:range rdf:resource="#URI"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="&alliance;hasVariable">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >Each ComputingElement should have several WorkNodes.</rdfs:comment>
+    <rdfs:domain>
+        <owl:Class rdf:about="#Application"/>
+    </rdfs:domain>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="#hasFileSet">
+        <rdfs:domain>
+            <owl:Class rdf:about="#Application"/>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="#StorageService"/>
+  </owl:ObjectProperty>
+    
+    <owl:ObjectProperty rdf:about="#hasMiddleware">
+        <rdfs:domain>
+            <owl:Class rdf:about="#ExecutionEnvironment"/>
+        </rdfs:domain>
+        <rdfs:range>
+            <owl:Class rdf:about="#Middleware"/>
+        </rdfs:range>
+    </owl:ObjectProperty>
+    
+  <owl:ObjectProperty rdf:about="#hasBase">
+        <rdfs:domain>
+            <owl:Class rdf:about="#Application"/>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="#DataResource"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#toStorageService">
+    <rdfs:domain rdf:resource="#ComputingService"/>
+    <rdfs:range rdf:resource="#StorageService"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#toComputingService">
+    <rdfs:domain rdf:resource="#StorageService"/>
+    <rdfs:range rdf:resource="#NetworkResource"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#toInclude">
+        <rdfs:domain>
+            <owl:Class rdf:about="#Application"/>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="#DataResource"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#toExclude">
+        <rdfs:domain>
+            <owl:Class rdf:about="#Application"/>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="#DataResource"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#isRecursive">
+        <rdfs:domain>
+            <owl:Class rdf:about="#Application"/>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="#DataResource"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#isIndirective">
+        <rdfs:domain>
+            <owl:Class rdf:about="#Application"/>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="#DataResource"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#hasChunk">
+        <rdfs:domain>
+            <owl:Class rdf:about="#Application"/>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="#DataResource"/>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="#toIncludeJSDL">
+    <rdfs:domain>
+        <owl:Class rdf:about="#Application"/>
+    </rdfs:domain>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >An unique identifier of a Grid entity.</rdfs:comment>
+    <rdfs:range>
+        <owl:Class>
+            <owl:unionOf rdf:parseType="Collection">
+                <owl:Class rdf:about="#ComputingActivity"/>
+                <owl:Class rdf:about="#StorageService"/>
+            </owl:unionOf>
+        </owl:Class>
+    </rdfs:range>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="#toBranch">
+    <rdfs:domain>
+        <owl:Class rdf:about="#Application"/>
+    </rdfs:domain>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >An unique identifier of a Grid entity.</rdfs:comment>
+    <rdfs:range>
+        <owl:Class>
+            <owl:unionOf rdf:parseType="Collection">
+                <owl:Class rdf:about="#ComputingActivity"/>
+                <owl:Class rdf:about="#StorageService"/>
+            </owl:unionOf>
+        </owl:Class>
+    </rdfs:range>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#toMerge">
+    <rdfs:domain>
+        <owl:Class rdf:about="#Application"/>
+    </rdfs:domain>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >An unique identifier of a Grid entity.</rdfs:comment>
+    <rdfs:range>
+        <owl:Class>
+            <owl:unionOf rdf:parseType="Collection">
+                <owl:Class rdf:about="#ComputingActivity"/>
+                <owl:Class rdf:about="#StorageService"/>
+            </owl:unionOf>
+        </owl:Class>
+    </rdfs:range>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#toSynchronize">
+    <rdfs:domain>
+        <owl:Class rdf:about="#Application"/>
+    </rdfs:domain>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >An unique identifier of a Grid entity.</rdfs:comment>
+    <rdfs:range>
+        <owl:Class>
+            <owl:unionOf rdf:parseType="Collection">
+                <owl:Class rdf:about="#ComputingActivity"/>
+                <owl:Class rdf:about="#StorageService"/>
+            </owl:unionOf>
+        </owl:Class>
+    </rdfs:range>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#toHold">
+    <rdfs:domain>
+        <owl:Class rdf:about="#Application"/>
+    </rdfs:domain>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >An unique identifier of a Grid entity.</rdfs:comment>
+    <rdfs:range>
+        <owl:Class>
+            <owl:unionOf rdf:parseType="Collection">
+                <owl:Class rdf:about="#ComputingActivity"/>
+                <owl:Class rdf:about="#StorageService"/>
+            </owl:unionOf>
+        </owl:Class>
+    </rdfs:range>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="&alliance;hasPlatform">
+      <rdfs:domain rdf:resource="#ApplicationEnvironment"/>
+      <rdfs:range rdf:resource="#Platform"/>
+      <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:ObjectProperty>        
+  <owl:ObjectProperty rdf:about="&alliance;policyType"/>
+  <owl:ObjectProperty rdf:about="&alliance;globalOwner"/>
+  <owl:ObjectProperty rdf:about="&alliance;priority"/>
+  <owl:ObjectProperty rdf:about="&alliance;maxTotalJobs">
+    <rdfs:domain rdf:resource="#ApplicationEnvironment"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="&alliance;storageDevice"/>
+  <owl:ObjectProperty rdf:about="#gridEntry">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >An entry for a user to a Grid system.</rdfs:comment>
+    <rdfs:range rdf:resource="#Endpoint"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="&alliance;maxJobs">
+    <rdfs:domain rdf:resource="#ApplicationEnvironment"/>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="&alliance;model"/>
+  <owl:ObjectProperty rdf:about="#hasRegistered">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >The users who registered to a VO or a Alliance.</rdfs:comment>
+    <rdfs:range>
+        <owl:Class>
+            <owl:unionOf rdf:parseType="Collection">
+                <owl:Class rdf:about="#ResourceRequester"/>
+                <owl:Class rdf:about="#AdminDomain"/>
+            </owl:unionOf>
+        </owl:Class>
+    </rdfs:range>
+    <rdfs:domain>
+        <owl:Class>
+            <owl:unionOf rdf:parseType="Collection">
+                <owl:Class rdf:about="#VO"/>
+                <owl:Class rdf:about="#Alliance"/>
+            </owl:unionOf>
+        </owl:Class>
+    </rdfs:domain>
+  </owl:ObjectProperty>
+  <owl:ObjectProperty rdf:about="#descriptor">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >The description of a Grid service. Here means a file in Web Service Description Language.</rdfs:comment>
+    <rdfs:range rdf:resource="#WSDL"/>
+    <rdfs:domain rdf:resource="#Service"/>
+  </owl:ObjectProperty>
+    
+    <owl:ObjectProperty rdf:about="#hasStagingSource">
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >The source to stage in application parameters.</rdfs:comment>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:domain>
+            <owl:Class rdf:about="#Application"/>
+        </rdfs:domain>
+    </owl:ObjectProperty>
+    <owl:ObjectProperty rdf:about="#hasStagingTarget">
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >The target to stage out running results.</rdfs:comment>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:domain>
+            <owl:Class rdf:about="#Application"/>
+        </rdfs:domain>
+    </owl:ObjectProperty>
+    <owl:ObjectProperty rdf:about="#hasJobTimeout">
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >The target to stage out running results.</rdfs:comment>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:domain>
+            <owl:Class rdf:about="#Application"/>
+        </rdfs:domain>
+    </owl:ObjectProperty>
+    <owl:ObjectProperty rdf:about="#hasWorkflowTimeout">
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >The target to stage out running results.</rdfs:comment>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:domain>
+            <owl:Class rdf:about="#Application"/>
+        </rdfs:domain>
+    </owl:ObjectProperty>
+    
+    <owl:ObjectProperty rdf:about="#hasInstanceModel">
+        <rdfs:range rdf:resource="#InstanceModel"/>
+        <rdfs:domain>
+            <owl:Class rdf:about="#ComputingService"/>
+        </rdfs:domain>
+    </owl:ObjectProperty>
+    
+    <owl:ObjectProperty rdf:about="#hasOSFamily">
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <owl:Class rdf:about="#ComputingActivity"/>
+                    <owl:Class rdf:about="#ExecutionEnvironment"/>
+                    <owl:Class rdf:about="#Software"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="#OperatingSystem"/>
+    </owl:ObjectProperty>
+    
+    <owl:ObjectProperty rdf:about="#hasOperationSystemType">
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <owl:Class rdf:about="#ComputingActivity"/>
+                    <owl:Class rdf:about="#ExecutionEnvironment"/>
+                    <owl:Class rdf:about="#Software"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="#OperatingSystem"/>
+        <owl:equivalentProperty rdf:resource="#hasOSFamily"/>
+    </owl:ObjectProperty>
+    
+    <owl:ObjectProperty rdf:about="#hasOSName">
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <owl:Class rdf:about="#ComputingActivity"/>
+                    <owl:Class rdf:about="#ExecutionEnvironment"/>
+                    <owl:Class rdf:about="#Software"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="#OperatingSystem"/>
+    </owl:ObjectProperty>
+    
+    <owl:ObjectProperty rdf:about="#hasOperatingSystemName">
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <owl:Class rdf:about="#ComputingActivity"/>
+                    <owl:Class rdf:about="#ExecutionEnvironment"/>
+                    <owl:Class rdf:about="#Software"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="#OperatingSystem"/>
+        <owl:equivalentProperty rdf:resource="#hasOSName"/>
+    </owl:ObjectProperty>
+    
+    <owl:ObjectProperty rdf:about="#hasOperatingSystem">
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <owl:Class rdf:about="#ComputingActivity"/>
+                    <owl:Class rdf:about="#ExecutionEnvironment"/>
+                    <owl:Class rdf:about="#Software"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="#OperatingSystem"/>
+        <owl:equivalentProperty rdf:resource="#hasOSName"/>
+        <owl:equivalentProperty rdf:resource="#hasOperatingSystemName"/>
+    </owl:ObjectProperty>
+    
+    <owl:ObjectProperty rdf:about="#hasInstalledSoftware">
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <owl:Class rdf:about="#Alliance"/>
+                    <owl:Class rdf:about="#AdminDomain"/>
+                    <owl:Class rdf:about="#VO"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <owl:Class rdf:about="#Application"/>
+                    <owl:Class rdf:about="#Middleware"/>
+                    <owl:Class rdf:about="#GridSupportService"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:range>
+    </owl:ObjectProperty>
+    
+    <!--Owner-->
+    <owl:ObjectProperty rdf:about="&alliance;hasOwner">
+        <rdfs:domain rdf:resource="#AdminDomain"/>
+        <rdfs:range rdf:resource="#Owner"/>
+    </owl:ObjectProperty>
+    
+    <!--User Manager-->
+    <owl:ObjectProperty rdf:about="&alliance;hasUserManager">
+        <rdfs:domain rdf:resource="#UserDomain"/>
+        <rdfs:range rdf:resource="#UserManager"/>
+    </owl:ObjectProperty>
+    
+    
+    <!--
+     ///////////////////////////////////////////////////////////////////////////////////////
+     //
+     // Datatype Properties
+     //
+     ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+    
+  <owl:DatatypeProperty rdf:about="#cpuClockSpeed">
+    <rdfs:domain rdf:resource="#CPU"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+    <owl:equivalentProperty rdf:resource="#individualCpuSpeed"/>
+  </owl:DatatypeProperty>
+    
+    <owl:DatatypeProperty rdf:about="#memberLevel">
+        <rdfs:domain rdf:resource="#Member"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    </owl:DatatypeProperty>
+    
+    <owl:DatatypeProperty rdf:about="#serviceLevel">
+        <rdfs:domain rdf:resource="#Service"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    </owl:DatatypeProperty>
+    
+    <owl:DatatypeProperty rdf:about="#virtualMachine">
+        <rdfs:domain rdf:resource="#ExecutionEnvironment"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#boolean"/>
+    </owl:DatatypeProperty>
+    
+    <owl:DatatypeProperty rdf:about="#url">
+        <rdfs:domain rdf:resource="#Endpoint"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+    <owl:DatatypeProperty rdf:about="#paymentMethod">
+        <rdfs:domain rdf:resource="#Service"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+    <owl:DatatypeProperty rdf:about="#measurement">
+        <rdfs:domain rdf:resource="#ExecutionEnvironment"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+    <owl:DatatypeProperty rdf:about="#individualCpuSpeed">
+        <rdfs:domain rdf:resource="#CPU"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+        <owl:equivalentProperty rdf:resource="#cpuClockSpeed"/>
+    </owl:DatatypeProperty>
+    
+    <owl:DatatypeProperty rdf:about="#clockSpeed">
+        <rdfs:domain rdf:resource="#CPU"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#decimal"/>
+        <owl:equivalentProperty rdf:resource="#individualCpuSpeed"/>
+    </owl:DatatypeProperty>
+    
+    <owl:DatatypeProperty rdf:about="#individualNetworkBandwidth">
+        <rdfs:domain rdf:resource="#NetworkService"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+        <owl:equivalentProperty rdf:resource="#networkPerformance"/>
+    </owl:DatatypeProperty>
+    
+    <owl:DatatypeProperty rdf:about="#freeSize">
+        <rdfs:domain rdf:resource="#DataStore"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+        <owl:equivalentProperty rdf:resource="#totalDiskSpace"/>
+    </owl:DatatypeProperty>
+    
+    <owl:DatatypeProperty rdf:about="#totalDiskSpace">
+        <rdfs:domain rdf:resource="#DataStore"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+        <owl:equivalentProperty rdf:resource="#FreeSize"/>
+    </owl:DatatypeProperty>
+    
+    <owl:DatatypeProperty rdf:about="#mainMemorySize">
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <owl:Class rdf:about="#ExecutionEnvironment"/>
+                    <owl:Class rdf:about="#ApplicationEnvironment"/>
+                    <owl:Class rdf:about="#MappingPolicy"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+        <owl:equivalentProperty rdf:resource="#totalPhysicalMemory"/>
+    </owl:DatatypeProperty>
+    
+    <owl:DatatypeProperty rdf:about="#totalPhysicalMemory">
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <owl:Class rdf:about="#ExecutionEnvironment"/>
+                    <owl:Class rdf:about="#ApplicationEnvironment"/>
+                    <owl:Class rdf:about="#MappingPolicy"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+        <owl:equivalentProperty rdf:resource="#mainMemorySize"/>
+    </owl:DatatypeProperty>
+    
+    <owl:DatatypeProperty rdf:about="#totalInstance">
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <owl:Class rdf:about="#ExecutionEnvironment"/>
+                    <owl:Class rdf:about="#MappingPolicy"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+        <owl:equivalentProperty rdf:resource="#totalResourceCount"/>
+    </owl:DatatypeProperty>
+    
+    <owl:DatatypeProperty rdf:about="#totalInstance">
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <owl:Class rdf:about="#ExecutionEnvironment"/>
+                    <owl:Class rdf:about="#MappingPolicy"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+        <owl:equivalentProperty rdf:resource="#totalResourceCount"/>
+    </owl:DatatypeProperty>
+    
+    <owl:DatatypeProperty rdf:about="#availableInstance">
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <owl:Class rdf:about="#ExecutionEnvironment"/>
+                    <owl:Class rdf:about="#MappingPolicy"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    </owl:DatatypeProperty>
+    
+    <owl:DatatypeProperty rdf:about="#virtualMemorySize">
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <owl:Class rdf:about="#ExecutionEnvironment"/>
+                    <owl:Class rdf:about="#ApplicationEnvironment"/>
+                    <owl:Class rdf:about="#MappingPolicy"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+        <owl:equivalentProperty rdf:resource="#totalVirtualMemory"/>
+    </owl:DatatypeProperty>
+    
+    <owl:DatatypeProperty rdf:about="#totalVirtualMemory">
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <owl:Class rdf:about="#ExecutionEnvironment"/>
+                    <owl:Class rdf:about="#ApplicationEnvironment"/>
+                    <owl:Class rdf:about="#MappingPolicy"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+        <owl:equivalentProperty rdf:resource="#virtualMemorySize"/>
+    </owl:DatatypeProperty>
+    
+    <owl:DatatypeProperty rdf:about="#networkPerformance">
+        <rdfs:domain rdf:resource="#NetworkService"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+        <owl:equivalentProperty rdf:resource="#individualNetworkBandwidth"/>
+    </owl:DatatypeProperty>
+    
+  <owl:DatatypeProperty rdf:about="&alliance;availableNum">
+    <rdfs:domain>
+      <owl:Class>
+        <owl:unionOf rdf:parseType="Collection">
+          <owl:Class rdf:about="#CPU"/>
+          <owl:Class rdf:about="#StorageService"/>
+        </owl:unionOf>
+      </owl:Class>
+    </rdfs:domain>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  </owl:DatatypeProperty>
+    
+    <owl:DatatypeProperty rdf:about="&alliance;physicalCpus">
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <owl:Class rdf:about="#ExecutionEnvironment"/>
+                    <owl:Class rdf:about="#ApplicationEnvironment"/>
+                    <owl:Class rdf:about="#MappingPolicy"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+        <owl:equivalentProperty rdf:resource="#totalCPUCount"/>
+    </owl:DatatypeProperty>
+    
+    <owl:DatatypeProperty rdf:about="&alliance;logicalCpus">
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <owl:Class rdf:about="#ExecutionEnvironment"/>
+                    <owl:Class rdf:about="#ApplicationEnvironment"/>
+                    <owl:Class rdf:about="#MappingPolicy"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    </owl:DatatypeProperty>
+    
+    <owl:DatatypeProperty rdf:about="&alliance;individualCpuTime">
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <owl:Class rdf:about="#ExecutionEnvironment"/>
+                    <owl:Class rdf:about="#ApplicationEnvironment"/>
+                    <owl:Class rdf:about="#MappingPolicy"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+    </owl:DatatypeProperty>
+    
+    <owl:DatatypeProperty rdf:about="&alliance;minCpuTime">
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <owl:Class rdf:about="#ExecutionEnvironment"/>
+                    <owl:Class rdf:about="#ApplicationEnvironment"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+    </owl:DatatypeProperty>
+    
+    <owl:DatatypeProperty rdf:about="&alliance;cpuTime">
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <owl:Class rdf:about="#ExecutionEnvironment"/>
+                    <owl:Class rdf:about="#Member"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+    </owl:DatatypeProperty>
+    
+    <owl:DatatypeProperty rdf:about="&alliance;maxCpuTime">
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <owl:Class rdf:about="#ExecutionEnvironment"/>
+                    <owl:Class rdf:about="#Application"/>
+                    <owl:Class rdf:about="#UserDomain"/>
+                    <owl:Class rdf:about="#Member"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+    </owl:DatatypeProperty>
+    
+    <owl:DatatypeProperty rdf:about="&alliance;maxTotalCpuTime">
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <owl:Class rdf:about="#ExecutionEnvironment"/>
+                    <owl:Class rdf:about="#Application"/>
+                    <owl:Class rdf:about="#UserDomain"/>
+                    <owl:Class rdf:about="#Member"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+    </owl:DatatypeProperty>
+    
+    <owl:DatatypeProperty rdf:about="&alliance;maxCost">
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <owl:Class rdf:about="#ExecutionEnvironment"/>
+                    <owl:Class rdf:about="#Application"/>
+                    <owl:Class rdf:about="#Member"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+    </owl:DatatypeProperty>
+    
+    <owl:DatatypeProperty rdf:about="&alliance;minCost">
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <owl:Class rdf:about="#ExecutionEnvironment"/>
+                    <owl:Class rdf:about="#Application"/>
+                    <owl:Class rdf:about="#Member"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+    </owl:DatatypeProperty>
+    
+    <owl:DatatypeProperty rdf:about="&alliance;virtualMemorySize">
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <owl:Class rdf:about="#ExecutionEnvironment"/>
+                    <owl:Class rdf:about="#ApplicationEnvironment"/>
+                    <owl:Class rdf:about="#MappingPolicy"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+        <owl:equivalentProperty rdf:resource="#individualVirtualMemory"/>
+    </owl:DatatypeProperty>
+    
+    <owl:DatatypeProperty rdf:about="&alliance;individualVirtualMemory">
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <owl:Class rdf:about="#ExecutionEnvironment"/>
+                    <owl:Class rdf:about="#ApplicationEnvironment"/>
+                    <owl:Class rdf:about="#MappingPolicy"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+        <owl:equivalentProperty rdf:resource="#virtualMemorySize"/>
+    </owl:DatatypeProperty>
+    
+    <owl:DatatypeProperty rdf:about="&alliance;mem">
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <owl:Class rdf:about="#ExecutionEnvironment"/>
+                    <owl:Class rdf:about="#ApplicationEnvironment"/>
+                    <owl:Class rdf:about="#MappingPolicy"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+        <owl:equivalentProperty rdf:resource="#virtualMemorySize"/>
+    </owl:DatatypeProperty>
+    
+  <owl:DatatypeProperty rdf:about="&alliance;hasFreeCpus">
+    <rdfs:domain rdf:resource="#CPU"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="&alliance;hasFilenameFormat">
+    <rdfs:domain rdf:resource="#DataResource"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="&alliance;hasKbytesChunk">
+    <rdfs:domain rdf:resource="#DataResource"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="&alliance;hasFileChunk">
+    <rdfs:domain rdf:resource="#DataResource"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#FunctionalProperty"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="#releaseVersion">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >The realeased version of a Grid middleware.</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#Middleware"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="#applicationVersion">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >The version of a Grid application.</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain>
+        <owl:Class rdf:about="#Application"/>
+    </rdfs:domain>
+  </owl:DatatypeProperty>
+    
+    <owl:DatatypeProperty rdf:about="#OSVersion">
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >The version of a Grid application.</rdfs:comment>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:domain>
+            <owl:Class rdf:about="#OperatingSystem"/>
+        </rdfs:domain>
+        <owl:equivalentProperty rdf:resource="#OperationSystemVersion"/>
+    </owl:DatatypeProperty>
+    
+    <owl:DatatypeProperty rdf:about="#OperationSystemVersion">
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >The version of a Grid application.</rdfs:comment>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:domain>
+            <owl:Class rdf:about="#OperatingSystem"/>
+        </rdfs:domain>
+        <owl:equivalentProperty rdf:resource="#OSVersion"/>
+    </owl:DatatypeProperty>
+    
+  <owl:DatatypeProperty rdf:about="#appVersion">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >The version of a Grid application.</rdfs:comment>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <owl:equivalentProperty rdf:resource="#applicationVersion"/>
+    <rdfs:domain>
+        <owl:Class rdf:about="#Application"/>
+    </rdfs:domain>
+  </owl:DatatypeProperty>
+    
+    <owl:DatatypeProperty rdf:about="#version">
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >The version of a Grid application.</rdfs:comment>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <owl:equivalentProperty rdf:resource="#applicationVersion"/>
+        <rdfs:domain>
+            <owl:Class rdf:about="#Application"/>
+        </rdfs:domain>
+    </owl:DatatypeProperty>
+  
+  <owl:DatatypeProperty rdf:about="&alliance;runningJobs">
+    <rdfs:domain rdf:resource="#ApplicationEnvironment"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="#hasModel">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+
+  <owl:DatatypeProperty rdf:about="#status">
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >The state of a Grid service.</rdfs:comment>
+    <rdfs:domain rdf:resource="#Service"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="&alliance;waitingJobs">
+    <rdfs:domain rdf:resource="#ApplicationEnvironment"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="&alliance;totalJobs">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:domain rdf:resource="#ApplicationEnvironment"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="&alliance;worstResponseTime">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="#hasVendor">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="&alliance;location">
+    <rdfs:domain rdf:resource="#Domain"/>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >Geographical location</rdfs:comment>
+  </owl:DatatypeProperty>
+  <owl:DatatypeProperty rdf:about="#hasName">
+    <rdfs:domain>
+      <owl:Class rdf:about="#GridEntity"/>
+    </rdfs:domain>
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >A hunman-readable name of a Grid entity</rdfs:comment>
+  </owl:DatatypeProperty>
+    
+    <owl:DatatypeProperty rdf:about="#requestedTotalWallTime">
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <owl:Class rdf:about="#ExecutionEnvironment"/>
+                    <owl:Class rdf:about="#ApplicationEnvironment"/>
+                    <owl:Class rdf:about="#MappingPolicy"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+        <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >A hunman-readable name of a Grid entity</rdfs:comment>
+    </owl:DatatypeProperty>
+    
+    <owl:DatatypeProperty rdf:about="#requestedTotalCPUTime">
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <owl:Class rdf:about="#ExecutionEnvironment"/>
+                    <owl:Class rdf:about="#ApplicationEnvironment"/>
+                    <owl:Class rdf:about="#MappingPolicy"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+    </owl:DatatypeProperty>
+    
+    <owl:DatatypeProperty rdf:about="#requestedSlots">
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <owl:Class rdf:about="#ExecutionEnvironment"/>
+                    <owl:Class rdf:about="#ApplicationEnvironment"/>
+                    <owl:Class rdf:about="#MappingPolicy"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    </owl:DatatypeProperty>
+
+    <owl:DatatypeProperty rdf:about="#requestedMemory">
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <owl:Class rdf:about="#ExecutionEnvironment"/>
+                    <owl:Class rdf:about="#ApplicationEnvironment"/>
+                    <owl:Class rdf:about="#MappingPolicy"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    </owl:DatatypeProperty>
+    
+    <owl:DatatypeProperty rdf:about="#charge">
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <owl:Class rdf:about="#ExecutionEnvironment"/>
+                    <owl:Class rdf:about="#ApplicationEnvironment"/>
+                    <owl:Class rdf:about="#Service"/>
+                    <owl:Class rdf:about="#Resource"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+    </owl:DatatypeProperty>
+    
+    <owl:DatatypeProperty rdf:about="&alliance;balance">
+        <rdfs:domain>
+            <owl:Class>
+                <owl:unionOf rdf:parseType="Collection">
+                    <owl:Class rdf:about="#UserDomain"/>
+                    <owl:Class rdf:about="#Service"/>
+                    <owl:Class rdf:about="#Resource"/>
+                </owl:unionOf>
+            </owl:Class>
+        </rdfs:domain>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#double"/>
+    </owl:DatatypeProperty>
+    
+    <owl:DatatypeProperty rdf:about="&alliance;cpuCredits">
+        <rdfs:domain rdf:resource="#Resource"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+    </owl:DatatypeProperty>
+
+    
+    
+</rdf:RDF>
+
+<!-- Created with Protege (with OWL Plugin 3.4.4, Build 579)  http://protege.stanford.edu -->

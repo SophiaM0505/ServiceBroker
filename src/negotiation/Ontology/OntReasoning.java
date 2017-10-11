@@ -1502,8 +1502,12 @@ public class OntReasoning {
 						if(requiredCpuN<=aCpuNo){
 							//System.out.println("++++++++++++++++++++ coallo is " + coallo); 
 							if(!coallo){
+<<<<<<< HEAD
 								//System.out.println("*************I am here 1");
 								Service service = new Service();
+=======
+								/*Service service = new Service();
+>>>>>>> 1dda55c7c8d031b83e0e540be268c3d465d92e1a
 						    	service.setProvider(provider);
 						    	//service.setService_name(workerN);
 						    	service.setCpuNo(aCpuNo);
@@ -1540,9 +1544,15 @@ public class OntReasoning {
 									offer.setNefold(0);
 									offer.setNumjobs(0);
 									
+<<<<<<< HEAD
 									NegHibConnect.hibOffer(offer);
 									String offer_contents = "=" + endpoint + ";^";
 								/*String offer_contents = ": Provider: "+ provider + ", instance: " +
+=======
+									NegHibConnect.hibOffer(offer);*/
+									//String offer_contents = "=" + endpoint + "|";
+								String offer_contents = ": Provider: "+ provider + ", instance: " +
+>>>>>>> 1dda55c7c8d031b83e0e540be268c3d465d92e1a
 			    		        		workerN + ", CPU Number: " +
 									aCpuNo + ", required CPU Number: " +
 									requiredCpuN +  ", Mem: " + mem + ", unit cost: "+ charge + ", type: Cloud^";*/
@@ -1556,7 +1566,7 @@ public class OntReasoning {
 								//coallo_done = true;
 								//System.out.println("*************I am here 2");
 								if(!workerN.equalsIgnoreCase(contracted_node)){
-								    Service service = new Service();
+								    /*Service service = new Service();
 						    	    service.setProvider(provider);
 						    	    //service.setService_name(workerN);
 						    	    service.setCpuNo(aCpuNo);
@@ -1593,7 +1603,7 @@ public class OntReasoning {
 									offer.setNefold(0);
 									offer.setNumjobs(0);
 									
-									NegHibConnect.hibOffer(offer);
+									NegHibConnect.hibOffer(offer);*/
 									
 								    /*String temp_offer_contents = "instance: " +
 			    		        		workerN + ", CPU Number: " +
@@ -1604,14 +1614,19 @@ public class OntReasoning {
 								    //offer.setSub(temp_offers_comb);
 								
 								    Random rand_comb_offer = new Random();
+<<<<<<< HEAD
 								    long comb_offer_id = 100000 + rand_comb_offer.nextInt(900000);
 						   	        //long comb_offer_id = rand_comb_offer.nextInt(10000 + 1);
 								    Offer comb_offer = new Offer();
+=======
+						   	        long comb_offer_id = rand_comb_offer.nextInt(10000 + 1);
+								    /*Offer comb_offer = new Offer();
+>>>>>>> 1dda55c7c8d031b83e0e540be268c3d465d92e1a
 								    comb_offer.setId(comb_offer_id);
 								    comb_offer.setSub(temp_offers_comb);
 								    comb_offer.setStatus(NegState.initiating.toString());
 								    comb_offer.setMaxDuration(max_duration);
-								    NegHibConnect.hibOffer(comb_offer);
+								    NegHibConnect.hibOffer(comb_offer);*/
 								    offers = comb_offer_id + "=" + temp_offers + offers;
 								    //offers = comb_offer_id + "- Provider: "+ provider + ", " + temp_offers + temp_offer_contents;
 								    requiredCpuN = requiredTotalCpuN;
@@ -1640,7 +1655,7 @@ public class OntReasoning {
 						else{
 							//System.out.println("*************I am here 3");
 							if(!workerN.equalsIgnoreCase(contracted_node)){
-								Service service = new Service();
+								/*Service service = new Service();
 						    	service.setProvider(provider);
 						    	//service.setService_name(workerN);
 						    	service.setCpuNo(aCpuNo);
@@ -1677,7 +1692,7 @@ public class OntReasoning {
 									offer.setNefold(0);
 									offer.setNumjobs(0);
 									
-									NegHibConnect.hibOffer(offer);
+									NegHibConnect.hibOffer(offer);*/
 									
 									String temp_offer_contents = endpoint + ";";
 							/*String temp_offer_contents = "instance: " +
@@ -3004,6 +3019,7 @@ public static String getOffersFromOtherShares(String name, String group, String 
 		return result;
 	}
 	//main methord
+<<<<<<< HEAD
 	/*public static void main(String[] args) throws OWLOntologyCreationException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, OWLOntologyStorageException, InterruptedException, IOException {
 		System.out.println(accessCheck("Sofia", "ManGroup", "CompSteering", "ClusterShare", 0, 0));
 		String offers = clusterSearch("Sofia", "ManGroup", "CompSteering", "ClusterShare", "super", 1, 1, "20170215");
@@ -3013,6 +3029,17 @@ public static String getOffersFromOtherShares(String name, String group, String 
 		//String offers = resourceSearch("Sofia", "ManGroup", "WaterSteering", "CloudShare", "asap", 1, 0);
 		System.out.println(offers);
 	}*/
+=======
+	public static void main(String[] args) throws OWLOntologyCreationException, InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException, OWLOntologyStorageException, InterruptedException, IOException {
+		//System.out.println(accessCheck("Sofia", "ManGroup", "CompSteering", "MaxShare", 0, 0));
+		//String offers = clusterSearch("Sofia", "ManGroup", "CompSteering", "MaxShare", "super", 1, 1, "20170215");
+		System.out.println(accessCheck("Sofia", "ManGroup", "WaterSteering", "CloudShare", 2, 0));
+		
+		//resourceSearch(String name, String grp, String app, String shareN, String pay_method, int core, long con_id)
+		String offers = resourceSearch("Sofia", "ManGroup", "WaterSteering", "CloudShare", "asap", 2, 0);
+		System.out.println(offers);
+	}
+>>>>>>> 1dda55c7c8d031b83e0e540be268c3d465d92e1a
 		//System.out.println(accessCheck("Sofia", "ManGroup", "ResvApp", "ResvShare", 0, 0));
 	    //String offers = resourceSearch("Sofia", "ManGroup", "ResvApp", "ResvShare", true);
 		/*int i;
