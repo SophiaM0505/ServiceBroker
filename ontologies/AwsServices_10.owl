@@ -1,0 +1,616 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE rdf:RDF [
+<!ENTITY owl "http://www.w3.org/2002/07/owl#" >
+<!ENTITY owl11 "http://www.w3.org/2006/12/owl11#" >
+<!ENTITY xsd "http://www.w3.org/2001/XMLSchema#" >
+<!ENTITY owl11xml "http://www.w3.org/2006/12/owl11-xml#" >
+<!ENTITY rdfs "http://www.w3.org/2000/01/rdf-schema#" >
+<!ENTITY rdf "http://www.w3.org/1999/02/22-rdf-syntax-ns#" >
+<!ENTITY CR-owl-guide-20030818 "http://www.w3.org/TR/2003/CR-owl-guide-20030818/" >
+<!ENTITY alliance "http://www.owl-ontologies.com/alliance#" >
+]>
+
+
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:protege="http://protege.stanford.edu/plugins/owl/protege#"
+    xmlns:xsp="http://www.owl-ontologies.com/2005/08/07/xsp.owl#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:owl2xml="http://www.w3.org/2006/12/owl2-xml#"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:swrl="http://www.w3.org/2003/11/swrl#"
+    xmlns:swrlb="http://www.w3.org/2003/11/swrlb#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns="http://www.owl-ontologies.com/alliance#"
+    xmlns:ontBase="file:///Users/zeqianmeng/Desktop/ontology/ontBase#"
+    xml:base="http://www.owl-ontologies.com/alliance">
+    <owl:Ontology rdf:about="file:///Users/zeqianmeng/Desktop/ontology/AwsServices">
+        <owl:imports rdf:resource="file:///Users/zeqianmeng/Desktop/ontology/ontBase.owl"/>
+    </owl:Ontology>
+    
+   
+    <!--
+     ///////////////////////////////////////////////////////////////////////////////////////
+     //
+     // RealityGrid Share
+     //
+     ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+    
+  <owl:NamedIndividual rdf:about="&alliance;AwsServices">
+    <rdf:type rdf:resource="#Service"/>
+      
+    <hasAdminDomain>
+        <owl:NamedIndividual rdf:about="&alliance;AWS">
+            <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+            <rdf:type rdf:resource="#Amazon"/>
+        </owl:NamedIndividual>
+    </hasAdminDomain>
+      
+    <hasComputingService>
+      <owl:NamedIndividual rdf:about="&alliance;ce202.awsec2.service">
+              <rdf:type rdf:resource="#Service"/>
+          <paymentMethod rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dynamic</paymentMethod>
+          
+              <hasExeEnvironment>
+                  <owl:NamedIndividual rdf:about="&alliance;awsec2.t2.medium">
+                      <rdf:type rdf:resource="#ExecutionEnvironment"/>
+                      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                      <hasOSFamily>
+                          <owl:NamedIndividual rdf:about="&alliance;Amazon_Linux">
+                              <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                              <rdf:type rdf:resource="#Linux"/>
+                              <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                                  >A linux OS.</rdfs:comment>
+                          </owl:NamedIndividual>
+                      </hasOSFamily>
+                      <hasID>
+                          <owl:NamedIndividual rdf:about="&alliance;IP_WN109_AWSEC2">
+                              <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                              <rdf:type rdf:resource="#IP"/>
+                              <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">194.42.17.255</hasName>
+                          </owl:NamedIndividual>
+                      </hasID>
+                      <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">awsec2.t2.medium</hasName>
+                      <hasResource>
+                          <owl:NamedIndividual rdf:about="&alliance;ce202.awsec2.resource">
+                              <rdf:type rdf:resource="#Resource"/>
+                              <hasCPUModel>
+                                  <owl:NamedIndividual rdf:about="&alliance;Intel_Xeon">
+                                  <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                                  <rdf:type rdf:resource="#CPU"/>
+                                  </owl:NamedIndividual>
+                              </hasCPUModel>
+                              <clockSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">3.3</clockSpeed>
+                          </owl:NamedIndividual>
+                      </hasResource>
+                      <virtualMemorySize rdf:datatype="http://www.w3.org/2001/XMLSchema#double">1</virtualMemorySize>
+                      <physicalCpus rdf:datatype="http://www.w3.org/2001/XMLSchema#int">2</physicalCpus>
+                      <charge rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.052</charge>
+                         
+                      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                      <hasEndpoint>
+                          <owl:NamedIndividual rdf:about="&alliance;AWS_t2m_endpoint">
+                              <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                              <rdf:type rdf:resource="#Endpoint"/>
+                              <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                                  >AWS Endpoint</hasName>
+                              <url rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://ec2-52-31-37-191.eu-west-1.compute.amazonaws.com:8080/steering/attach</url>
+                          </owl:NamedIndividual>
+                      </hasEndpoint>
+               </owl:NamedIndividual>
+             </hasExeEnvironment>
+        </owl:NamedIndividual>
+      </hasComputingService>
+     
+      <hasComputingService>
+          <owl:NamedIndividual rdf:about="&alliance;ce203.amazon.alliance">
+              <rdf:type rdf:resource="#Service"/>
+              <paymentMethod rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dynamic</paymentMethod>
+
+              <hasExeEnvironment>
+                  <owl:NamedIndividual rdf:about="&alliance;awsec2.t2.large">
+                      <rdf:type rdf:resource="#ExecutionEnvironment"/>
+                      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                      <hasOSFamily>
+                          <owl:NamedIndividual rdf:about="&alliance;Amazon_Linux">
+                              <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                              <rdf:type rdf:resource="#Linux"/>
+                              <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                                  >A linux OS.</rdfs:comment>
+                          </owl:NamedIndividual>
+                      </hasOSFamily>
+                
+                      <hasID>
+                          <owl:NamedIndividual rdf:about="&alliance;IP_WN110_AWSEC2">
+                              <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                              <rdf:type rdf:resource="#IP"/>
+                              <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">194.42.17.244</hasName>
+                          </owl:NamedIndividual>
+                      </hasID>
+                      <!--<hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">wn108.awsec2.alliance1</hasName>-->
+                      <hasResource>
+                          <owl:NamedIndividual rdf:about="&alliance;ce203.awsec2.resource">
+                              <rdf:type rdf:resource="#Resource"/>
+                              <hasCPUModel>
+                                  <owl:NamedIndividual rdf:about="&alliance;Intel_Xeon">
+                                      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                                      <rdf:type rdf:resource="#CPU"/>
+                                  </owl:NamedIndividual>
+                              </hasCPUModel>
+                              <clockSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">3.3</clockSpeed>
+                          </owl:NamedIndividual>
+                      </hasResource>
+                      <physicalCpus rdf:datatype="http://www.w3.org/2001/XMLSchema#int">2</physicalCpus>
+                      <virtualMemorySize rdf:datatype="http://www.w3.org/2001/XMLSchema#double">8</virtualMemorySize>
+                      <charge rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.104</charge>
+                      <hasEndpoint>
+                          <owl:NamedIndividual rdf:about="&alliance;AWS_t2l_endpoint">
+                              <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                              <rdf:type rdf:resource="#Endpoint"/>
+                              <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                                  >AWS Endpoint</hasName>
+                              <url rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://ec2-52-31-37-191.eu-west-1.compute.amazonaws.com:8080/steering/attach</url>
+                          </owl:NamedIndividual>
+                      </hasEndpoint>
+                  </owl:NamedIndividual>
+              </hasExeEnvironment>
+        </owl:NamedIndividual>
+      </hasComputingService>
+      
+      <hasComputingService>
+          <owl:NamedIndividual rdf:about="&alliance;ce204.amazon.alliance">
+              <rdf:type rdf:resource="#Service"/>
+              <paymentMethod rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dynamic</paymentMethod>
+              
+              <hasExeEnvironment>
+                  <owl:NamedIndividual rdf:about="&alliance;awsec2.m4.large">
+                      <rdf:type rdf:resource="#ExecutionEnvironment"/>
+                      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                      <hasOSFamily>
+                          <owl:NamedIndividual rdf:about="&alliance;Amazon_Linux">
+                              <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                              <rdf:type rdf:resource="#Linux"/>
+                              <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                                  >A linux OS.</rdfs:comment>
+                          </owl:NamedIndividual>
+                      </hasOSFamily>
+                      
+                      <hasID>
+                          <owl:NamedIndividual rdf:about="&alliance;IP_WN111_AWSEC2">
+                              <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                              <rdf:type rdf:resource="#IP"/>
+                              <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">194.42.17.257</hasName>
+                          </owl:NamedIndividual>
+                      </hasID>
+                      <!--<hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">wn108.awsec2.alliance1</hasName>-->
+                      <hasResource>
+                          <owl:NamedIndividual rdf:about="&alliance;ce204.awsec2.resource">
+                              <rdf:type rdf:resource="#Resource"/>
+                              <hasCPUModel>
+                                  <owl:NamedIndividual rdf:about="&alliance;Intel_Xeon">
+                                      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                                      <rdf:type rdf:resource="#CPU"/>
+                                  </owl:NamedIndividual>
+                              </hasCPUModel>
+                              <clockSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">2.4</clockSpeed>
+                          </owl:NamedIndividual>
+                      </hasResource>
+                      <physicalCpus rdf:datatype="http://www.w3.org/2001/XMLSchema#int">2</physicalCpus>
+                      <virtualMemorySize rdf:datatype="http://www.w3.org/2001/XMLSchema#double">8</virtualMemorySize>
+                      <charge rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.12</charge>
+                      <hasEndpoint>
+                          <owl:NamedIndividual rdf:about="&alliance;AWS_m4l_endpoint">
+                              <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                              <rdf:type rdf:resource="#Endpoint"/>
+                              <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                                  >AWS Endpoint</hasName>
+                              <url rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://ec2-52-31-37-191.eu-west-1.compute.amazonaws.com:8080/steering/attach</url>
+                          </owl:NamedIndividual>
+                      </hasEndpoint>
+                  </owl:NamedIndividual>
+              </hasExeEnvironment>
+          </owl:NamedIndividual>
+      </hasComputingService>
+      
+      <hasComputingService>
+          <owl:NamedIndividual rdf:about="&alliance;ce205.awsec2.service">
+              <rdf:type rdf:resource="#Service"/>
+              <paymentMethod rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dynamic</paymentMethod>
+              
+              <hasExeEnvironment>
+                  <owl:NamedIndividual rdf:about="&alliance;awsec2.m4.xlarge">
+                      <rdf:type rdf:resource="#ExecutionEnvironment"/>
+                      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                      <hasOSFamily>
+                          <owl:NamedIndividual rdf:about="&alliance;Amazon_Linux">
+                              <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                              <rdf:type rdf:resource="#Linux"/>
+                              <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                                  >A linux OS.</rdfs:comment>
+                          </owl:NamedIndividual>
+                      </hasOSFamily>
+                      
+                      <hasID>
+                          <owl:NamedIndividual rdf:about="&alliance;IP_WN112_AWSEC2">
+                              <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                              <rdf:type rdf:resource="#IP"/>
+                              <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">194.42.17.258</hasName>
+                          </owl:NamedIndividual>
+                      </hasID>
+                      <!--<hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">wn108.awsec2.alliance1</hasName>-->
+                      <hasResource>
+                          <owl:NamedIndividual rdf:about="&alliance;ce205.awsec2.resource">
+                              <rdf:type rdf:resource="#Resource"/>
+                              <hasCPUModel>
+                                  <owl:NamedIndividual rdf:about="&alliance;Intel_Xeon">
+                                      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                                      <rdf:type rdf:resource="#CPU"/>
+                                  </owl:NamedIndividual>
+                              </hasCPUModel>
+                              <clockSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">2.4</clockSpeed>
+                          </owl:NamedIndividual>
+                      </hasResource>
+                      <physicalCpus rdf:datatype="http://www.w3.org/2001/XMLSchema#int">4</physicalCpus>
+                      <virtualMemorySize rdf:datatype="http://www.w3.org/2001/XMLSchema#double">16</virtualMemorySize>
+                      <charge rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.239</charge>
+                      <hasEndpoint>
+                          <owl:NamedIndividual rdf:about="&alliance;AWS_t2xl_endpoint">
+                              <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                              <rdf:type rdf:resource="#Endpoint"/>
+                              <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                                  >AWS Endpoint</hasName>
+                              <url rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://ec2-52-31-37-191.eu-west-1.compute.amazonaws.com:8080/steering/attach</url>
+                          </owl:NamedIndividual>
+                      </hasEndpoint>
+                  </owl:NamedIndividual>
+              </hasExeEnvironment>
+          </owl:NamedIndividual>
+      </hasComputingService>
+      
+      <hasComputingService>
+          <owl:NamedIndividual rdf:about="&alliance;ce207.awsec2.service">
+              <rdf:type rdf:resource="#Service"/>
+              <paymentMethod rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dynamic</paymentMethod>
+              
+              <hasExeEnvironment>
+                  <owl:NamedIndividual rdf:about="&alliance;awsec2.m4.xlarge">
+                      <rdf:type rdf:resource="#ExecutionEnvironment"/>
+                      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                      <hasOSFamily>
+                          <owl:NamedIndividual rdf:about="&alliance;Amazon_Linux">
+                              <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                              <rdf:type rdf:resource="#Linux"/>
+                              <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                                  >A linux OS.</rdfs:comment>
+                          </owl:NamedIndividual>
+                      </hasOSFamily>
+                      
+                      <hasID>
+                          <owl:NamedIndividual rdf:about="&alliance;IP_WN113_AWSEC2">
+                              <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                              <rdf:type rdf:resource="#IP"/>
+                              <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">194.42.17.258</hasName>
+                          </owl:NamedIndividual>
+                      </hasID>
+                      <!--<hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">wn108.awsec2.alliance1</hasName>-->
+                      <hasResource>
+                          <owl:NamedIndividual rdf:about="&alliance;ce207.awsec2.resource">
+                              <rdf:type rdf:resource="#Resource"/>
+                              <hasCPUModel>
+                                  <owl:NamedIndividual rdf:about="&alliance;Intel_Xeon">
+                                      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                                      <rdf:type rdf:resource="#CPU"/>
+                                  </owl:NamedIndividual>
+                              </hasCPUModel>
+                              <clockSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">2.4</clockSpeed>
+                          </owl:NamedIndividual>
+                      </hasResource>
+                      <physicalCpus rdf:datatype="http://www.w3.org/2001/XMLSchema#int">4</physicalCpus>
+                      <virtualMemorySize rdf:datatype="http://www.w3.org/2001/XMLSchema#double">16</virtualMemorySize>
+                      <charge rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.239</charge>
+                      <hasEndpoint>
+                          <owl:NamedIndividual rdf:about="&alliance;AWS_t2xl_endpoint">
+                              <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                              <rdf:type rdf:resource="#Endpoint"/>
+                              <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                                  >AWS Endpoint</hasName>
+                              <url rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://ec2-52-31-37-193.eu-west-1.compute.amazonaws.com:8080/steering/attach</url>
+                          </owl:NamedIndividual>
+                      </hasEndpoint>
+                  </owl:NamedIndividual>
+              </hasExeEnvironment>
+          </owl:NamedIndividual>
+      </hasComputingService>
+      
+      <hasComputingService>
+          <owl:NamedIndividual rdf:about="&alliance;ce208.awsec2.service">
+              <rdf:type rdf:resource="#Service"/>
+              <paymentMethod rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dynamic</paymentMethod>
+              
+              <hasExeEnvironment>
+                  <owl:NamedIndividual rdf:about="&alliance;awsec2.m4.xlarge">
+                      <rdf:type rdf:resource="#ExecutionEnvironment"/>
+                      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                      <hasOSFamily>
+                          <owl:NamedIndividual rdf:about="&alliance;Amazon_Linux">
+                              <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                              <rdf:type rdf:resource="#Linux"/>
+                              <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                                  >A linux OS.</rdfs:comment>
+                          </owl:NamedIndividual>
+                      </hasOSFamily>
+                      
+                      <hasID>
+                          <owl:NamedIndividual rdf:about="&alliance;IP_WN114_AWSEC2">
+                              <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                              <rdf:type rdf:resource="#IP"/>
+                              <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">194.42.17.259</hasName>
+                          </owl:NamedIndividual>
+                      </hasID>
+                      <!--<hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">wn108.awsec2.alliance1</hasName>-->
+                      <hasResource>
+                          <owl:NamedIndividual rdf:about="&alliance;ce208.awsec2.resource">
+                              <rdf:type rdf:resource="#Resource"/>
+                              <hasCPUModel>
+                                  <owl:NamedIndividual rdf:about="&alliance;Intel_Xeon">
+                                      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                                      <rdf:type rdf:resource="#CPU"/>
+                                  </owl:NamedIndividual>
+                              </hasCPUModel>
+                              <clockSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">2.4</clockSpeed>
+                          </owl:NamedIndividual>
+                      </hasResource>
+                      <physicalCpus rdf:datatype="http://www.w3.org/2001/XMLSchema#int">4</physicalCpus>
+                      <virtualMemorySize rdf:datatype="http://www.w3.org/2001/XMLSchema#double">16</virtualMemorySize>
+                      <charge rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.239</charge>
+                      <hasEndpoint>
+                          <owl:NamedIndividual rdf:about="&alliance;AWS_t2xl_endpoint">
+                              <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                              <rdf:type rdf:resource="#Endpoint"/>
+                              <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                                  >AWS Endpoint</hasName>
+                              <url rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://ec2-52-31-37-192.eu-west-1.compute.amazonaws.com:8080/steering/attach</url>
+                          </owl:NamedIndividual>
+                      </hasEndpoint>
+                  </owl:NamedIndividual>
+              </hasExeEnvironment>
+          </owl:NamedIndividual>
+      </hasComputingService>
+      
+      <hasComputingService>
+          <owl:NamedIndividual rdf:about="&alliance;ce209.awsec2.service">
+              <rdf:type rdf:resource="#Service"/>
+              <paymentMethod rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dynamic</paymentMethod>
+              
+              <hasExeEnvironment>
+                  <owl:NamedIndividual rdf:about="&alliance;awsec2.m4.xlarge">
+                      <rdf:type rdf:resource="#ExecutionEnvironment"/>
+                      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                      <hasOSFamily>
+                          <owl:NamedIndividual rdf:about="&alliance;Amazon_Linux">
+                              <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                              <rdf:type rdf:resource="#Linux"/>
+                              <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                                  >A linux OS.</rdfs:comment>
+                          </owl:NamedIndividual>
+                      </hasOSFamily>
+                      
+                      <hasID>
+                          <owl:NamedIndividual rdf:about="&alliance;IP_WN116_AWSEC2">
+                              <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                              <rdf:type rdf:resource="#IP"/>
+                              <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">194.42.17.260</hasName>
+                          </owl:NamedIndividual>
+                      </hasID>
+                      <!--<hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">wn108.awsec2.alliance1</hasName>-->
+                      <hasResource>
+                          <owl:NamedIndividual rdf:about="&alliance;ce209.awsec2.resource">
+                              <rdf:type rdf:resource="#Resource"/>
+                              <hasCPUModel>
+                                  <owl:NamedIndividual rdf:about="&alliance;Intel_Xeon">
+                                      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                                      <rdf:type rdf:resource="#CPU"/>
+                                  </owl:NamedIndividual>
+                              </hasCPUModel>
+                              <clockSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">2.4</clockSpeed>
+                          </owl:NamedIndividual>
+                      </hasResource>
+                      <physicalCpus rdf:datatype="http://www.w3.org/2001/XMLSchema#int">4</physicalCpus>
+                      <virtualMemorySize rdf:datatype="http://www.w3.org/2001/XMLSchema#double">16</virtualMemorySize>
+                      <charge rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.239</charge>
+                      <hasEndpoint>
+                          <owl:NamedIndividual rdf:about="&alliance;AWS_t2xl_endpoint">
+                              <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                              <rdf:type rdf:resource="#Endpoint"/>
+                              <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                                  >AWS Endpoint</hasName>
+                              <url rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://ec2-52-31-37-193.eu-west-1.compute.amazonaws.com:8080/steering/attach</url>
+                          </owl:NamedIndividual>
+                      </hasEndpoint>
+                  </owl:NamedIndividual>
+              </hasExeEnvironment>
+          </owl:NamedIndividual>
+      </hasComputingService>
+      
+      <hasComputingService>
+          <owl:NamedIndividual rdf:about="&alliance;ce210.awsec2.service">
+              <rdf:type rdf:resource="#Service"/>
+              <paymentMethod rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dynamic</paymentMethod>
+              
+              <hasExeEnvironment>
+                  <owl:NamedIndividual rdf:about="&alliance;awsec2.m4.xlarge">
+                      <rdf:type rdf:resource="#ExecutionEnvironment"/>
+                      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                      <hasOSFamily>
+                          <owl:NamedIndividual rdf:about="&alliance;Amazon_Linux">
+                              <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                              <rdf:type rdf:resource="#Linux"/>
+                              <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                                  >A linux OS.</rdfs:comment>
+                          </owl:NamedIndividual>
+                      </hasOSFamily>
+                      
+                      <hasID>
+                          <owl:NamedIndividual rdf:about="&alliance;IP_WN117_AWSEC2">
+                              <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                              <rdf:type rdf:resource="#IP"/>
+                              <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">194.42.17.261</hasName>
+                          </owl:NamedIndividual>
+                      </hasID>
+                      <!--<hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">wn108.awsec2.alliance1</hasName>-->
+                      <hasResource>
+                          <owl:NamedIndividual rdf:about="&alliance;ce210.awsec2.resource">
+                              <rdf:type rdf:resource="#Resource"/>
+                              <hasCPUModel>
+                                  <owl:NamedIndividual rdf:about="&alliance;Intel_Xeon">
+                                      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                                      <rdf:type rdf:resource="#CPU"/>
+                                  </owl:NamedIndividual>
+                              </hasCPUModel>
+                              <clockSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">2.4</clockSpeed>
+                          </owl:NamedIndividual>
+                      </hasResource>
+                      <physicalCpus rdf:datatype="http://www.w3.org/2001/XMLSchema#int">4</physicalCpus>
+                      <virtualMemorySize rdf:datatype="http://www.w3.org/2001/XMLSchema#double">16</virtualMemorySize>
+                      <charge rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.239</charge>
+                      <hasEndpoint>
+                          <owl:NamedIndividual rdf:about="&alliance;AWS_t2xl_endpoint">
+                              <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                              <rdf:type rdf:resource="#Endpoint"/>
+                              <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                                  >AWS Endpoint</hasName>
+                              <url rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://ec2-52-31-37-194.eu-west-1.compute.amazonaws.com:8080/steering/attach</url>
+                          </owl:NamedIndividual>
+                      </hasEndpoint>
+                  </owl:NamedIndividual>
+              </hasExeEnvironment>
+          </owl:NamedIndividual>
+      </hasComputingService>
+      
+      <hasComputingService>
+          <owl:NamedIndividual rdf:about="&alliance;ce211.awsec2.service">
+              <rdf:type rdf:resource="#Service"/>
+              <paymentMethod rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dynamic</paymentMethod>
+              
+              <hasExeEnvironment>
+                  <owl:NamedIndividual rdf:about="&alliance;awsec2.m4.xlarge">
+                      <rdf:type rdf:resource="#ExecutionEnvironment"/>
+                      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                      <hasOSFamily>
+                          <owl:NamedIndividual rdf:about="&alliance;Amazon_Linux">
+                              <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                              <rdf:type rdf:resource="#Linux"/>
+                              <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                                  >A linux OS.</rdfs:comment>
+                          </owl:NamedIndividual>
+                      </hasOSFamily>
+                      
+                      <hasID>
+                          <owl:NamedIndividual rdf:about="&alliance;IP_WN118_AWSEC2">
+                              <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                              <rdf:type rdf:resource="#IP"/>
+                              <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">194.42.17.262</hasName>
+                          </owl:NamedIndividual>
+                      </hasID>
+                      <!--<hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">wn108.awsec2.alliance1</hasName>-->
+                      <hasResource>
+                          <owl:NamedIndividual rdf:about="&alliance;ce211.awsec2.resource">
+                              <rdf:type rdf:resource="#Resource"/>
+                              <hasCPUModel>
+                                  <owl:NamedIndividual rdf:about="&alliance;Intel_Xeon">
+                                      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                                      <rdf:type rdf:resource="#CPU"/>
+                                  </owl:NamedIndividual>
+                              </hasCPUModel>
+                              <clockSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">2.4</clockSpeed>
+                          </owl:NamedIndividual>
+                      </hasResource>
+                      <physicalCpus rdf:datatype="http://www.w3.org/2001/XMLSchema#int">4</physicalCpus>
+                      <virtualMemorySize rdf:datatype="http://www.w3.org/2001/XMLSchema#double">16</virtualMemorySize>
+                      <charge rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.239</charge>
+                      <hasEndpoint>
+                          <owl:NamedIndividual rdf:about="&alliance;AWS_t2xl_endpoint">
+                              <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                              <rdf:type rdf:resource="#Endpoint"/>
+                              <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                                  >AWS Endpoint</hasName>
+                              <url rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://ec2-52-31-37-195.eu-west-1.compute.amazonaws.com:8080/steering/attach</url>
+                          </owl:NamedIndividual>
+                      </hasEndpoint>
+                  </owl:NamedIndividual>
+              </hasExeEnvironment>
+          </owl:NamedIndividual>
+      </hasComputingService>
+      
+      <hasComputingService>
+          <owl:NamedIndividual rdf:about="&alliance;ce206.awsec2.service">
+              <rdf:type rdf:resource="#Service"/>
+              <paymentMethod rdf:datatype="http://www.w3.org/2001/XMLSchema#string">dynamic</paymentMethod>
+              
+              <hasExeEnvironment>
+                  <owl:NamedIndividual rdf:about="&alliance;awsec2.t2.2xlarge">
+                      <rdf:type rdf:resource="#ExecutionEnvironment"/>
+                      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                      <hasOSFamily>
+                          <owl:NamedIndividual rdf:about="&alliance;Amazon_Linux">
+                              <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                              <rdf:type rdf:resource="#Linux"/>
+                              <rdfs:comment rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                                  >A linux OS.</rdfs:comment>
+                          </owl:NamedIndividual>
+                      </hasOSFamily>
+                      
+                      <hasID>
+                          <owl:NamedIndividual rdf:about="&alliance;IP_WN113_AWSEC2">
+                              <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                              <rdf:type rdf:resource="#IP"/>
+                              <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">194.42.18.258</hasName>
+                          </owl:NamedIndividual>
+                      </hasID>
+                      <!--<hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string">wn108.awsec2.alliance1</hasName>-->
+                      <hasResource>
+                          <owl:NamedIndividual rdf:about="&alliance;ce206.awsec2.resource">
+                              <rdf:type rdf:resource="#Resource"/>
+                              <hasCPUModel>
+                                  <owl:NamedIndividual rdf:about="&alliance;Intel_Xeon">
+                                      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                                      <rdf:type rdf:resource="#CPU"/>
+                                  </owl:NamedIndividual>
+                              </hasCPUModel>
+                              <clockSpeed rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">2.6</clockSpeed>
+                          </owl:NamedIndividual>
+                      </hasResource>
+                      <physicalCpus rdf:datatype="http://www.w3.org/2001/XMLSchema#int">8</physicalCpus>
+                      <virtualMemorySize rdf:datatype="http://www.w3.org/2001/XMLSchema#double">32</virtualMemorySize>
+                      <charge rdf:datatype="http://www.w3.org/2001/XMLSchema#double">0.3712</charge>
+                      <hasEndpoint>
+                          <owl:NamedIndividual rdf:about="&alliance;AWS_t22xl_endpoint">
+                              <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+                              <rdf:type rdf:resource="#Endpoint"/>
+                              <hasName rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+                                  >AWS Endpoint</hasName>
+                              <url rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://ec2-52-31-37-192.eu-west-1.compute.amazonaws.com:8080/steering/attach</url>
+                          </owl:NamedIndividual>
+                      </hasEndpoint>
+                  </owl:NamedIndividual>
+              </hasExeEnvironment>
+          </owl:NamedIndividual>
+      </hasComputingService>
+      
+      <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  </owl:NamedIndividual>
+    
+    <!--
+     ///////////////////////////////////////////////////////////////////////////////////////
+     //
+     // AWS Services (Instance with image?)
+     //
+     ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+    
+    
+</rdf:RDF>
+
+<!-- Created with Protege (with OWL Plugin 3.4.4, Build 579)  http://protege.stanford.edu -->
